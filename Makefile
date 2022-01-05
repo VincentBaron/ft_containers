@@ -6,7 +6,7 @@
 #    By: vbaron <vbaron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/14 13:38:45 by vbaron            #+#    #+#              #
-#    Updated: 2022/01/05 15:53:09 by vbaron           ###   ########.fr        #
+#    Updated: 2022/01/05 20:12:49 by vbaron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@ DIR_S = srcs/
 DIR_O = objs
 
 SOURCES = 	main.cpp \
-			util.cpp \
 			test_unit.cpp \
 
 
@@ -24,12 +23,12 @@ OBJS := $(filter-out objs/test_unit.o, $(OBJ))
 OBJS_TEST := $(filter-out objs/main.o, $(OBJ))
 HEADERS = headers
 
-NAME = easyfind
+NAME = containers
 NAME_TEST = unit-test
 
 CC = clang++
 
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CFLAGS = -Wall -Wextra -Werror -Wno-unused-parameter -std=c++98
 
 all: $(NAME)
 

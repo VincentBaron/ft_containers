@@ -1,8 +1,8 @@
 
 # include <iostream>
-# include "../includes/util.hpp"
+# include "../includes/vector.hpp"
 
 int main()
 {
-    std::cout << add(2, 2) << std::endl;
+   ft::vector<int> vect;
 }
