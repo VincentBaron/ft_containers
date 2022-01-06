@@ -6,13 +6,15 @@
 /*   By: vbaron <vbaron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 17:49:43 by vbaron            #+#    #+#             */
-/*   Updated: 2022/01/06 12:18:10 by vbaron           ###   ########.fr       */
+/*   Updated: 2022/01/06 13:34:49 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 # define MAX_SIZE 2305843009213693951
+# include <iostream>
+# include <string>
 
 namespace ft
 {
@@ -27,7 +29,7 @@ namespace ft
 
         // Constructors and destructor
         vector(void) : _size(0), _capacity(0) {}; 
-        vector(size_type initial_size) : _array(init_array_null(initial_size)), _size(initial_size), _capacity(initial_size) {
+        vector(size_type initial_size) : _array(initArrayNull(initial_size)), _size(initial_size), _capacity(initial_size) {
             std::cout << "parameter constructor called." << std::endl;
         }
         vector(const vector<T> &src) {};
@@ -41,6 +43,7 @@ namespace ft
         // Member functions
         T at(size_type index)
         {
+            rangeCheck(index);
             return (this->_array[index]);
         }
 
@@ -54,13 +57,19 @@ namespace ft
         size_type _capacity;
 
         //Member functions
-        T *init_array_null(size_type initial_size) const
+        T *initArrayNull(size_type initial_size) const
         {
             T *arr = new T[initial_size];
             for (size_type i = 0; i < initial_size; i++)
                 arr[i] = 0;
             return (arr);
         };
+
+        void rangeCheck(size_type index)
+        {
+            if (index >= this->_size)
+                throw std::out_of_range("std::exception::what(): vector::_M_range_check: __n (which is 12) >= this->size() (which is 10)");
+        }
         
     };
 }

@@ -6,19 +6,26 @@
 /*   By: vbaron <vbaron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:01:30 by vbaron            #+#    #+#             */
-/*   Updated: 2022/01/05 20:01:35 by vbaron           ###   ########.fr       */
+/*   Updated: 2022/01/06 13:33:05 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/acutest.hpp"
-#include "../includes/util.hpp"
+#include "../includes/vector.hpp"
+#include <vector>
 
-void test_add(void)
+void test_vector(void)
 {
-    TEST_CHECK_(add(2, 2)==(2+2), "add(%d,%d)==%d", 2, 2, (2+2));
+    ft::vector<int> v(10);
+    std::vector<int> vreal(10);
+
+
+    TEST_CHECK_(v.at(3) == vreal.at(3), "test v.at(3)");
+    TEST_CHECK_(v.at(12) == vreal.at(12), "test v.at(12)");
+    TEST_CHECK_(v.at(-1) == vreal.at(-1), "test v.at(-1)");
 }
 
 TEST_LIST = {
-        {"int add(int, int);", test_add },
+        {"TEST v.at()", test_vector},
         {}
     };
