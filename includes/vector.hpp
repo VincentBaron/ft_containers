@@ -6,7 +6,7 @@
 /*   By: vbaron <vbaron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 17:49:43 by vbaron            #+#    #+#             */
-/*   Updated: 2022/01/06 14:44:00 by vbaron           ###   ########.fr       */
+/*   Updated: 2022/01/06 15:17:41 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,39 +24,55 @@ namespace ft
     {
 
     public:
-        //typedefs
+        
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////// TYPEDEFS
         typedef vector<T> vector_type;
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        // Constructors and destructor
-        vector(void) : _size(0), _capacity(0) {}; 
-        vector(size_type initial_size) : _array(initArrayNull(initial_size)), _size(initial_size), _capacity(initial_size) {
+        //////////////////////////////////////////////////////////////////////////////////////// CONSTRUCTOR && DESTRUCTORS
+        vector(void) : _size(0), _capacity(0) {};
+
+        vector(size_type initial_size) : _array(initArrayNull(initial_size)), _size(initial_size), _capacity(initial_size)
+        {
             std::cout << "parameter constructor called." << std::endl;
         }
+
         vector(const vector<T> &src) {};
+        
         virtual ~vector() {};
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        // Operator overloads
+        //////////////////////////////////////////////////////////////////////////////////////////////// OPERATOR OVERLOADS
         // vector_type &operator=(const vector &rhs) {};
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        // Getters / Setters
+        //////////////////////////////////////////////////////////////////////////////////////////////// GETTERS && SETTERS
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        // Member functions
+        ////////////////////////////////////////////////////////////////////////////////////////////////// MEMBER FUNCTIONS
         T at(size_type index)
         {
             rangeCheck(index);
             return (this->_array[index]);
         }
 
+        void push_back(T elem)
+        {
+            manageCapacity();
+        }
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     protected:
         // Attributes
 
     private:
-        // Attributes
+        //////////////////////////////////////////////////////////////////////////////////////////////////////// ATTRIBUTES
         T *_array;
         size_type _size;
         size_type _capacity;
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        //Member functions
+        /////////////////////////////////////////////////////////////////////////////////////////////////// MEMBER FUNCTIONS
         T *initArrayNull(size_type initial_size) const
         {
             T *arr = new T[initial_size];
@@ -70,7 +86,7 @@ namespace ft
             if (index >= this->_size)
                 throw std::out_of_range("Out of range");
         }
-        
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     };
 }
 
