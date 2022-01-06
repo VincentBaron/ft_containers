@@ -6,7 +6,7 @@
 /*   By: vbaron <vbaron@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 17:49:43 by vbaron            #+#    #+#             */
-/*   Updated: 2022/01/06 13:34:49 by vbaron           ###   ########.fr       */
+/*   Updated: 2022/01/06 14:44:00 by vbaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ namespace ft
         void rangeCheck(size_type index)
         {
             if (index >= this->_size)
-                throw std::out_of_range("std::exception::what(): vector::_M_range_check: __n (which is 12) >= this->size() (which is 10)");
+                throw std::out_of_range("Out of range");
         }
         
     };
