@@ -4,5 +4,6 @@
 
 int main()
 {
-   ft::vector<int> vect;
+   ft::vector<int> vect(10);
+   std::cout << vect.at(0) << std::endl;
 }

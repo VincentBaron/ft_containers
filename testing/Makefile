@@ -6,15 +6,14 @@
 #    By: vbaron <vbaron@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/14 13:38:45 by vbaron            #+#    #+#              #
-#    Updated: 2022/01/06 12:10:55 by vbaron           ###   ########.fr        #
+#    Updated: 2022/01/06 10:43:28 by vbaron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-DIR_S = srcs/
+DIR_S = ./
 DIR_O = objs
 
 SOURCES = 	main.cpp \
-			test_unit.cpp \
 
 
 SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
@@ -28,7 +27,7 @@ NAME_TEST = unit-test
 
 CC = clang++
 
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 -Wno-unused-parameter
+CFLAGS = -Wall -Wextra -Werror -Wno-unused-parameter -std=c++98
 
 all: $(NAME)
 
