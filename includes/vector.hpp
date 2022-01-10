@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 17:49:43 by vbaron            #+#    #+#             */
-/*   Updated: 2022/01/10 20:12:53 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/10 20:25:28 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ namespace ft
 			}
 		};
 
-		template< class InputIt >
-		vector( InputIt first, InputIt last, const Allocator& alloc = Allocator() );
+		// template< class InputIt >
+		// vector( InputIt first, InputIt last, const Allocator& alloc = Allocator() );
 
 		vector( const vector& other )
 		{
@@ -109,10 +109,12 @@ namespace ft
 		{
 			if (n > this->capacity())
 			{
-				this->_capacity = n;
-				if (this->capacity() > MAX_SIZE)
+				if (n > MAX_SIZE)
 					throw std::length_error("Required memory exceeds vector maximum storage");
-				newAlocator.allocate(this->capacity);
+				vector_type newVector;
+				newVector._start = newVector._data.alocate(n);
+				newVector._end = newVector._start;
+				newVector._endCapacity = n;
 				for (size_t x = 0; x < this->size(); x++)
 					newAlocator[x] = this->Alocator.;
 			}
