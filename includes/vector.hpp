@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 17:49:43 by vbaron            #+#    #+#             */
-/*   Updated: 2022/01/11 16:29:10 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/11 20:13:24 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,22 @@ namespace ft
 				_end++;
 			}
 		};
-
+		
 		template< class InputIt >
 		vector( InputIt first, InputIt last, alloc_type alloc = alloc_type() ) : _data(alloc)
 		{
-			size_type count = last - first;
-			_start = _data.allocate(count);
-			_end = _start;
-			_endCapacity = _start + count;
-			while (count--)
-			{
-				_data.construct(_end, *first);
-				_end++;
-				first++;
-			}
+			// vector(first, last, std::iterator_traits<InputIt>::iterator_category());
+
+			// size_type count = last - first;
+			// _start = _data.allocate(count);
+			// _end = _start;
+			// _endCapacity = _start + count;
+			// while (count--)
+			// {
+			// 	_data.construct(_end, *first);
+			// 	_end++;
+			// 	first++;
+			// }
 			
 			// _start = _data.allocate()
 		};
