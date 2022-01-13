@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:01:30 by vbaron            #+#    #+#             */
-/*   Updated: 2022/01/11 20:10:14 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/13 12:40:00 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ void test_vector_constructors(void)
 	TEST_CHECK_(v.size() == vreal.size(), "Parameter Constructor size Wrong");
 
 	std::vector<int> input(10, 12);
-	// v = ft::vector<int>(input.begin(), input.end());
+	ft::vector<int> vnew(input.begin(), input.end());
     vreal = std::vector<int>(input.begin(), input.end());
 
-	std::cout << v[2] << std::endl;
-	std::cout << vreal[2] << std::endl;
-	TEST_CHECK_(v.capacity() == vreal.capacity(), "Parameter with value Constructor capacity wrong");
-	TEST_CHECK_(v.size() == vreal.size(), "Parameter with value Constructor size Wrong");
-	TEST_CHECK_(v[2] == vreal[2], "Parameter with value Constructor size Wrong");
+	// std::cout << v[2] << std::endl;
+	// std::cout << vreal[2] << std::endl;
+	// TEST_CHECK_(v.capacity() == vreal.capacity(), "Parameter with value Constructor capacity wrong");
+	// TEST_CHECK_(v.size() == vreal.size(), "Parameter with value Constructor size Wrong");
+	// TEST_CHECK_(v[2] == vreal[2], "Parameter with value Constructor size Wrong");
 	
 	
 	//TEST_CHECK_(v.capacity() == vreal.capacity(), "Capacity after reserve(100):\nv.capacity() = %llu\nvreal.capacity() = %lu", v.capacity(), vreal.capacity());

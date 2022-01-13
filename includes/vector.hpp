@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 17:49:43 by vbaron            #+#    #+#             */
-/*   Updated: 2022/01/11 20:13:24 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/13 16:59:16 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #define MAX_SIZE 2305843009213693951
 #include <iostream>
 #include <string>
-
+#include "utils.hpp"
 
 namespace ft
 {
@@ -32,13 +32,14 @@ namespace ft
 		typedef Allocator alloc_type;
 		typedef typename Allocator::pointer alloc_ptr;
 		typedef typename Allocator::reference alloc_ref;
+
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		//////////////////////////////////////////////////////////////////////////////////////// CONSTRUCTOR && DESTRUCTORS
 
-		explicit vector( const alloc_type& alloc = alloc_type() ) : _data(alloc), _start(0), _end(0), _endCapacity(0) {};
+		explicit vector(const alloc_type &alloc = alloc_type()) : _data(alloc), _start(0), _end(0), _endCapacity(0){};
 
-		explicit vector( size_type count, const T& value = T(), const alloc_type& alloc = alloc_type()) : _data(alloc), _start(0), _end(0), _endCapacity(0)
+		explicit vector(size_type count, const T &value = T(), const alloc_type &alloc = alloc_type()) : _data(alloc), _start(0), _end(0), _endCapacity(0)
 		{
 			_start = _data.allocate(count);
 			_end = _start;
@@ -49,27 +50,25 @@ namespace ft
 				_end++;
 			}
 		};
-		
-		template< class InputIt >
-		vector( InputIt first, InputIt last, alloc_type alloc = alloc_type() ) : _data(alloc)
-		{
-			// vector(first, last, std::iterator_traits<InputIt>::iterator_category());
 
-			// size_type count = last - first;
-			// _start = _data.allocate(count);
-			// _end = _start;
-			// _endCapacity = _start + count;
-			// while (count--)
-			// {
-			// 	_data.construct(_end, *first);
-			// 	_end++;
-			// 	first++;
-			// }
-			
-			// _start = _data.allocate()
+		template <class InputIt>
+		vector(InputIt first, InputIt last, alloc_type alloc = alloc_type(), typename ft::enable_if<!ft::isIntegral<InputIt>::value, InputIt>::type* = 0) : _data(alloc)
+		{
+			size_type count = last - first;
+			_start = _data.allocate(count);
+			_end = _start;
+			_endCapacity = _start + count;
+			while (count--)
+			{
+				_data.construct(_end, *first);
+				_end++;
+				first++;
+			}
+
+			_start = _data.allocate()
 		};
 
-		vector( const vector& other )
+		vector(const vector &other)
 		{
 			*this = other;
 		};
@@ -92,9 +91,6 @@ namespace ft
 			_end = rhs._end;
 			_endCapacity = rhs._endCapacity;
 			return (*this);
-			
-
-			
 		};
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -112,9 +108,9 @@ namespace ft
 		// 	return (this[index]);
 		// }
 
-		alloc_ref& data(void) const {return this->_data;}
+		alloc_ref &data(void) const { return this->_data; }
 
-		alloc_ref& operator[](size_type idx) const
+		alloc_ref &operator[](size_type idx) const
 		{
 			alloc_ref elem = *_start;
 			while (idx--)
@@ -127,11 +123,11 @@ namespace ft
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////// CAPACITY
-		size_type size(void) const {return (this->_end - this->_start);}
+		size_type size(void) const { return (this->_end - this->_start); }
 
-		size_type capacity(void) const {return (this->_endCapacity - this->_start);}
+		size_type capacity(void) const { return (this->_endCapacity - this->_start); }
 
-		size_type max_size(void) const {return MAX_SIZE;}
+		size_type max_size(void) const { return MAX_SIZE; }
 
 		void reserve(size_type n)
 		{
@@ -161,16 +157,17 @@ namespace ft
 				_end--;
 			}
 			_data.destroy(_end);
-			
 		}
-		
+
 		void push_back(T elem)
 		{
-			reserve();
+			reallocate();
+			_data.construct(_end + 1, elem);
 		}
+
+
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	protected:
 	private:
 		//////////////////////////////////////////////////////////////////////////////////////////////////////// ATTRIBUTES
 		alloc_type _data;
@@ -180,18 +177,39 @@ namespace ft
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		////////////////////////////////////////////////////////////////////////////////////////////////// MEMBER FUNCTIONS
-		T *initArrayNull(size_type initial_size) const
-		{
-			T *arr = new T[initial_size];
-			for (size_type i = 0; i < initial_size; i++)
-				arr[i] = 0;
-			return (arr);
-		};
-
 		void rangeCheck(size_type index)
 		{
 			if (index >= this->size())
 				throw std::out_of_range("Out of range");
+		}
+
+		vector_type manageAlloc(void)
+		{
+			vector_type tmp;
+			if (capacity() == 0)
+				tmp->_start = tmp->_data.allocate(1);
+			else if (capacity() * 2 > MAX_SIZE)
+				tmp->_start = tmp->_data.allocate(MAX_SIZE);
+			else
+				tmp->_start = tmp->_data.allocate(capacity() * 2);
+			return (tmp);
+		}
+
+		void reallocate(void)
+		{
+			if (size() < capacity())
+				return ;
+			vector_type tmp;
+			tmp = manageAlloc();
+			tmp->_end = tmp->_start;
+			while (size() > 0)
+			{
+				tmp->data.construct(tmp->_end, _start);
+				_array.destroy(_start)
+				_start++;
+				tmp->_end++;
+			}
+			_data.deallocate(&_data, tmp->size());
 		}
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	};
