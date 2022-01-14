@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 17:49:43 by vbaron            #+#    #+#             */
-/*   Updated: 2022/01/14 17:44:38 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/14 17:45:39 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ namespace ft
 		void push_back(T elem)
 		{
 			reallocate();
-			_data.construct(_end + 1, elem);
+			_data.construct(_end++, elem);
 			std::cout << "YALA3" << std::endl;
 		}
 
