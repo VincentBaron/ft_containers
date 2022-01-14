@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 17:49:43 by vbaron            #+#    #+#             */
-/*   Updated: 2022/01/14 15:15:52 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/14 15:28:40 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ namespace ft
 				tmp._end++;
 			}
 			_data.deallocate(oldStart, tmp.size());
+			std::cout << "YALA2" << std::endl;
 			*this = tmp;
 		}
 
@@ -162,6 +163,7 @@ namespace ft
 				_end--;
 			}
 			_data.destroy(_end);
+			std::cout << "YALLAAA" << std::endl;
 		}
 
 		void push_back(T elem)
