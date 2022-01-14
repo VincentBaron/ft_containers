@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 17:49:43 by vbaron            #+#    #+#             */
-/*   Updated: 2022/01/14 18:47:47 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/14 19:07:30 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,11 +168,12 @@ namespace ft
 
 		void clear(void)
 		{
-			while (this->size() != -1)
+			while (this->size())
 			{
 				_data.destroy(_end);
 				_end--;
 			}
+			_data.destroy(_end);
 		}
 
 		void push_back(T elem)
