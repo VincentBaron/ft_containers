@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 17:49:43 by vbaron            #+#    #+#             */
-/*   Updated: 2022/01/13 16:59:16 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/14 15:15:52 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ namespace ft
 				first++;
 			}
 
-			_start = _data.allocate()
+			_start = _data.allocate();
 		};
 
 		vector(const vector &other)
@@ -131,17 +131,22 @@ namespace ft
 
 		void reserve(size_type n)
 		{
-			if (n > this->capacity())
+			if (capacity() > n)
+				return ;
+			vector_type tmp;
+			tmp._start = tmp._data.allocate(n);
+			tmp._endCapacity = tmp._start + n;
+			tmp._end = tmp._start;
+			alloc_ptr oldStart = _start;
+			while (size() > 0)
 			{
-				if (n > MAX_SIZE)
-					throw std::length_error("Required memory exceeds vector maximum storage");
-				vector_type newVector;
-				newVector._start = newVector._data.alocate(n);
-				newVector._end = newVector._start;
-				newVector._endCapacity = n;
-				for (size_t x = 0; x < this->size(); x++)
-					newVector[x] = *this[x];
+				tmp._data.construct(tmp._end, *_start);
+				_data.destroy(_start);
+				_start++;
+				tmp._end++;
 			}
+			_data.deallocate(oldStart, tmp.size());
+			*this = tmp;
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -183,33 +188,24 @@ namespace ft
 				throw std::out_of_range("Out of range");
 		}
 
-		vector_type manageAlloc(void)
+		size_type calculateCapacity(void)
 		{
-			vector_type tmp;
+			size_type newCapacity;
 			if (capacity() == 0)
-				tmp->_start = tmp->_data.allocate(1);
+				newCapacity = 1;
 			else if (capacity() * 2 > MAX_SIZE)
-				tmp->_start = tmp->_data.allocate(MAX_SIZE);
+				newCapacity = MAX_SIZE;
 			else
-				tmp->_start = tmp->_data.allocate(capacity() * 2);
-			return (tmp);
+				newCapacity = capacity() * 2;
+			return (newCapacity);
 		}
 
 		void reallocate(void)
 		{
 			if (size() < capacity())
 				return ;
-			vector_type tmp;
-			tmp = manageAlloc();
-			tmp->_end = tmp->_start;
-			while (size() > 0)
-			{
-				tmp->data.construct(tmp->_end, _start);
-				_array.destroy(_start)
-				_start++;
-				tmp->_end++;
-			}
-			_data.deallocate(&_data, tmp->size());
+			size_type newCapacity = calculateCapacity();
+			reserve(newCapacity);
 		}
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	};
