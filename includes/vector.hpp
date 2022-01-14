@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 17:49:43 by vbaron            #+#    #+#             */
-/*   Updated: 2022/01/14 15:28:40 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/14 17:44:38 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,17 +135,16 @@ namespace ft
 				return ;
 			vector_type tmp;
 			tmp._start = tmp._data.allocate(n);
-			tmp._endCapacity = tmp._start + n;
 			tmp._end = tmp._start;
-			alloc_ptr oldStart = _start;
-			while (size() > 0)
+			tmp._endCapacity = tmp._start + n;
+			alloc_ptr tmpStartPtr = _start;
+			while (tmpStartPtr != _end)
 			{
-				tmp._data.construct(tmp._end, *_start);
-				_data.destroy(_start);
-				_start++;
+				std::cout << "tmpStartPtr value:" << *tmpStartPtr << std::endl;
+				tmp._data.construct(tmp._end, *tmpStartPtr);
+				tmpStartPtr++;
 				tmp._end++;
 			}
-			_data.deallocate(oldStart, tmp.size());
 			std::cout << "YALA2" << std::endl;
 			*this = tmp;
 		}
@@ -170,6 +169,7 @@ namespace ft
 		{
 			reallocate();
 			_data.construct(_end + 1, elem);
+			std::cout << "YALA3" << std::endl;
 		}
 
 

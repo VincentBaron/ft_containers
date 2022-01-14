@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:01:30 by vbaron            #+#    #+#             */
-/*   Updated: 2022/01/14 14:34:50 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/14 17:43:48 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void test_vector_constructors(void)
 	TEST_CHECK_(v.size() == vreal.size(), "Default Constructor size Wrong");
 
 	
-	v = ft::vector<int>(10);
-    vreal = std::vector<int>(10);
+	v = ft::vector<int>(4);
+    vreal = std::vector<int>(4);
 
 	TEST_CHECK_(v.capacity() == vreal.capacity(), "Parameter Constructor capacity wrong");
 	TEST_CHECK_(v.size() == vreal.size(), "Parameter Constructor size Wrong");
