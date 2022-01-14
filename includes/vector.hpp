@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 17:49:43 by vbaron            #+#    #+#             */
-/*   Updated: 2022/01/14 17:45:39 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/14 18:47:47 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,20 @@ namespace ft
 		/////////////////////////////////////////////////////////////////////////////////////////////////  MEMBER FUNCTIONS
 		void assign(size_type count, const T &value)
 		{
-			this->reserve(this->size() + count);
+			reallocate(count);
+			
+			alloc_ptr tmpStart = _start;
+			while (tmpStart != _end && count > 0)
+			{
+				_data.destroy(tmpStart);
+				_data.construct(tmpStart, value);
+				tmpStart++;
+				count--;
+			}
+			while (tmpStart != _end)
+				_data.destroy(_end--);
+			while (count > 0)
+				_data.construct(++_end, value);
 		}
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -145,7 +158,6 @@ namespace ft
 				tmpStartPtr++;
 				tmp._end++;
 			}
-			std::cout << "YALA2" << std::endl;
 			*this = tmp;
 		}
 
@@ -156,20 +168,22 @@ namespace ft
 
 		void clear(void)
 		{
-			while (this->size())
+			while (this->size() != -1)
 			{
 				_data.destroy(_end);
 				_end--;
 			}
-			_data.destroy(_end);
-			std::cout << "YALLAAA" << std::endl;
 		}
 
 		void push_back(T elem)
 		{
-			reallocate();
-			_data.construct(_end++, elem);
-			std::cout << "YALA3" << std::endl;
+			reallocate(1);
+			_data.construct(++_end, elem);
+		}
+
+		void pop_back(void)
+		{
+			_data.destroy(_end);
 		}
 
 
@@ -190,7 +204,7 @@ namespace ft
 				throw std::out_of_range("Out of range");
 		}
 
-		size_type calculateCapacity(void)
+		size_type calculateCapacity()
 		{
 			size_type newCapacity;
 			if (capacity() == 0)
@@ -202,9 +216,9 @@ namespace ft
 			return (newCapacity);
 		}
 
-		void reallocate(void)
+		void reallocate(size_t realocSize)
 		{
-			if (size() < capacity())
+			if (realocSize < capacity())
 				return ;
 			size_type newCapacity = calculateCapacity();
 			reserve(newCapacity);
