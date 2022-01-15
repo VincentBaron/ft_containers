@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 17:49:43 by vbaron            #+#    #+#             */
-/*   Updated: 2022/01/14 19:07:30 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/15 15:21:40 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,12 @@ namespace ft
 
 		//////////////////////////////////////////////////////////////////////////////////////// CONSTRUCTOR && DESTRUCTORS
 
-		explicit vector(const alloc_type &alloc = alloc_type()) : _data(alloc), _start(0), _end(0), _endCapacity(0){};
+		explicit vector(const alloc_type &alloc = alloc_type())
+		{
+			_start = _data.allocate(0);
+			_end = _start;
+			_endCapacity = _start;
+		};
 
 		explicit vector(size_type count, const T &value = T(), const alloc_type &alloc = alloc_type()) : _data(alloc), _start(0), _end(0), _endCapacity(0)
 		{
@@ -46,8 +51,8 @@ namespace ft
 			_endCapacity = _start + count;
 			while (count--)
 			{
-				_data.construct(_end, value);
-				_end++;
+				_data.construct(_end++, value);
+				break ;
 			}
 		};
 
@@ -178,7 +183,7 @@ namespace ft
 
 		void push_back(T elem)
 		{
-			reallocate(1);
+			reallocate(size() + 1);
 			_data.construct(++_end, elem);
 		}
 

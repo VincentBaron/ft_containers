@@ -8,7 +8,7 @@
 			"name": "(lldb) Launch",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "/Users/vincentbaron/Desktop/ft_containers/containers",
+			"program": "/Users/vincentbaron/Desktop/ft_containers/unit-test",
 			"args": [],
 			"stopAtEntry": false,
 			"cwd": "${fileDirname}",

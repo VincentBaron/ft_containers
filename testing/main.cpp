@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:39:33 by vbaron            #+#    #+#             */
-/*   Updated: 2022/01/14 19:16:05 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/15 14:33:15 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@ int main() {
     using std::vector;
 
     //Create a vector with values 1 .. 10
-    vector<int> v(10);
+    vector<int> v(4);
     std::cout << "v has size " << v.size() << " and capacity " << v.capacity() << "\n";
-    std::cout << v.at(12) << std::endl;
 
     // Now add 90 values, and print the size and capacity after each insert
     for(int i = 0; i <= 100; ++i)
