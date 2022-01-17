@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 09:13:07 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/17 11:04:04 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/17 11:18:15 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "vector.hpp"
 # include "utils.hpp"
 # define SIZE 10
+# define OFFSET 40
 # define RESET   "\033[0m"
 # define BLACK   "\033[30m"      /* Black */
 # define RED     "\033[31m"      /* Red */
@@ -25,6 +26,7 @@
 # define MAGENTA "\033[35m"      /* Magenta */
 # define CYAN    "\033[36m"      /* Cyan */
 # define WHITE   "\033[37m"      /* White */
+# define BRIGHTBLACK   "\033[90m"      /* White */
 # define BOLDBLACK   "\033[1m\033[30m"      /* Bold Black */
 # define BOLDRED     "\033[1m\033[31m"      /* Bold Red */
 # define BOLDGREEN   "\033[1m\033[32m"      /* Bold Green */
@@ -51,12 +53,13 @@ bool tryOutOfRange(T vect)
 template<typename T1, typename T2>
 void checkOutput(T1 res1, T2 res2, std::string mssg)
 {
+	std::string offset = "";
 	std::cout << YELLOW << mssg << RESET;
 	if (res1 == res2)
-		std::cout << BOLDGREEN << "SUCCESS!" << RESET << std::endl;
+		std::cout << BOLDGREEN << offset.insert(0, OFFSET - mssg.size(), ' ') << "SUCCESS!" << RESET << std::endl;
 	else
 	{
-		std::cout << BOLDRED << "FAILURE!" << RESET << std::endl;
+		std::cout << BOLDRED << offset.insert(0, OFFSET - mssg.size(), ' ') << "FAILURE!" << RESET << std::endl;
 		std::cout << CYAN << "Output myVector: " << res1 << RESET << std::endl;
 		std::cout << BLUE << "Output realVector: " << res2 << RESET << std::endl << std::endl;
 	}
@@ -65,16 +68,16 @@ void checkOutput(T1 res1, T2 res2, std::string mssg)
 template<typename T>
 void checkArray(ft::vector<T> v, std::vector<T> vreal)
 {
-	std::cout << YELLOW << "Checking _array...    " << RESET << std::endl;
+	std::cout << "\n" << BRIGHTBLACK << "Checking _array...    " << RESET << std::endl;
 	for (unsigned long long x = 0; x < v.size(); x++)
-		checkOutput(v[x], vreal[x], "Checking _data[" + to_string(x) + "]...    ");
+		checkOutput(v[x], vreal[x], "Checking _data[" + to_string(x) + "]...");
 }
 
 template <typename T>
 void checkBasicAttr(ft::vector<T> v, std::vector<T> vreal)
 {
 	// checkOutput(v.capacity(), vreal.capacity(), "Checking Capacity...    ");
-	checkOutput(v.size(), vreal.size(), "Checking Size...    ");
+	checkOutput(v.size(), vreal.size(), "Checking Size...");
 	checkArray(v, vreal);
 }
 

@@ -9,7 +9,8 @@
 		"memory": "c",
 		"string": "c",
 		"string_view": "c",
-		"unordered_map": "c"
+		"unordered_map": "c",
+		"iostream": "c"
 	},
 	"C_Cpp.errorSquiggles": "Disabled"
 }
