@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 09:13:07 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/17 10:20:41 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/17 11:04:04 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,32 @@ void vectorPushBack(void)
 
 	v.push_back(42);
 	vreal.push_back(42);
+	checkBasicAttr(v, vreal);
+}
+
+void vectorPopBack(void)
+{
+	std::cout << BOLDMAGENTA << "\nVector Pop Back testing..." << RESET << std::endl;
+
+	ft::vector<int> v(5, 42);
+	std::vector<int> vreal(5, 42);
+
+	try
+	{
+		vreal.pop_back();	
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	try
+	{
+		v.pop_back();	
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 	checkBasicAttr(v, vreal);
 }
 

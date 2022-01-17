@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 17:49:43 by vbaron            #+#    #+#             */
-/*   Updated: 2022/01/17 10:23:50 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/17 11:03:04 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,10 @@ namespace ft
 
 		void pop_back(void)
 		{
+			if (!size())
+				throw std::length_error("Length error");
 			_data.destroy(_end);
+			_end--;
 		}
 
 
