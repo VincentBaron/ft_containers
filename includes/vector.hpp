@@ -28,6 +28,7 @@ namespace ft
 
 	public:
 		/////////////////////////////////////////////////////////////////////////////////////////////////////CLASS TYPEDEFS
+		typedef T value_type;
 		typedef vector<T> vector_type;
 		typedef Alloc allocator_type;
 		typedef typename Alloc::pointer pointer;
@@ -243,9 +244,10 @@ namespace ft
 
 		void resize (size_type n, value_type val = value_type())
 		{
+			size_type originalSize = size();
 			if (n < size())
 			{
-				while (n++ < size())
+				while (n++ < originalSize)
 				{
 					_data.destroy(_end);
 					_end--;
@@ -254,7 +256,6 @@ namespace ft
 			else if (n > size())
 			{
 				reallocate(n);
-				size_type originalSize = size();
 				while (n-- > originalSize)
 					_data.construct(_end++, val);
 			}

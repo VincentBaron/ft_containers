@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 09:13:07 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/17 16:12:52 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/17 16:16:15 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ void vectorResize()
 	checkBasicAttr(v, vreal);
 
 	v.resize(11, 50);
-	v.resize(11, 50);
+	vreal.resize(11, 50);
 
 	checkBasicAttr(v, vreal);
 
