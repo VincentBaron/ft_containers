@@ -37,14 +37,9 @@ namespace ft
 
 		//////////////////////////////////////////////////////////////////////////////////////// CONSTRUCTOR && DESTRUCTORS
 
-		explicit vector(const allocator_type &alloc = allocator_type())
-		{
-			_start = _data.allocate(0);
-			_end = _start;
-			_endCapacity = _start;
-		};
+		explicit vector(const allocator_type &alloc = allocator_type()) : _data(alloc), _start(0), _end(0), _endCapacity(0) {};
 
-		explicit vector(size_type count, const T &value = T(), const allocator_type &alloc = allocator_type()) : _data(alloc), _start(0), _end(0), _endCapacity(0)
+		explicit vector(size_type count, const T &value = T(), const allocator_type &alloc = allocator_type()) : _data(alloc)
 		{
 			_start = _data.allocate(count);
 			_end = _start;
@@ -108,7 +103,7 @@ namespace ft
 		{
 			rangeCheck(n);
 			return (*(_start + n));		
-		}
+		};
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////  MEMBER FUNCTIONS
@@ -128,7 +123,9 @@ namespace ft
 				_data.destroy(_end--);
 			while (count > 0)
 				_data.construct(++_end, value);
-		}
+		};
+
+		allocator_type get_allocator() const {return _data;};
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////// ELEMENT ACCESS
@@ -136,37 +133,37 @@ namespace ft
 		{
 			rangeCheck(n);
 			return (*(_start + n));
-		}
+		};
 
 		const reference at(size_type n) const
 		{
 			rangeCheck(n);
 			return (*(_start + n));
-		}
+		};
 		
 		reference front(size_type n)
 		{
 			rangeCheck(n);
 			return (*_start);
-		}
+		};
 
 		const reference front(size_type n) const
 		{
 			rangeCheck(n);
 			return (*_start);
-		}
+		};
 
 		reference back(size_type n)
 		{
 			rangeCheck(n);
 			return (*_end);
-		}
+		};
 
 		const reference back(size_type n) const
 		{
 			rangeCheck(n);
 			return (*_end);
-		}
+		};
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -174,11 +171,11 @@ namespace ft
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////// CAPACITY
-		size_type size(void) const { return (this->_end - this->_start); }
+		size_type size(void) const { return (this->_end - this->_start); };
 
-		size_type capacity(void) const { return (this->_endCapacity - this->_start); }
+		size_type capacity(void) const { return (this->_endCapacity - this->_start); };
 
-		size_type max_size(void) const { return MAX_SIZE; }
+		size_type max_size(void) const { return MAX_SIZE; };
 
 		void reserve(size_type n)
 		{
@@ -196,7 +193,7 @@ namespace ft
 				tmp._end++;
 			}
 			*this = tmp;
-		}
+		};
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -211,13 +208,13 @@ namespace ft
 				_end--;
 			}
 			_data.destroy(_end);
-		}
+		};
 
 		void push_back(T elem)
 		{
 			reallocate(size() + 1);
 			_data.construct(_end++, elem);
-		}
+		};
 
 		void pop_back(void)
 		{
@@ -225,7 +222,7 @@ namespace ft
 				throw std::length_error("Length error");
 			_data.destroy(_end);
 			_end--;
-		}
+		};
 
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -59,7 +59,8 @@
 		"tuple": "c",
 		"type_traits": "c",
 		"typeinfo": "c",
-		"utility": "c"
+		"utility": "c",
+		"*.tpp": "cpp"
 	},
 	"C_Cpp.errorSquiggles": "Disabled"
 }

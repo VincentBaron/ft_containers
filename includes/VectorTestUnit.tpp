@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 09:13:07 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/17 11:30:57 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/17 12:26:46 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,20 @@ void vectorPopBack(void)
 		std::cerr << e.what() << '\n';
 	}
 	checkBasicAttr(v, vreal);
+}
+
+void vectorGetAllocator(void)
+{
+	std::string mssg = "\nVector get_allocator() testing...";
+	std::cout << BOLDMAGENTA << mssg << RESET << std::endl;
+	
+	ft::vector<int> v(5, 42);
+
+	// std::cout << (v.get_allocator()) << std::endl;
+	// if (v.get_allocator() == 42)
+	// 	std::cout << BOLDGREEN << offset.insert(0, OFFSET - mssg.size(), ' ') << "SUCCESS!" << RESET << std::endl;
+	// else
+	// 	std::cout << BOLDRED << offset.insert(0, OFFSET - mssg.size(), ' ') << "FAILURE!" << RESET << std::endl;
 }
 
 void vectorDefaultConstructor(void)
