@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 09:13:07 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/17 11:18:15 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/17 11:30:57 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void checkArray(ft::vector<T> v, std::vector<T> vreal)
 {
 	std::cout << "\n" << BRIGHTBLACK << "Checking _array...    " << RESET << std::endl;
 	for (unsigned long long x = 0; x < v.size(); x++)
-		checkOutput(v[x], vreal[x], "Checking _data[" + to_string(x) + "]...");
+		checkOutput(v.at(x), vreal.at(x), "Checking _data[" + to_string(x) + "]...");
 }
 
 template <typename T>
