@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 09:13:07 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/17 09:55:11 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/17 10:20:41 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void checkArray(ft::vector<T> v, std::vector<T> vreal)
 template <typename T>
 void checkBasicAttr(ft::vector<T> v, std::vector<T> vreal)
 {
-	checkOutput(v.capacity(), vreal.capacity(), "Checking Capacity...    ");
+	// checkOutput(v.capacity(), vreal.capacity(), "Checking Capacity...    ");
 	checkOutput(v.size(), vreal.size(), "Checking Size...    ");
 	checkArray(v, vreal);
 }

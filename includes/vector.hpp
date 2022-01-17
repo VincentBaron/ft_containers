@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 17:49:43 by vbaron            #+#    #+#             */
-/*   Updated: 2022/01/17 10:14:18 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/17 10:23:50 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,6 @@ namespace ft
 			alloc_ptr tmpStartPtr = _start;
 			while (tmpStartPtr != _end)
 			{
-				std::cout << "tmpStartPtr value:" << *tmpStartPtr << std::endl;
 				tmp._data.construct(tmp._end, *tmpStartPtr);
 				tmpStartPtr++;
 				tmp._end++;
@@ -184,7 +183,7 @@ namespace ft
 		void push_back(T elem)
 		{
 			reallocate(size() + 1);
-			_data.construct(++_end, elem);
+			_data.construct(_end++, elem);
 		}
 
 		void pop_back(void)
