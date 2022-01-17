@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:39:33 by vbaron            #+#    #+#             */
-/*   Updated: 2022/01/15 14:33:15 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/17 14:18:12 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ int main() {
     using std::cout;
     using std::vector;
 
-    //Create a vector with values 1 .. 10
-    vector<int> v(4);
-    std::cout << "v has size " << v.size() << " and capacity " << v.capacity() << "\n";
+    // //Create a vector with values 1 .. 10
+    // vector<int> v(4);
+    // std::cout << "v has size " << v.size() << " and capacity " << v.capacity() << "\n";
 
-    // Now add 90 values, and print the size and capacity after each insert
-    for(int i = 0; i <= 100; ++i)
-    {
-        v.push_back(i);
-        std::cout << "v has size " << v.size() << " and capacity " << v.capacity() 
-            << ". Memory range: " << &v.front() << " -- " << &v.back() << "\n"; 
-    }
+    // // Now add 90 values, and print the size and capacity after each insert
+    // for(int i = 0; i <= 100; ++i)
+    // {
+    //     v.push_back(i);
+    //     std::cout << "v has size " << v.size() << " and capacity " << v.capacity() 
+    //         << ". Memory range: " << &v.front() << " -- " << &v.back() << "\n"; 
+    // }
     // std::cout << v.max_size() << std::endl;
 
 	// testing assign()

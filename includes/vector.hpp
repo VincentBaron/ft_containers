@@ -11,11 +11,11 @@
 /* ************************************************************************** */
 
 #ifndef VECTOR_HPP
-# define VECTOR_HPP
-# define MAX_SIZE 2305843009213693951
-# include <iostream>
-# include <string>
-# include "utils.hpp"
+#define VECTOR_HPP
+#define MAX_SIZE 2305843009213693951
+#include <iostream>
+#include <string>
+#include "utils.hpp"
 
 namespace ft
 {
@@ -37,7 +37,12 @@ namespace ft
 
 		//////////////////////////////////////////////////////////////////////////////////////// CONSTRUCTOR && DESTRUCTORS
 
-		explicit vector(const allocator_type &alloc = allocator_type()) : _data(alloc), _start(0), _end(0), _endCapacity(0) {};
+		explicit vector(const allocator_type &alloc = allocator_type()) : _data(alloc)
+		{
+			_start = _data.allocate(0);
+			_end = _start;
+			_endCapacity = _start;
+		};
 
 		explicit vector(size_type count, const T &value = T(), const allocator_type &alloc = allocator_type()) : _data(alloc)
 		{
@@ -52,7 +57,7 @@ namespace ft
 		};
 
 		template <class InputIt>
-		vector(InputIt first, InputIt last, allocator_type alloc = allocator_type(), typename ft::enable_if<!ft::isIntegral<InputIt>::value, InputIt>::type* = 0) : _data(alloc)
+		vector(InputIt first, InputIt last, allocator_type alloc = allocator_type(), typename ft::enable_if<!ft::isIntegral<InputIt>::value, InputIt>::type * = 0) : _data(alloc)
 		{
 			size_type count = last - first;
 			_start = _data.allocate(count);
@@ -84,25 +89,32 @@ namespace ft
 		{
 			if (this == &rhs)
 				return (*this);
-			// this->clear();
-			// _data.deallocate(_start, this->capacity());
-			_data.allocate(rhs.capacity());
-			_start = rhs._start;
-			_end = rhs._end;
-			_endCapacity = rhs._endCapacity;
+			this->clear();
+			_data.deallocate(_start, capacity());
+			_start = _data.allocate(rhs.capacity());
+			_end = _start;
+			_endCapacity = rhs._start + rhs.capacity();
+			pointer tmp = rhs._start;
+			while (size() <= rhs.size())
+			{
+				_data.construct(_end, *tmp);
+				tmp++;
+				_end++;
+			}
+			_end--;
 			return (*this);
 		};
 
 		reference operator[](size_type n)
 		{
 			rangeCheck(n);
-			return (*(_start + n));		
+			return (*(_start + n));
 		}
 
 		const reference operator[](size_type n) const
 		{
 			rangeCheck(n);
-			return (*(_start + n));		
+			return (*(_start + n));
 		};
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -110,7 +122,7 @@ namespace ft
 		void assign(size_type count, const T &value)
 		{
 			reallocate(count);
-			
+
 			pointer tmpStart = _start;
 			while (tmpStart != _end && count > 0)
 			{
@@ -125,7 +137,7 @@ namespace ft
 				_data.construct(++_end, value);
 		};
 
-		allocator_type get_allocator() const {return _data;};
+		allocator_type get_allocator() const { return _data; };
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////// ELEMENT ACCESS
@@ -140,7 +152,7 @@ namespace ft
 			rangeCheck(n);
 			return (*(_start + n));
 		};
-		
+
 		reference front(size_type n)
 		{
 			rangeCheck(n);
@@ -177,12 +189,12 @@ namespace ft
 
 		size_type max_size(void) const { return MAX_SIZE; };
 
-		bool empty() const { return(!size() ? true : false);};
+		bool empty() const { return (!size() ? true : false); };
 
 		void reserve(size_type n)
 		{
 			if (capacity() > n)
-				return ;
+				return;
 			vector_type tmp;
 			tmp._start = tmp._data.allocate(n);
 			tmp._end = tmp._start;
@@ -204,12 +216,15 @@ namespace ft
 
 		void clear(void)
 		{
-			while (this->size())
+			if (size())
 			{
-				_data.destroy(_end);
-				_end--;
+				pointer tmp = _end;
+				while (tmp >= _start)
+				{
+					_data.destroy(tmp);
+					tmp--;
+				}
 			}
-			_data.destroy(_end);
 		};
 
 		void push_back(T elem)
@@ -226,7 +241,19 @@ namespace ft
 			_end--;
 		};
 
-
+		// void resize (size_type n, value_type val = value_type())
+		// {
+		// 	if (n < size())
+		// 	{
+		// 		while (n++ < size())
+		// 		{
+		// 			_data.destroy(_end);
+		// 			_end--;
+		// 		}
+		// 	}
+		// 	// else if (n > size())
+		// 	// 	assign(n)
+		// };
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	private:
@@ -259,7 +286,7 @@ namespace ft
 		void reallocate(size_t realocSize)
 		{
 			if (realocSize < capacity())
-				return ;
+				return;
 			size_type newCapacity = calculateCapacity();
 			reserve(newCapacity);
 		}

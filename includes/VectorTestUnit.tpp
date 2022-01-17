@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 09:13:07 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/17 14:11:50 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/17 16:02:23 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void checkOutput(T1 res1, T2 res2, std::string mssg)
 }
 
 template<typename T>
-void checkArray(ft::vector<T> v, std::vector<T> vreal)
+void checkArray(ft::vector<T> &v, std::vector<T> &vreal)
 {
 	std::cout << "\n" << BRIGHTBLACK << "Checking _array...    " << RESET << std::endl;
 	for (unsigned long long x = 0; x < v.size(); x++)
@@ -74,7 +74,7 @@ void checkArray(ft::vector<T> v, std::vector<T> vreal)
 }
 
 template <typename T>
-void checkBasicAttr(ft::vector<T> v, std::vector<T> vreal)
+void checkBasicAttr(ft::vector<T> &v, std::vector<T> &vreal)
 {
 	// checkOutput(v.capacity(), vreal.capacity(), "Checking Capacity...    ");
 	checkOutput(v.size(), vreal.size(), "Checking Size...");
