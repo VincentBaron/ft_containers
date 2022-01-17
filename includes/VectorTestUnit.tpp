@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 09:13:07 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/17 16:16:15 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/17 18:06:39 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ void vectorEmpty(void)
 	checkOutput(v.empty(), vreal.empty(), "Checking not empty after push back...");
 }
 
-void vectorResize()
+void vectorResize(void)
 {
 	std::cout << BOLDMAGENTA << "\nVector resize() testing..." << RESET << std::endl;
 	
@@ -184,6 +184,8 @@ void vectorResize()
 	checkBasicAttr(v, vreal);
 
 }
+
+void vectorIterator(void)
 
 void vectorDefaultConstructor(void)
 {
