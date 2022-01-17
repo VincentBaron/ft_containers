@@ -6,45 +6,45 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 17:49:43 by vbaron            #+#    #+#             */
-/*   Updated: 2022/01/17 11:48:38 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/17 11:50:41 by vincentbaron      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_HPP
-#define VECTOR_HPP
-#define MAX_SIZE 2305843009213693951
-#include <iostream>
-#include <string>
-#include "utils.hpp"
+# define VECTOR_HPP
+# define MAX_SIZE 2305843009213693951
+# include <iostream>
+# include <string>
+# include "utils.hpp"
 
 namespace ft
 {
 	//////////////////////////////////////////////////////////////////////////////////////////////// NAMESPACE TYPEDEFS
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	typedef unsigned long long int size_type;
-	template <class T, class Allocator = std::allocator<T> >
+	template <class T, class Alloc = std::allocator<T> >
 	class vector
 	{
 
 	public:
 		/////////////////////////////////////////////////////////////////////////////////////////////////////CLASS TYPEDEFS
 		typedef vector<T> vector_type;
-		typedef Allocator value_type;
-		typedef typename Allocator::pointer pointer;
-		typedef typename Allocator::reference reference;
+		typedef Alloc allocator_type;
+		typedef typename Alloc::pointer pointer;
+		typedef typename Alloc::reference reference;
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		//////////////////////////////////////////////////////////////////////////////////////// CONSTRUCTOR && DESTRUCTORS
 
-		explicit vector(const value_type &alloc = value_type())
+		explicit vector(const allocator_type &alloc = allocator_type())
 		{
 			_start = _data.allocate(0);
 			_end = _start;
 			_endCapacity = _start;
 		};
 
-		explicit vector(size_type count, const T &value = T(), const value_type &alloc = value_type()) : _data(alloc), _start(0), _end(0), _endCapacity(0)
+		explicit vector(size_type count, const T &value = T(), const allocator_type &alloc = allocator_type()) : _data(alloc), _start(0), _end(0), _endCapacity(0)
 		{
 			_start = _data.allocate(count);
 			_end = _start;
@@ -57,7 +57,7 @@ namespace ft
 		};
 
 		template <class InputIt>
-		vector(InputIt first, InputIt last, value_type alloc = value_type(), typename ft::enable_if<!ft::isIntegral<InputIt>::value, InputIt>::type* = 0) : _data(alloc)
+		vector(InputIt first, InputIt last, allocator_type alloc = allocator_type(), typename ft::enable_if<!ft::isIntegral<InputIt>::value, InputIt>::type* = 0) : _data(alloc)
 		{
 			size_type count = last - first;
 			_start = _data.allocate(count);
@@ -143,8 +143,30 @@ namespace ft
 			rangeCheck(n);
 			return (*(_start + n));
 		}
+		
+		reference front(size_type n)
+		{
+			rangeCheck(n);
+			return (*_start);
+		}
 
-		reference &data(void) const { return this->_data; }
+		const reference front(size_type n) const
+		{
+			rangeCheck(n);
+			return (*_start);
+		}
+
+		reference back(size_type n)
+		{
+			rangeCheck(n);
+			return (*_end);
+		}
+
+		const reference back(size_type n) const
+		{
+			rangeCheck(n);
+			return (*_end);
+		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -210,7 +232,7 @@ namespace ft
 
 	private:
 		//////////////////////////////////////////////////////////////////////////////////////////////////////// ATTRIBUTES
-		value_type _data;
+		allocator_type _data;
 		pointer _start;
 		pointer _end;
 		pointer _endCapacity;
