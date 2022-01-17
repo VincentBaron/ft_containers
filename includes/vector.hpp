@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 17:49:43 by vbaron            #+#    #+#             */
-/*   Updated: 2022/01/15 15:21:40 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/17 10:14:18 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ namespace ft
 			_endCapacity = _start + count;
 			while (count--)
 			{
-				_data.construct(_end++, value);
-				break ;
+				_data.construct(_end, value);
+				_end++;
 			}
 		};
 
@@ -89,14 +89,21 @@ namespace ft
 		{
 			if (this == &rhs)
 				return (*this);
-			this->clear();
-			_data.deallocate(_start, this->capacity());
+			// this->clear();
+			// _data.deallocate(_start, this->capacity());
 			_data.allocate(rhs.capacity());
 			_start = rhs._start;
 			_end = rhs._end;
 			_endCapacity = rhs._endCapacity;
 			return (*this);
 		};
+
+		alloc_ref &operator[](size_type idx) const
+		{
+			rangeCheck(idx);
+			return (*(_start + idx));
+				
+		}
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////  MEMBER FUNCTIONS
@@ -128,13 +135,6 @@ namespace ft
 
 		alloc_ref &data(void) const { return this->_data; }
 
-		alloc_ref &operator[](size_type idx) const
-		{
-			alloc_ref elem = *_start;
-			while (idx--)
-				elem++;
-			return (elem);
-		}
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////// ITERATORS
@@ -204,7 +204,7 @@ namespace ft
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		////////////////////////////////////////////////////////////////////////////////////////////////// MEMBER FUNCTIONS
-		void rangeCheck(size_type index)
+		void rangeCheck(size_type index) const
 		{
 			if (index >= this->size())
 				throw std::out_of_range("Out of range");

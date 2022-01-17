@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 09:13:07 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/17 09:19:55 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/17 09:55:11 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,15 @@ void checkOutput(T1 res1, T2 res2, std::string mssg)
 	else
 	{
 		std::cout << BOLDRED << "FAILURE!" << RESET << std::endl;
-		std::cout << CYAN << "Output 1: " << res1 << RESET << std::endl;
-		std::cout << BLUE << "Output 2: " << res2 << RESET << std::endl;
+		std::cout << CYAN << "Output myVector: " << res1 << RESET << std::endl;
+		std::cout << BLUE << "Output realVector: " << res2 << RESET << std::endl << std::endl;
 	}
 }
 
 template<typename T>
 void checkArray(ft::vector<T> v, std::vector<T> vreal)
 {
+	std::cout << YELLOW << "Checking _array...    " << RESET << std::endl;
 	for (unsigned long long x = 0; x < v.size(); x++)
 		checkOutput(v[x], vreal[x], "Checking _data[" + to_string(x) + "]...    ");
 }
@@ -79,6 +80,8 @@ void checkBasicAttr(ft::vector<T> v, std::vector<T> vreal)
 
 void vectorSizeParameterConstructor(void)
 {
+	std::cout << BOLDMAGENTA << "\nVector Size constructor testing..." << RESET << std::endl;
+	
 	ft::vector<int> v(5);
 	std::vector<int> vreal(5);
 
@@ -87,6 +90,8 @@ void vectorSizeParameterConstructor(void)
 
 void vectorSizeParameterAndValueConstructor(void)
 {
+	std::cout << BOLDMAGENTA << "\nVector Size and Value constructor testing..." << RESET << std::endl;
+
 	ft::vector<int> v(5, 9);
 	std::vector<int> vreal(5, 9);
 
@@ -95,6 +100,8 @@ void vectorSizeParameterAndValueConstructor(void)
 
 void vectorPushBack(void)
 {
+	std::cout << BOLDMAGENTA << "\nVector Push Back testing..." << RESET << std::endl;
+
 	ft::vector<int> v(5);
 	std::vector<int> vreal(5);
 
@@ -105,7 +112,7 @@ void vectorPushBack(void)
 
 void vectorDefaultConstructor(void)
 {
-	std::cout << BOLDMAGENTA << "Vector default constructor testing..." << RESET << std::endl;
+	std::cout << BOLDMAGENTA << "\nVector default constructor testing..." << RESET << std::endl;
 	
 	ft::vector<int> v;
 	std::vector<int> vreal;
