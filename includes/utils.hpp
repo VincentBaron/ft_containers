@@ -6,13 +6,14 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 10:20:45 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/13 14:48:30 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/17 09:11:21 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_HPP
 # define UTILS_HPP
 # include <iterator>
+# include <sstream>
 
 namespace ft {
 
@@ -42,6 +43,14 @@ struct enable_if {};
 template<class T>
 struct enable_if<true, T> {typedef T type;};
 
+}
+
+template <class T>
+inline std::string to_string (const T& t)
+{
+    std::stringstream ss;
+    ss << t;
+    return ss.str();
 }
 
 #endif
