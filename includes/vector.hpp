@@ -177,6 +177,8 @@ namespace ft
 
 		size_type max_size(void) const { return MAX_SIZE; };
 
+		bool empty() const { return(!size() ? true : false);};
+
 		void reserve(size_type n)
 		{
 			if (capacity() > n)

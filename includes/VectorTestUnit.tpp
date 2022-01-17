@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 09:13:07 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/17 12:26:46 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/17 14:11:50 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void vectorSizeParameterAndValueConstructor(void)
 
 void vectorPushBack(void)
 {
-	std::cout << BOLDMAGENTA << "\nVector Push Back testing..." << RESET << std::endl;
+	std::cout << BOLDMAGENTA << "\nVector push_back() testing..." << RESET << std::endl;
 
 	ft::vector<int> v(5);
 	std::vector<int> vreal(5);
@@ -115,7 +115,7 @@ void vectorPushBack(void)
 
 void vectorPopBack(void)
 {
-	std::cout << BOLDMAGENTA << "\nVector Pop Back testing..." << RESET << std::endl;
+	std::cout << BOLDMAGENTA << "\nVector pop_back() testing..." << RESET << std::endl;
 
 	ft::vector<int> v(5, 42);
 	std::vector<int> vreal(5, 42);
@@ -151,6 +151,19 @@ void vectorGetAllocator(void)
 	// 	std::cout << BOLDGREEN << offset.insert(0, OFFSET - mssg.size(), ' ') << "SUCCESS!" << RESET << std::endl;
 	// else
 	// 	std::cout << BOLDRED << offset.insert(0, OFFSET - mssg.size(), ' ') << "FAILURE!" << RESET << std::endl;
+}
+
+void vectorEmpty(void)
+{
+	std::cout << BOLDMAGENTA << "\nVector empty() testing..." << RESET << std::endl;
+	
+	ft::vector<int> v;
+	std::vector<int> vreal;
+
+	checkOutput(v.empty(), vreal.empty(), "Checking on default Cosntructor...");
+	v.push_back(42);
+	vreal.push_back(42);
+	checkOutput(v.empty(), vreal.empty(), "Checking not empty after push back...");
 }
 
 void vectorDefaultConstructor(void)
