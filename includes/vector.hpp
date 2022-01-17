@@ -241,19 +241,24 @@ namespace ft
 			_end--;
 		};
 
-		// void resize (size_type n, value_type val = value_type())
-		// {
-		// 	if (n < size())
-		// 	{
-		// 		while (n++ < size())
-		// 		{
-		// 			_data.destroy(_end);
-		// 			_end--;
-		// 		}
-		// 	}
-		// 	// else if (n > size())
-		// 	// 	assign(n)
-		// };
+		void resize (size_type n, value_type val = value_type())
+		{
+			if (n < size())
+			{
+				while (n++ < size())
+				{
+					_data.destroy(_end);
+					_end--;
+				}
+			}
+			else if (n > size())
+			{
+				reallocate(n);
+				size_type originalSize = size();
+				while (n-- > originalSize)
+					_data.construct(_end++, val);
+			}
+		};
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	private:
