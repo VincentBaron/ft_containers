@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 09:13:07 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/18 17:42:25 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/18 17:50:45 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,15 +191,15 @@ void vectorIterator(void)
 
 	srand(time(NULL));
 	long long size = 6;
-	ft::vector<int> v(size, 42);
+	ft::vector<int> v(size);
 	std::vector<int> vreal(size);
 
-	// for (long long x = 0; x < size; x++)
-	// {
-	// 	int val = rand();
-	// 	v.push_back(val);
-	// 	vreal.push_back(val);
-	// }
+	for (long long x = 0; x < size; x++)
+	{
+		int val = rand() % 20;
+		v.push_back(val);
+		vreal.push_back(val);
+	}
 	// ft::vector<int>::iterator vIte;
 	// std::vector<int>::iterator vrealIte;
 
