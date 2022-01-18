@@ -73,7 +73,6 @@ namespace ft
 				_end++;
 				first++;
 			}
-
 			_start = _data.allocate();
 		};
 
@@ -105,7 +104,6 @@ namespace ft
 				tmp++;
 				_end++;
 			}
-			_end--;
 			return (*this);
 		};
 
@@ -193,7 +191,7 @@ namespace ft
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////// CAPACITY
-		size_type size(void) const { return (this->_end - this->_start + 1); };
+		size_type size(void) const { return (this->_end - this->_start); };
 
 		size_type capacity(void) const { return (this->_endCapacity - this->_start); };
 
