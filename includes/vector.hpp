@@ -227,26 +227,23 @@ namespace ft
 			if (size())
 			{
 				pointer tmp = _end;
-				while (tmp >= _start)
-				{
+				while (--tmp >= _start)
 					_data.destroy(tmp);
-					tmp--;
-				}
 			}
 		};
 
 		void push_back(T elem)
 		{
+			std::cout << size() << std::endl;
 			reallocate(size() + 1);
-			_data.construct(_end++, elem);
+			_data.construct(_end - 1, elem);
 		};
 
 		void pop_back(void)
 		{
 			if (!size())
 				throw std::length_error("Length error");
-			_data.destroy(_end);
-			_end--;
+			_data.destroy(_end--);
 		};
 
 		void resize (size_type n, value_type val = value_type())
