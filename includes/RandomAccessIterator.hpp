@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:41:17 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/17 18:50:27 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/18 17:29:17 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,23 @@
 namespace ft
 {
 	template <typename T>
-	class random_access_iterator
+	class random_access_iterator_tag
 	{
 
 	public:
-		typedef std::random_access_iterator_tag iterator_category;
 		typedef T difference_type;
+		typedef typename T::pointer pointer;
+		typedef typename T::reference reference;
+		typedef typename T::value_type value_type;
 
 		// Constructors and destructor
-		random_access_iterator(void) : _data(0);
-		random_access_iterator(T *ptr) : _data(ptr);
-		random_access_iterator(const random_access_iterator &src) : _data(src._data);
-		virtual ~random_access_iterator();
+		random_access_iterator_tag(void) : _data(0) {};
+		random_access_iterator_tag(pointer ptr) : _data(ptr) {};
+		random_access_iterator_tag(const random_access_iterator_tag &src) : _data(src._data) {};
+		virtual ~random_access_iterator_tag() {};
 
 		// Operator overloads
-		random_access_iterator &operator=(const random_access_iterator &rhs)
+		random_access_iterator_tag &operator=(const random_access_iterator_tag &rhs)
 		{
 			if (*this == rhs)
 				return (*this);
@@ -40,46 +42,46 @@ namespace ft
 			return (*this);
 		};
 
-		const T &operator*(void) const { return *_data; };
-		const T *operator->(void) const { return &(*_data); };
+		const value_type &operator*(void) const { return *_data; };
+		const pointer operator->(void) const { return &(*_data); };
 
-		bool operator==(const random_access_iterator &rhs) const { return (_data == rhs._data); }
-		bool operator!=(const random_access_iterator &rhs) const { return (_data != rhs._data); }
-		bool operator<(const random_access_iterator &rhs) const { return (_data < rhs._data); }
-		bool operator>(const random_access_iterator &rhs) const { return (_data > rhs._data); }
-		bool operator<=(const random_access_iterator &rhs) const { return (_data <= rhs._data); }
-		bool operator>=(const random_access_iterator &rhs) const { return (_data >= rhs._data); }
-		random_access_iterator &operator++()
+		bool operator==(const random_access_iterator_tag &rhs) const { return (_data == rhs._data); }
+		bool operator!=(const random_access_iterator_tag &rhs) const { return (_data != rhs._data); }
+		bool operator<(const random_access_iterator_tag &rhs) const { return (_data < rhs._data); }
+		bool operator>(const random_access_iterator_tag &rhs) const { return (_data > rhs._data); }
+		bool operator<=(const random_access_iterator_tag &rhs) const { return (_data <= rhs._data); }
+		bool operator>=(const random_access_iterator_tag &rhs) const { return (_data >= rhs._data); }
+		random_access_iterator_tag &operator++()
 		{
 			_data++;
 			return *this;
 		}
-		random_access_iterator operator++(int)
+		random_access_iterator_tag operator++(int)
 		{
-			random_access_iterator ret = *this;
+			random_access_iterator_tag ret = *this;
 			_data++;
 			return ret;
 		}
-		random_access_iterator &operator--()
+		random_access_iterator_tag &operator--()
 		{
 			_data--;
 			return *this;
 		}
-		random_access_iterator operator--(int)
+		random_access_iterator_tag operator--(int)
 		{
-			random_access_iterator ret = *this;
+			random_access_iterator_tag ret = *this;
 			_data--;
 			return ret;
 		}
-		difference_type operator-(const random_access_iterator &other) const { return _data - other._data; }
-		random_access_iterator operator+(difference_type i) const { _data + i; }
-		random_access_iterator operator+(difference_type i) const { _data - i; }
-		random_access_iterator &operator+=(difference_type i)
+		difference_type operator-(const random_access_iterator_tag &other) const { return _data - other._data; }
+		random_access_iterator_tag operator+(difference_type i) const { _data + i; }
+		random_access_iterator_tag operator-(difference_type i) const { _data - i; }
+		random_access_iterator_tag &operator+=(difference_type i)
 		{
 			_data += i;
 			return (*this);
 		}
-		random_access_iterator &operator-=(difference_type i)
+		random_access_iterator_tag &operator-=(difference_type i)
 		{
 			_data -= i;
 			return (*this);
@@ -87,13 +89,13 @@ namespace ft
 
 	private:
 		// Attributes
-		T *_data;
+		pointer _data;
 	};
 
 	template <typename T>
-	inline RandomAccessIterator<T> operator+(
-		typename RandomAccessIterator<T>::difference_type i,
-		const RandomAccessIterator<T> &other)
+	inline random_access_iterator_tag<T> operator+(
+		typename random_access_iterator_tag<T>::difference_type i,
+		const random_access_iterator_tag<T> &other)
 	{
 		return other + i;
 	}

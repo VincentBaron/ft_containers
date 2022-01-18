@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 09:13:07 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/17 18:06:39 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/18 17:42:25 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,38 @@ void vectorResize(void)
 }
 
 void vectorIterator(void)
+{
+	std::cout << BOLDMAGENTA << "\nVector random_access_iterator testing..." << RESET << std::endl;
+
+	srand(time(NULL));
+	long long size = 6;
+	ft::vector<int> v(size, 42);
+	std::vector<int> vreal(size);
+
+	// for (long long x = 0; x < size; x++)
+	// {
+	// 	int val = rand();
+	// 	v.push_back(val);
+	// 	vreal.push_back(val);
+	// }
+	// ft::vector<int>::iterator vIte;
+	// std::vector<int>::iterator vrealIte;
+
+	ft::vector<int>::iterator vIte = v.begin();
+	for (long long x = 0; x < size; x++)
+	{
+		std::cout << *(vIte) << std::endl;
+		vIte++;
+	}
+	vIte--;
+	for (long long x = 0; x < size; x++)
+	{
+		std::cout << *(vIte) << std::endl;
+		vIte--;
+	}
+
+	// checkOutput(v.begin(), vreal.begin(), "Checking begin()");
+}
 
 void vectorDefaultConstructor(void)
 {
