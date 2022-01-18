@@ -6,13 +6,14 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 09:13:07 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/18 17:50:45 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/18 18:16:35 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTORTESTUNIT_TPP
 # define VECTORTESTUNIT_TPP
 # include <vector>
+# include <cstdlib>
 # include "vector.hpp"
 # include "utils.hpp"
 # define SIZE 10
@@ -191,8 +192,8 @@ void vectorIterator(void)
 
 	srand(time(NULL));
 	long long size = 6;
-	ft::vector<int> v(size);
-	std::vector<int> vreal(size);
+	ft::vector<int> v;
+	std::vector<int> vreal;
 
 	for (long long x = 0; x < size; x++)
 	{

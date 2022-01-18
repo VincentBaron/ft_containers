@@ -193,7 +193,7 @@ namespace ft
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////// CAPACITY
-		size_type size(void) const { return (this->_end - this->_start); };
+		size_type size(void) const { return (this->_end - this->_start + 1); };
 
 		size_type capacity(void) const { return (this->_endCapacity - this->_start); };
 
@@ -300,7 +300,7 @@ namespace ft
 
 		void reallocate(size_t realocSize)
 		{
-			if (realocSize < capacity())
+			if (realocSize <= capacity())
 				return;
 			size_type newCapacity = calculateCapacity();
 			reserve(newCapacity);
