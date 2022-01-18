@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 09:13:07 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/18 19:07:12 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/18 19:13:16 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ void vectorPushBack(void)
 {
 	std::cout << BOLDMAGENTA << "\nVector push_back() testing..." << RESET << std::endl;
 
-	ft::vector<int> v(5);
-	std::vector<int> vreal(5);
+	ft::vector<int> v;
+	std::vector<int> vreal;
 
 	v.push_back(42);
 	vreal.push_back(42);
