@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:41:17 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/19 13:42:15 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/19 15:45:25 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ namespace ft
 	{
 
 	public:
-		typedef T difference_type;
+		typedef typename T::difference_type difference_type;
 		typedef typename T::pointer pointer;
 		typedef typename T::reference reference;
 		typedef typename T::value_type value_type;
@@ -75,7 +75,7 @@ namespace ft
 			_data--;
 			return ret;
 		}
-		difference_type operator-(const random_access_iterator_tag &other) const { return _data - other._data; }
+		difference_type operator-(const random_access_iterator_tag &other) const { return (_data - other._data); }
 		pointer operator+(difference_type i) const { return(_data + i); }
 		pointer operator+(int i) const { return (_data + i); }
 		random_access_iterator_tag operator-(difference_type i) const { _data - i; }
