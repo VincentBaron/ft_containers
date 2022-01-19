@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 09:13:07 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/19 12:02:29 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/19 12:38:02 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,14 @@ void checkArray(ft::vector<T> &v, std::vector<T> &vreal)
 	for (unsigned long long x = 0; x < v.size(); x++)
 		checkOutput(v.at(x), vreal.at(x), "Checking _data[" + to_string(x) + "]...");
 }
+
+// template<typename Ite>
+// void checkArray(Ite *vIte, Ite *vrealIte)
+// {
+// 	std::cout << "\n" << BRIGHTBLACK << "Checking _array...    " << RESET << std::endl;
+// 	while (vIte)
+// 		checkOutput(v.at(x), vreal.at(x), "Checking _data[" + to_string(x) + "]...");
+// }
 
 template <typename T>
 void checkBasicAttr(ft::vector<T> &v, std::vector<T> &vreal)
