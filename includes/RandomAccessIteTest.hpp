@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:02:14 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/19 15:51:09 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/19 15:52:53 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void vectorIterator(void)
 	checkOutput((v.begin() != v.end()), (vreal.begin() != vreal.end()), "Testing <...");
 	checkOutput((v.begin() > v.end()), (vreal.begin() > vreal.end()), "Testing >...");
 	checkOutput((v.begin() == v.begin()), (vreal.begin() == vreal.begin()), "Testing ==...");
+	checkOutput(*(v.begin() += 2), *(vreal.begin() += 2), "Testing Ite += n...");
 	
 
 	// ft::vector<int>::iterator *vItePtr = &vIte;
