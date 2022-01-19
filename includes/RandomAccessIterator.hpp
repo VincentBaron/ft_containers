@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:41:17 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/19 15:46:56 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/19 16:10:20 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ namespace ft
 		typedef typename T::pointer pointer;
 		typedef typename T::reference reference;
 		typedef typename T::value_type value_type;
+		typedef typename T::size_type size_type;
 
 		// Constructors and destructor
 		random_access_iterator_tag(void) : _data(0) {};
@@ -44,6 +45,7 @@ namespace ft
 		};
 
 		value_type &operator*(void) { return *_data; };
+		value_type &operator[](size_type idx) { return *(_data + idx);}
 		const value_type &operator*(void) const { return *_data; };
 		const pointer operator->(void) const { return &(*_data); };
 
@@ -77,7 +79,7 @@ namespace ft
 		}
 		difference_type operator-(const random_access_iterator_tag &other) const { return (_data - other._data); }
 		pointer operator+(difference_type i) const { return(_data + i); }
-		pointer operator+(int i) const { return (_data + i); }
+		pointer operator+(size_type i) const { return (_data + i); }	
 		random_access_iterator_tag operator-(difference_type i) const { _data - i; }
 		random_access_iterator_tag &operator+=(difference_type i)
 		{
