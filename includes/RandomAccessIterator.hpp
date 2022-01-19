@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:41:17 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/18 17:29:17 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/19 12:13:58 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ namespace ft
 		virtual ~random_access_iterator_tag() {};
 
 		// Operator overloads
+		void operator=(const T value) {*(this->_data) = value;}
 		random_access_iterator_tag &operator=(const random_access_iterator_tag &rhs)
 		{
 			if (*this == rhs)
@@ -42,6 +43,7 @@ namespace ft
 			return (*this);
 		};
 
+		value_type &operator*(void) { return *_data; };
 		const value_type &operator*(void) const { return *_data; };
 		const pointer operator->(void) const { return &(*_data); };
 

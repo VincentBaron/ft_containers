@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   VectorTestUnit.tpp                                 :+:      :+:    :+:   */
+/*   VectorTestUnit.hpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 09:13:07 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/19 10:18:23 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/19 12:02:29 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,40 +188,6 @@ void vectorResize(void)
 
 	checkBasicAttr(v, vreal);
 
-}
-
-void vectorIterator(void)
-{
-	std::cout << BOLDMAGENTA << "\nVector random_access_iterator testing..." << RESET << std::endl;
-
-	srand(time(NULL));
-	long long size = 6;
-	ft::vector<int> v;
-	std::vector<int> vreal;
-
-	for (long long x = 0; x < size; x++)
-	{
-		int val = rand() % 20;
-		v.push_back(val);
-		vreal.push_back(val);
-	}
-	// ft::vector<int>::iterator vIte;
-	// std::vector<int>::iterator vrealIte;
-
-	ft::vector<int>::iterator vIte = v.begin();
-	for (long long x = 0; x < size; x++)
-	{
-		std::cout << *(vIte) << std::endl;
-		vIte++;
-	}
-	vIte--;
-	for (long long x = 0; x < size; x++)
-	{
-		std::cout << *(vIte) << std::endl;
-		vIte--;
-	}
-
-	// checkOutput(v.begin(), vreal.begin(), "Checking begin()");
 }
 
 void vectorDefaultConstructor(void)

@@ -188,6 +188,26 @@ namespace ft
 			iterator tmp(_start);
 			return (tmp);
 		}
+
+		const iterator begin(void) const
+		{
+			const iterator tmp(_start);
+			return (tmp);
+		}
+
+		iterator end(void)
+		{
+			iterator tmp(_end);
+			return (tmp);
+		}
+
+		const iterator end(void) const
+		{
+			const iterator tmp(_end);
+			return (tmp);
+		}
+
+
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////// CAPACITY
