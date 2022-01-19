@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:02:14 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/19 16:12:04 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/19 16:36:34 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "vector.hpp"
 # include "utils.hpp"
 # define SIZE 10
-# define OFFSET 40
+# define OFFSET 60
 # define RESET   "\033[0m"
 # define BLACK   "\033[30m"      /* Black */
 # define RED     "\033[31m"      /* Red */
@@ -53,8 +53,19 @@ void vectorIterator(void)
 		v.push_back(val);
 		vreal.push_back(val);
 	}
+	
+	ft::vector<int>::iterator defaultVIte;
+	std::vector<int>::iterator defaultVrealIte;
+	checkOutput(1, 1, "Testing default constructor...");
+
+	ft::vector<int>::iterator copyVIte(v.begin());
+	std::vector<int>::iterator copyVrealIte(vreal.begin());
+	checkOutput(*copyVIte, *copyVrealIte, "Testing copy constructor...");
+	
+	
 	ft::vector<int>::iterator vIte = v.begin();
 	std::vector<int>::iterator vrealIte = vreal.begin();
+	checkOutput(*vIte, *vrealIte, "Testing operator= overload constructor...");
 
 	std::cout << YELLOW << "Testing iterator++...\n" << RESET;
 	while (vIte != v.end() && vrealIte != vreal.end())

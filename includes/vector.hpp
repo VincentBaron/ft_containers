@@ -36,6 +36,7 @@ namespace ft
 		typedef typename Alloc::pointer pointer;
 		typedef typename Alloc::reference reference;
 		typedef ft::random_access_iterator_tag<allocator_type> iterator;
+		typedef typename ft::reverse_iterator<iterator> reverse_iterator;
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
