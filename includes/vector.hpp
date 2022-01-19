@@ -95,10 +95,10 @@ namespace ft
 			this->clear();
 			_data.deallocate(_start, capacity());
 			_start = _data.allocate(rhs.capacity());
+			_endCapacity = _start + rhs.capacity();
 			_end = _start;
-			_endCapacity = rhs._start + rhs.capacity();
 			pointer tmp = rhs._start;
-			while (size() <= rhs.size())
+			while (tmp != rhs._end)
 			{
 				_data.construct(_end, *tmp);
 				tmp++;
@@ -226,17 +226,20 @@ namespace ft
 		{
 			if (size())
 			{
-				pointer tmp = _end;
-				while (--tmp >= _start)
+				pointer tmp = _start;
+				while (tmp < _end)
+				{
 					_data.destroy(tmp);
+					tmp++;
+				}
 			}
 		};
 
 		void push_back(T elem)
 		{
-			std::cout << size() << std::endl;
 			reallocate(size() + 1);
-			_data.construct(_end - 1, elem);
+			_data.construct(_end, elem);
+			_end++;
 		};
 
 		void pop_back(void)
@@ -253,15 +256,19 @@ namespace ft
 			{
 				while (n++ < originalSize)
 				{
-					_data.destroy(_end);
 					_end--;
+					_data.destroy(_end);
 				}
 			}
 			else if (n > size())
 			{
 				reallocate(n);
-				while (n-- > originalSize)
-					_data.construct(_end++, val);
+				while (n > originalSize)
+				{
+					_data.construct(_end, val);
+					_end++;
+					n--;
+				}
 			}
 		};
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -295,6 +302,7 @@ namespace ft
 
 		void reallocate(size_t realocSize)
 		{
+			std::cout << capacity() << std::endl;
 			if (realocSize <= capacity())
 				return;
 			size_type newCapacity = calculateCapacity();

@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 09:13:07 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/18 19:13:16 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/19 10:18:23 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,11 @@ void vectorPushBack(void)
 	std::vector<int> vreal;
 
 	v.push_back(42);
+	v.push_back(43);
+	v.push_back(44);
 	vreal.push_back(42);
+	vreal.push_back(43);
+	vreal.push_back(44);
 	checkBasicAttr(v, vreal);
 }
 
@@ -171,16 +175,16 @@ void vectorResize(void)
 {
 	std::cout << BOLDMAGENTA << "\nVector resize() testing..." << RESET << std::endl;
 	
-	ft::vector<int> v(10, 42);
-	std::vector<int> vreal(10, 42);
+	ft::vector<int> v(2, 42);
+	std::vector<int> vreal(2, 42);
 
-	v.resize(5);
-	vreal.resize(5);
+	// v.resize(5);
+	// vreal.resize(5);
 
-	checkBasicAttr(v, vreal);
+	// checkBasicAttr(v, vreal);
 
-	v.resize(11, 50);
-	vreal.resize(11, 50);
+	v.resize(3, 50);
+	vreal.resize(3, 50);
 
 	checkBasicAttr(v, vreal);
 
