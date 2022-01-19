@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:41:17 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/19 12:13:58 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/19 13:42:15 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ namespace ft
 			return ret;
 		}
 		difference_type operator-(const random_access_iterator_tag &other) const { return _data - other._data; }
-		random_access_iterator_tag operator+(difference_type i) const { _data + i; }
+		pointer operator+(difference_type i) const { return(_data + i); }
+		pointer operator+(int i) const { return (_data + i); }
 		random_access_iterator_tag operator-(difference_type i) const { _data - i; }
 		random_access_iterator_tag &operator+=(difference_type i)
 		{
