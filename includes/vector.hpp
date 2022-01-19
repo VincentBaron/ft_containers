@@ -302,7 +302,6 @@ namespace ft
 
 		void reallocate(size_t realocSize)
 		{
-			std::cout << capacity() << std::endl;
 			if (realocSize <= capacity())
 				return;
 			size_type newCapacity = calculateCapacity();
