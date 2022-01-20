@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:02:14 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/20 12:12:11 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/20 12:34:06 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,12 @@ void vectorReverseIterator(void)
 	*(vreal.rbegin())++;
 	checkOutput(*(v.rbegin()), *(vreal.rbegin()), "Testing *revIte++...");
 	checkOutput(*(vIte + 2), *(vreal.rbegin() + 2), "Testing revIte + n...");
-	// checkOutput((vIte - vIte), (vreal.rbegin() - vreal.rbegin()), "Testing Ite - Itebis...");
-	// checkOutput((v.rbegin() != v.end()), (vreal.rbegin() != vreal.end()), "Testing <...");
-	// checkOutput((v.rbegin() > v.end()), (vreal.rbegin() > vreal.end()), "Testing >...");
-	// checkOutput((v.rbegin() == v.rbegin()), (vreal.rbegin() == vreal.rbegin()), "Testing ==...");
-	// checkOutput(*(v.rbegin() += 2), *(vreal.rbegin() += 2), "Testing Ite += n...");
-	// checkOutput(*(v.end() -= 2), *(vreal.end() -= 2), "Testing Ite -= n...");
-	// checkOutput(v.rbegin()[2], vreal.rbegin()[2], "Testing Ite operator[]...");
+	checkOutput((v.rbegin() != v.rend()), (vreal.rbegin() != vreal.rend()), "Testing <...");
+	checkOutput((v.rbegin() > v.rend()), (vreal.rbegin() > vreal.rend()), "Testing >...");
+	checkOutput((v.rbegin() == v.rbegin()), (vreal.rbegin() == vreal.rbegin()), "Testing ==...");
+	checkOutput(*(v.rbegin() += 2), *(vreal.rbegin() += 2), "Testing Ite += n...");
+	checkOutput(*(v.rend() -= 2), *(vreal.rend() -= 2), "Testing Ite -= n...");
+	checkOutput(v.rbegin()[2], vreal.rbegin()[2], "Testing Ite operator[]...");
 }
 
 
