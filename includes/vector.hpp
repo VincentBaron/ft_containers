@@ -287,16 +287,16 @@ namespace ft
 		{
 			size_type d = position - _start;
 			reallocate(size() + 1);
-			position = _start + d;
-			_end++;
-			iterator tmp = _end;
-			while (--tmp > position)
+			pointer newPos = _start + d;
+			pointer tmp = _end - 1;
+			while (tmp > newPos)
 			{
 				_data.construct(tmp, *(tmp - 1));
+				--tmp;
 			}
-			_data.destroy(position);
-			_data.construct(position, val);
-			return (position);
+			_data.destroy(newPos);
+			_data.construct(newPos, val);
+			return (newPos);
 		};
 
 		void push_back(T elem)

@@ -24,7 +24,7 @@ void vectorTesting(void)
 	vectorResize();
 	vectorRandomAccessIterator();
 	vectorReverseIterator();
-	// vectorInsert();
+	vectorInsert();
 }
 
 int main(void)

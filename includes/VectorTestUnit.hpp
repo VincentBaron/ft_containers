@@ -198,28 +198,28 @@ void vectorResize(void)
 
 }
 
-// void vectorInsert(void)
-// {
-// 	std::cout << BOLDMAGENTA << "\nVector insert() testing..." << RESET << std::endl;
+void vectorInsert(void)
+{
+	std::cout << BOLDMAGENTA << "\nVector insert() testing..." << RESET << std::endl;
 
-// 	srand(time(NULL));
-// 	long long size = 6;
-// 	ft::vector<int> v;
-// 	std::vector<int> vreal;
+	srand(time(NULL));
+	long long size = 6;
+	ft::vector<int> v;
+	std::vector<int> vreal;
 
-// 	for (long long x = 0; x < size; x++)
-// 	{
-// 		int val = rand() % 20;
-// 		v.push_back(val);
-// 		vreal.push_back(val);
-// 	}
-// 	ft::vector<int>::iterator vIte = v.begin();
-// 	std::vector<int>::iterator vrealIte = vreal.begin();
+	for (long long x = 0; x < size; x++)
+	{
+		int val = rand() % 20;
+		v.push_back(val);
+		vreal.push_back(val);
+	}
+	ft::vector<int>::iterator vIte = v.begin();
+	std::vector<int>::iterator vrealIte = vreal.begin();
 
-// 	v.insert(vIte + 2, 78);
-// 	vreal.insert(vrealIte + 2, 78);
-// 	checkArray(v, vreal);
-// }
+	v.insert(vIte + 2, 78);
+	vreal.insert(vrealIte + 2, 78);
+	checkArray(v, vreal);
+}
 
 void vectorDefaultConstructor(void)
 {

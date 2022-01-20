@@ -28,7 +28,7 @@ NAME_TEST = unit-test
 
 CC = clang++
 
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -Wno-unused-parameter -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -std=c++98 -Wno-unused-parameter -g3 #-fsanitize=address
 
 all: $(NAME)
 
