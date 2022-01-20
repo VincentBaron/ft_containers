@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:01:30 by vbaron            #+#    #+#             */
-/*   Updated: 2022/01/20 12:40:23 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/20 13:00:01 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 
 void vectorTesting(void)
 {
-	vectorDefaultConstructor();
-	vectorSizeParameterConstructor();
-	vectorSizeParameterAndValueConstructor();
-	vectorPushBack();
-	vectorPopBack();
-	vectorEmpty();
-	vectorResize();
-	vectorRandomAccessIterator();
-	vectorReverseIterator();
+	// vectorDefaultConstructor();
+	// vectorSizeParameterConstructor();
+	// vectorSizeParameterAndValueConstructor();
+	// vectorPushBack();
+	// vectorPopBack();
+	// vectorEmpty();
+	// vectorResize();
+	// vectorRandomAccessIterator();
+	// vectorReverseIterator();
+	vectorInsert();
 }
 
 int main(void)
