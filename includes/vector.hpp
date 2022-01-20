@@ -283,13 +283,15 @@ namespace ft
 
 		iterator insert (iterator position, const value_type& val)
 		{
-			iterator::distance d = position - _start;
+			size_type d = position - _start;
 			reallocate(size() + 1);
 			position = _start + d;
 			_end++;
 			iterator tmp = _end;
 			while (--tmp > position)
+			{
 				_data.construct(tmp, *(tmp - 1));
+			}
 			_data.destroy(position);
 			_data.construct(position, val);
 			return (position);

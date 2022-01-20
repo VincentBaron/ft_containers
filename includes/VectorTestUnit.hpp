@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 09:13:07 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/20 12:59:44 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/20 13:02:51 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,8 +216,8 @@ void vectorInsert(void)
 	ft::vector<int>::iterator vIte = v.begin();
 	std::vector<int>::iterator vrealIte = vreal.begin();
 
-	v.insert(vIte + 2);
-	vreal.insert(vrealIte + 2);
+	v.insert(vIte + 2, 78);
+	vreal.insert(vrealIte + 2, 78);
 	checkArray(v, vreal);
 }
 
