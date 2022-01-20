@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:02:14 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/20 11:34:54 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/20 11:57:50 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,14 @@ void vectorReverseIterator(void)
 		v.push_back(val);
 		vreal.push_back(val);
 	}
-	
-	ft::vector<int>::reverse_iterator revIte(v.rbegin());
-	std::vector<int>::reverse_iterator revRealIte(vreal.rbegin());
 
-	// std::cout << *revRealIte << std::endl;
-	checkOutput(*revIte, *revRealIte, "Testing *revIte...");
+	ft::vector<int>::reverse_iterator defaultVIte;
+	std::vector<int>::reverse_iterator defaultVrealIte;
+	checkOutput(1, 1, "Testing default constructor...");
 
-
-	// ft::vector<int>::iterator defaultVIte;
-	// std::vector<int>::iterator defaultVrealIte;
-	// checkOutput(1, 1, "Testing default constructor...");
-
-	// ft::vector<int>::iterator copyVIte(v.begin());
-	// std::vector<int>::iterator copyVrealIte(vreal.begin());
-	// checkOutput(*copyVIte, *copyVrealIte, "Testing copy constructor...");
+	ft::vector<int>::iterator copyVIte(v.begin());
+	std::vector<int>::iterator copyVrealIte(vreal.begin());
+	checkOutput(*copyVIte, *copyVrealIte, "Testing copy constructor...");
 	
 	
 	// ft::vector<int>::iterator vIte = v.begin();

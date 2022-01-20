@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 16:47:59 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/20 11:37:57 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/20 11:58:16 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,64 @@ namespace ft
 		reverse_iterator(void) : _data(0){};
 		explicit reverse_iterator(iterator_type it) : _data(it){};
 		template <class Iter>
-		reverse_iterator(const reverse_iterator<Iter> &rev_it) : _data(rev_it.base()){};
+		reverse_iterator(const reverse_iterator<Iter> &rev_it) : _data(rev_it._data){};
 		virtual ~reverse_iterator(){};
 		// Operator overloads
-		reverse_iterator &operator=(const reverse_iterator &rhs);
+		iterator_type operator+(difference_type n) const { return (_data - n); };
+		iterator_type operator-(difference_type i) const { _data + i; }
 
-		// Getters / Setters
-
-		// Member functions
-		iterator_type base(void) const {return _data;};
-		
-		reference operator*(void) const 
+		reference operator*(void) const
 		{
 			iterator_type tmp = _data;
 			return (*(--tmp));
 		};
+
+		reverse_iterator &operator++()
+		{
+			_data--;
+			return *this;
+		}
+		reverse_iterator operator++(int)
+		{
+			reverse_iterator ret = *this;
+			_data--;
+			return ret;
+		}
+
+		reverse_iterator &operator--()
+		{
+			_data++;
+			return *this;
+		}
+		reverse_iterator operator--(int)
+		{
+			reverse_iterator ret = *this;
+			_data++;
+			return ret;
+		}
+
+		reverse_iterator &operator+=(difference_type i)
+		{
+			_data -= i;
+			return (*this);
+		}
+
+		reverse_iterator &operator-=(difference_type i)
+		{
+			_data += i;
+			return (*this);
+		}
+
+		pointer operator->() const
+		{
+			return &(operator*());
+		}
+
+		reference operator[] (difference_type n) const {return _data - n;};
+		// Getters / Setters
+
+		// Member functions
+		iterator_type base(void) const { return _data; };
 
 	protected:
 		// Attributes

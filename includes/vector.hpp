@@ -16,9 +16,9 @@
 #include <iostream>
 #include <string>
 #include "utils.hpp"
-# include "iterator.hpp"
-# include "RandomAccessIterator.hpp"
-# include "reverse_iterator.hpp"
+#include "iterator.hpp"
+#include "RandomAccessIterator.hpp"
+#include "reverse_iterator.hpp"
 
 namespace ft
 {
@@ -184,7 +184,7 @@ namespace ft
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////// ITERATORS
-		
+
 		iterator begin(void)
 		{
 			iterator tmp(_start);
@@ -212,6 +212,24 @@ namespace ft
 		reverse_iterator rbegin(void)
 		{
 			reverse_iterator tmp(_end);
+			return (tmp);
+		}
+
+		const reverse_iterator rbegin(void) const
+		{
+			const reverse_iterator tmp(_end);
+			return (tmp);
+		}
+
+		reverse_iterator rend(void)
+		{
+			reverse_iterator tmp(_start);
+			return (tmp);
+		}
+
+		const reverse_iterator rend(void) const
+		{
+			const reverse_iterator tmp(_start);
 			return (tmp);
 		}
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -277,7 +295,7 @@ namespace ft
 			_data.destroy(_end--);
 		};
 
-		void resize (size_type n, value_type val = value_type())
+		void resize(size_type n, value_type val = value_type())
 		{
 			size_type originalSize = size();
 			if (n < size())
