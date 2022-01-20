@@ -18,6 +18,7 @@
 #include "utils.hpp"
 # include "iterator.hpp"
 # include "RandomAccessIterator.hpp"
+# include "reverse_iterator.hpp"
 
 namespace ft
 {
@@ -208,7 +209,11 @@ namespace ft
 			return (tmp);
 		}
 
-
+		reverse_iterator rbegin(void)
+		{
+			reverse_iterator tmp(_end);
+			return (tmp);
+		}
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////// CAPACITY

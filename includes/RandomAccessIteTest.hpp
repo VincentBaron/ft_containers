@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:02:14 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/19 16:36:34 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/20 11:34:54 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,78 @@
 # define BOLDCYAN    "\033[1m\033[36m"      /* Bold Cyan */
 # define BOLDWHITE   "\033[1m\033[37m"      /* Bold White */
 
-void vectorIterator(void)
+
+void vectorReverseIterator(void)
+{
+	std::cout << BOLDMAGENTA << "\nVector reverse_iterator testing..." << RESET << std::endl;
+
+	srand(time(NULL));
+	long long size = 6;
+	ft::vector<int> v;
+	std::vector<int> vreal;
+
+	for (long long x = 0; x < size; x++)
+	{
+		int val = rand() % 20;
+		v.push_back(val);
+		vreal.push_back(val);
+	}
+	
+	ft::vector<int>::reverse_iterator revIte(v.rbegin());
+	std::vector<int>::reverse_iterator revRealIte(vreal.rbegin());
+
+	// std::cout << *revRealIte << std::endl;
+	checkOutput(*revIte, *revRealIte, "Testing *revIte...");
+
+
+	// ft::vector<int>::iterator defaultVIte;
+	// std::vector<int>::iterator defaultVrealIte;
+	// checkOutput(1, 1, "Testing default constructor...");
+
+	// ft::vector<int>::iterator copyVIte(v.begin());
+	// std::vector<int>::iterator copyVrealIte(vreal.begin());
+	// checkOutput(*copyVIte, *copyVrealIte, "Testing copy constructor...");
+	
+	
+	// ft::vector<int>::iterator vIte = v.begin();
+	// std::vector<int>::iterator vrealIte = vreal.begin();
+	// checkOutput(*vIte, *vrealIte, "Testing operator= overload constructor...");
+
+	// std::cout << YELLOW << "Testing iterator++...\n" << RESET;
+	// while (vIte != v.end() && vrealIte != vreal.end())
+	// {
+	// 	checkOutput(*vIte, *vrealIte, "");
+	// 	vIte++;
+	// 	vrealIte++;
+	// }
+	// std::cout << YELLOW << "Testing iterator--...\n" << RESET;
+	// while (vIte != v.begin() && vrealIte != vreal.begin())
+	// {
+	// 	vIte--;
+	// 	vrealIte--;
+	// 	checkOutput(*vIte, *vrealIte, "");
+	// }
+	// *(v.begin()) = 10;
+	// *(vreal.begin()) = 10;
+	// checkOutput(*(v.begin()), *(vreal.begin()), "Testing *Ite = value...");
+	// *(v.begin())--;
+	// *(vreal.begin())--;
+	// checkOutput(*(v.begin()), *(vreal.begin()), "Testing *Ite--...");
+	// *(v.begin())++;
+	// *(vreal.begin())++;
+	// checkOutput(*(v.begin()), *(vreal.begin()), "Testing *Ite++...");
+	// checkOutput(*(vIte + 2), *(vreal.begin() + 2), "Testing Ite + n...");
+	// checkOutput((vIte - vIte), (vreal.begin() - vreal.begin()), "Testing Ite - Itebis...");
+	// checkOutput((v.begin() != v.end()), (vreal.begin() != vreal.end()), "Testing <...");
+	// checkOutput((v.begin() > v.end()), (vreal.begin() > vreal.end()), "Testing >...");
+	// checkOutput((v.begin() == v.begin()), (vreal.begin() == vreal.begin()), "Testing ==...");
+	// checkOutput(*(v.begin() += 2), *(vreal.begin() += 2), "Testing Ite += n...");
+	// checkOutput(*(v.end() -= 2), *(vreal.end() -= 2), "Testing Ite -= n...");
+	// checkOutput(v.begin()[2], vreal.begin()[2], "Testing Ite operator[]...");
+}
+
+
+void vectorRandomAccessIterator(void)
 {
 	std::cout << BOLDMAGENTA << "\nVector random_access_iterator testing..." << RESET << std::endl;
 
@@ -98,15 +169,6 @@ void vectorIterator(void)
 	checkOutput(*(v.begin() += 2), *(vreal.begin() += 2), "Testing Ite += n...");
 	checkOutput(*(v.end() -= 2), *(vreal.end() -= 2), "Testing Ite -= n...");
 	checkOutput(v.begin()[2], vreal.begin()[2], "Testing Ite operator[]...");
-
-	
-
-	// ft::vector<int>::iterator *vItePtr = &vIte;
-	// std::vector<int>::iterator *vrealItePtr = &vrealIte;
-
-	// checkOutput(vItePtr->, vrealItePtr->, "Testing Ite->");
-
-
 }
 
 #endif
