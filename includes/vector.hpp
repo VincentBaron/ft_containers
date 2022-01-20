@@ -45,7 +45,7 @@ namespace ft
 
 		explicit vector(const allocator_type &alloc = allocator_type()) : _data(alloc)
 		{
-			_start = _data.allocate(0);
+			_start = 0;
 			_end = _start;
 			_endCapacity = _start;
 		};
@@ -83,7 +83,11 @@ namespace ft
 			*this = other;
 		};
 
-		virtual ~vector(){};
+		virtual ~vector()
+		{
+			clear();
+			_data.deallocate(_start, capacity());
+		};
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		//////////////////////////////////////////////////////////////////////////////////////////////// GETTERS && SETTERS
@@ -259,8 +263,6 @@ namespace ft
 				tmp._end++;
 			}
 			*this = tmp;
-			tmp.clear();
-			tmp._data.deallocate(tmp._start, tmp.capacity());
 		};
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////

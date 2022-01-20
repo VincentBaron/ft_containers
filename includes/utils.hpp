@@ -23,10 +23,10 @@ template<>
 struct isIntegral<bool> {static const bool value = true;};
 template<>
 struct isIntegral<char> {static const bool value = true;};
-template<>
-struct isIntegral<char16_t> {static const bool value = true;};
-template<>
-struct isIntegral<char32_t> {static const bool value = true;};
+// template<>
+// struct isIntegral<char16_t> {static const bool value = true;};
+// template<>
+// struct isIntegral<char32_t> {static const bool value = true;};
 template<>
 struct isIntegral<wchar_t> {static const bool value = true;};
 template<>
