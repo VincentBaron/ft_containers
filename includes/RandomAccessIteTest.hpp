@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RANDOMACCESSITERATOR_HPP
-# define RANDOMACCESSITERATOR_HPP
+#ifndef RANDOMACCESSITERATORTEST_HPP
+# define RANDOMACCESSITERATORTEST_HPP
 
 # include <vector>
 # include <cstdlib>
