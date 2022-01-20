@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 16:47:59 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/20 12:08:55 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/20 12:13:37 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ namespace ft
 		virtual ~reverse_iterator(){};
 		// Operator overloads
 		iterator_type operator+(difference_type n) const { return (_data - n); };
-		iterator_type operator-(difference_type i) const { _data + i; }
+		iterator_type operator-(difference_type i) const { return (_data + i); }
 
 		reference operator*(void) const
 		{
@@ -125,12 +125,12 @@ namespace ft
 	template <class Iterator>
 	reverse_iterator<Iterator> operator+(
 		typename reverse_iterator<Iterator>::difference_type n,
-		const reverse_iterator<Iterator> &rev_it){return (rev_it + n)};
+		const reverse_iterator<Iterator> &rev_it){return (rev_it + n);};
 
 	template <class Iterator>
 	reverse_iterator<Iterator> operator-(
 		typename reverse_iterator<Iterator>::difference_type n,
-		const reverse_iterator<Iterator> &rev_it){return (rev_it - n)};
+		const reverse_iterator<Iterator> &rev_it){return (rev_it - n);};
 
 }
 
