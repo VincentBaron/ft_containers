@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:02:14 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/20 11:57:50 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/20 12:01:02 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,22 +59,17 @@ void vectorReverseIterator(void)
 	std::vector<int>::reverse_iterator defaultVrealIte;
 	checkOutput(1, 1, "Testing default constructor...");
 
-	ft::vector<int>::iterator copyVIte(v.begin());
-	std::vector<int>::iterator copyVrealIte(vreal.begin());
-	checkOutput(*copyVIte, *copyVrealIte, "Testing copy constructor...");
-	
-	
-	// ft::vector<int>::iterator vIte = v.begin();
-	// std::vector<int>::iterator vrealIte = vreal.begin();
-	// checkOutput(*vIte, *vrealIte, "Testing operator= overload constructor...");
+	ft::vector<int>::reverse_iterator vIte(v.rbegin());
+	std::vector<int>::reverse_iterator vrealIte(vreal.rbegin());
+	checkOutput(*vIte, *vrealIte, "Testing copy constructor...");
 
-	// std::cout << YELLOW << "Testing iterator++...\n" << RESET;
-	// while (vIte != v.end() && vrealIte != vreal.end())
-	// {
-	// 	checkOutput(*vIte, *vrealIte, "");
-	// 	vIte++;
-	// 	vrealIte++;
-	// }
+	std::cout << YELLOW << "Testing reverse_iterator++...\n" << RESET;
+	while (vIte != v.rend() && vrealIte != vreal.rend())
+	{
+		checkOutput(*vIte, *vrealIte, "");
+		vIte++;
+		vrealIte++;
+	}
 	// std::cout << YELLOW << "Testing iterator--...\n" << RESET;
 	// while (vIte != v.begin() && vrealIte != vreal.begin())
 	// {

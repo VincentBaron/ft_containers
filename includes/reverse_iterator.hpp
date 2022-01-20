@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 16:47:59 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/20 11:58:16 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/20 12:08:55 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ namespace ft
 			return &(operator*());
 		}
 
-		reference operator[] (difference_type n) const {return _data - n;};
+		reference operator[](difference_type n) const { return _data - n; };
 		// Getters / Setters
 
 		// Member functions
@@ -97,6 +97,41 @@ namespace ft
 		// Attributes
 		iterator_type _data;
 	};
+
+	template <class Iterator>
+	bool operator==(const reverse_iterator<Iterator> &lhs,
+					const reverse_iterator<Iterator> &rhs) { return lhs.base() == rhs.base(); };
+
+	template <class Iterator>
+	bool operator!=(const reverse_iterator<Iterator> &lhs,
+					const reverse_iterator<Iterator> &rhs) { return lhs.base() != rhs.base(); };
+
+	template <class Iterator>
+	bool operator<(const reverse_iterator<Iterator> &lhs,
+				   const reverse_iterator<Iterator> &rhs) { return lhs.base() < rhs.base(); };
+
+	template <class Iterator>
+	bool operator<=(const reverse_iterator<Iterator> &lhs,
+					const reverse_iterator<Iterator> &rhs) { return lhs.base() <= rhs.base(); };
+
+	template <class Iterator>
+	bool operator>(const reverse_iterator<Iterator> &lhs,
+				   const reverse_iterator<Iterator> &rhs) { return lhs.base() > rhs.base(); };
+
+	template <class Iterator>
+	bool operator>=(const reverse_iterator<Iterator> &lhs,
+					const reverse_iterator<Iterator> &rhs) { return lhs.base() >= rhs.base(); };
+
+	template <class Iterator>
+	reverse_iterator<Iterator> operator+(
+		typename reverse_iterator<Iterator>::difference_type n,
+		const reverse_iterator<Iterator> &rev_it){return (rev_it + n)};
+
+	template <class Iterator>
+	reverse_iterator<Iterator> operator-(
+		typename reverse_iterator<Iterator>::difference_type n,
+		const reverse_iterator<Iterator> &rev_it){return (rev_it - n)};
+
 }
 
 #endif
