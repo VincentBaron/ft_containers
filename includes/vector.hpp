@@ -33,6 +33,7 @@ namespace ft
 		typedef vector<T> vector_type;
 		typedef Alloc allocator_type;
 		typedef typename Alloc::pointer pointer;
+		typedef typename Alloc::difference_type difference_type;
 		typedef typename Alloc::reference reference;
 		typedef typename Alloc::size_type size_type;
 		typedef ft::random_access_iterator<value_type> iterator;
@@ -128,8 +129,8 @@ namespace ft
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////  MEMBER FUNCTIONS
-		template<class InputIterator>
-		void assign (InputIterator first, InputIterator last, typename ft::enable_if<!ft::isIntegral<InputIterator>::value, InputIterator>::type * = 0)
+		template <class InputIterator>
+		void assign(InputIterator first, InputIterator last, typename ft::enable_if<!ft::isIntegral<InputIterator>::value, InputIterator>::type * = 0)
 		{
 			reallocate(last - first);
 
@@ -153,7 +154,7 @@ namespace ft
 				first++;
 			}
 		};
-		
+
 		void assign(size_type count, const T &value)
 		{
 			reallocate(count);
@@ -317,7 +318,7 @@ namespace ft
 			}
 		};
 
-		iterator insert (iterator position, const value_type& val)
+		iterator insert(iterator position, const value_type &val)
 		{
 			size_type dist = position - _start;
 			reallocate(size() + 1);
@@ -326,14 +327,14 @@ namespace ft
 			while (tmp > newPos)
 			{
 				_data.construct(tmp, *(tmp - 1));
-				--tmp;
+				tmp--;
 			}
 			_data.destroy(newPos);
 			_data.construct(newPos, val);
 			return (newPos);
 		};
 
-		void insert (iterator position, size_type n, const value_type& val)
+		void insert(iterator position, size_type n, const value_type &val)
 		{
 			size_type dist = position - _start;
 			reallocate(size() + n);
@@ -349,6 +350,31 @@ namespace ft
 				_data.destroy(newPos);
 				_data.construct(newPos, val);
 				n--;
+				newPos++;
+			}
+		};
+
+		template <class InputIterator>
+		void insert(iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::isIntegral<InputIterator>::value, InputIterator>::type * = 0)
+		{
+			difference_type n = last - first;
+			size_type dist = position - _start;
+			reallocate(size() + n);
+			pointer newPos = _start + dist;
+			pointer tmp = _end - 1;
+			std::cout << capacity() << std::endl;
+			while (tmp > newPos + n)
+			{
+				_data.construct(tmp, *(tmp - n));
+				tmp--;
+			}
+			for (iterator beg = begin(); beg < end(); beg++)
+				std::cout << *beg << std::endl;
+			while (first < last)
+			{
+				_data.destroy(newPos);
+				_data.construct(newPos, *first);
+				first++;
 				newPos++;
 			}
 		};
@@ -406,15 +432,18 @@ namespace ft
 				throw std::out_of_range("Out of range");
 		}
 
-		size_type calculateCapacity()
+		size_type calculateCapacity(size_type realocSize)
 		{
-			size_type newCapacity;
+			size_type newCapacity = capacity();
 			if (capacity() == 0)
 				newCapacity = 1;
 			else if (capacity() * 2 > _data.max_size())
 				newCapacity = _data.max_size();
 			else
-				newCapacity = capacity() * 2;
+			{
+				while (newCapacity < realocSize)
+					newCapacity *= 2;
+			}
 			return (newCapacity);
 		}
 
@@ -422,7 +451,7 @@ namespace ft
 		{
 			if (realocSize <= capacity())
 				return;
-			size_type newCapacity = calculateCapacity();
+			size_type newCapacity = calculateCapacity(realocSize);
 			reserve(newCapacity);
 		}
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////

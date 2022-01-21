@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 09:13:07 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/21 12:01:13 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/01/21 15:14:10 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,6 +225,22 @@ void vectorInsert(void)
 	v.insert(vIte + 2, 5, 78);
 	vreal.insert(vrealIte + 2, 5, 78);
 	checkArray(v, vreal);
+
+	std::cout << BOLDMAGENTA << "\nVector insert() iterators testing..." << RESET << std::endl;
+
+	v = ft::vector<int>(4, 42);
+	vreal = std::vector<int>(4, 42);
+	
+	std::vector<int> tmp;
+	for (long long x = 0; x < size; x++)
+	{
+		// int val = rand() % 20;
+		tmp.push_back(52);
+	}
+	
+	v.insert(vIte + 2, tmp.begin(), tmp.end());
+	vreal.insert(vrealIte + 2, tmp.begin(), tmp.end());
+	checkArray(v, vreal);
 }
 
 void vectorAssign(void)
@@ -252,7 +268,7 @@ void vectorAssign(void)
 		int val = rand() % 20;
 		tmp.push_back(val);
 	}
-	
+
 	v.assign(tmp.begin(), tmp.end());
 	vreal.assign(tmp.begin(), tmp.end());
 	
