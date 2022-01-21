@@ -15,17 +15,17 @@
 
 void vectorTesting(void)
 {
-	// vectorDefaultConstructor();
-	// vectorSizeParameterConstructor();
-	// vectorSizeParameterAndValueConstructor();
+	vectorDefaultConstructor();
+	vectorSizeParameterConstructor();
+	vectorSizeParameterAndValueConstructor();
 	vectorAssign();
-	// vectorPushBack();
-	// vectorPopBack();
-	// vectorEmpty();
-	// vectorResize();
-	// vectorRandomAccessIterator();
-	// vectorReverseIterator();
-	// vectorInsert();
+	vectorPushBack();
+	vectorPopBack();
+	vectorEmpty();
+	vectorResize();
+	vectorRandomAccessIterator();
+	vectorReverseIterator();
+	vectorInsert();
 }
 
 int main(void)

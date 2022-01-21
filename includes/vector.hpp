@@ -23,7 +23,6 @@ namespace ft
 {
 	//////////////////////////////////////////////////////////////////////////////////////////////// NAMESPACE TYPEDEFS
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	typedef unsigned long long int size_type;
 	template <class T, class Alloc = std::allocator<T> >
 	class vector
 	{
@@ -35,6 +34,7 @@ namespace ft
 		typedef Alloc allocator_type;
 		typedef typename Alloc::pointer pointer;
 		typedef typename Alloc::reference reference;
+		typedef typename Alloc::size_type size_type;
 		typedef ft::random_access_iterator<value_type> iterator;
 		typedef ft::random_access_iterator<const value_type> const_iterator;
 		typedef typename ft::reverse_iterator<iterator> reverse_iterator;
@@ -319,9 +319,9 @@ namespace ft
 
 		iterator insert (iterator position, const value_type& val)
 		{
-			size_type d = position - _start;
+			size_type dist = position - _start;
 			reallocate(size() + 1);
-			pointer newPos = _start + d;
+			pointer newPos = _start + dist;
 			pointer tmp = _end - 1;
 			while (tmp > newPos)
 			{
@@ -331,6 +331,26 @@ namespace ft
 			_data.destroy(newPos);
 			_data.construct(newPos, val);
 			return (newPos);
+		};
+
+		void insert (iterator position, size_type n, const value_type& val)
+		{
+			size_type dist = position - _start;
+			reallocate(size() + n);
+			pointer newPos = _start + dist;
+			pointer tmp = _end - 1;
+			while (tmp > newPos + n)
+			{
+				_data.construct(tmp, *(tmp - n));
+				--tmp;
+			}
+			while (n > 0)
+			{
+				_data.destroy(newPos);
+				_data.construct(newPos, val);
+				n--;
+				newPos++;
+			}
 		};
 
 		void push_back(T elem)

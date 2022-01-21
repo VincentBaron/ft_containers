@@ -200,7 +200,7 @@ void vectorResize(void)
 
 void vectorInsert(void)
 {
-	std::cout << BOLDMAGENTA << "\nVector insert() testing..." << RESET << std::endl;
+	std::cout << BOLDMAGENTA << "\nVector insert() single value testing..." << RESET << std::endl;
 
 	srand(time(NULL));
 	long long size = 6;
@@ -218,6 +218,12 @@ void vectorInsert(void)
 
 	v.insert(vIte + 2, 78);
 	vreal.insert(vrealIte + 2, 78);
+	checkArray(v, vreal);
+
+	std::cout << BOLDMAGENTA << "\nVector insert() n count testing..." << RESET << std::endl;
+
+	v.insert(vIte + 2, 5, 78);
+	vreal.insert(vrealIte + 2, 5, 78);
 	checkArray(v, vreal);
 }
 
