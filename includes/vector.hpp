@@ -12,7 +12,6 @@
 
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
-#define MAX_SIZE 2305843009213693951
 #include <iostream>
 #include <string>
 #include "utils.hpp"
@@ -129,6 +128,32 @@ namespace ft
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////  MEMBER FUNCTIONS
+		template<class InputIterator>
+		void assign (InputIterator first, InputIterator last, typename ft::enable_if<!ft::isIntegral<InputIterator>::value, InputIterator>::type * = 0)
+		{
+			reallocate(last - first);
+
+			pointer tmpStart = _start;
+			while (tmpStart != _end && first != last)
+			{
+				_data.destroy(tmpStart);
+				_data.construct(tmpStart, *first);
+				tmpStart++;
+				first++;
+			}
+			while (_end > tmpStart)
+			{
+				_end--;
+				_data.destroy(_end);
+			}
+			while (first != last)
+			{
+				_data.construct(_end, *first);
+				_end++;
+				first++;
+			}
+		};
+		
 		void assign(size_type count, const T &value)
 		{
 			reallocate(count);
@@ -141,10 +166,17 @@ namespace ft
 				tmpStart++;
 				count--;
 			}
-			while (tmpStart != _end)
-				_data.destroy(_end--);
+			while (_end > tmpStart)
+			{
+				_end--;
+				_data.destroy(_end);
+			}
 			while (count > 0)
-				_data.construct(++_end, value);
+			{
+				_data.construct(_end, value);
+				_end++;
+				count--;
+			}
 		};
 
 		allocator_type get_allocator() const { return _data; };
@@ -245,7 +277,7 @@ namespace ft
 
 		size_type capacity(void) const { return (this->_endCapacity - this->_start); };
 
-		size_type max_size(void) const { return MAX_SIZE; };
+		size_type max_size(void) const { return _data.max_size(); };
 
 		bool empty() const { return (!size() ? true : false); };
 
@@ -359,8 +391,8 @@ namespace ft
 			size_type newCapacity;
 			if (capacity() == 0)
 				newCapacity = 1;
-			else if (capacity() * 2 > MAX_SIZE)
-				newCapacity = MAX_SIZE;
+			else if (capacity() * 2 > _data.max_size())
+				newCapacity = _data.max_size();
 			else
 				newCapacity = capacity() * 2;
 			return (newCapacity);
