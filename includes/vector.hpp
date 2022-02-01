@@ -381,26 +381,18 @@ namespace ft
 		template <class InputIterator>
 		void insert(iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::isIntegral<InputIterator>::value, InputIterator>::type * = 0)
 		{
-			difference_type n = last - first;
-			size_type dist = position - _start;
+			difference_type n = 0;
+			for (InputIterator tmp = first; tmp <= last; tmp++)
+				n++;
+			difference_type dist = position - begin();
+			vector_type tmp;
+			for (iterator ite = end() - 1; ite >= position; ite--)
+				tmp.push_back(*ite);
+			for (iterator tmpIte = tmp.begin(); tmpIte < tmp.end(); tmpIte++)
+				std::cout << *tmpIte << std::endl;
 			reallocate(size() + n);
-			pointer newPos = _start + dist;
-			pointer tmp = _end - 1;
-			std::cout << capacity() << std::endl;
-			while (tmp > newPos + n)
-			{
-				_data.construct(tmp, *(tmp - n));
-				tmp--;
-			}
-			for (iterator beg = begin(); beg < end(); beg++)
-				std::cout << *beg << std::endl;
-			while (first < last)
-			{
-				_data.destroy(newPos);
-				_data.construct(newPos, *first);
-				first++;
-				newPos++;
-			}
+			for (pointer tmpPtr = _start + dist; tmpPtr < _end; tmpPtr++)
+				_data.destroy(tmpPtr);
 		};
 
 		void push_back(T elem)
