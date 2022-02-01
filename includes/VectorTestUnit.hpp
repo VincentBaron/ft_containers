@@ -207,24 +207,24 @@ void vectorInsert(void)
 	ft::vector<int> v;
 	std::vector<int> vreal;
 
-	// for (long long x = 0; x < size; x++)
-	// {
-	// 	int val = rand() % 20;
-	// 	v.push_back(val);
-	// 	vreal.push_back(val);
-	// }
-	// ft::vector<int>::iterator vIte = v.begin();
-	// std::vector<int>::iterator vrealIte = vreal.begin();
+	for (long long x = 0; x < size; x++)
+	{
+		int val = rand() % 20;
+		v.push_back(val);
+		vreal.push_back(val);
+	}
+	ft::vector<int>::iterator vIte = v.begin();
+	std::vector<int>::iterator vrealIte = vreal.begin();
 
-	// v.insert(vIte + 2, 78);
-	// vreal.insert(vrealIte + 2, 78);
-	// checkArray(v, vreal);
+	v.insert(vIte + 2, 78);
+	vreal.insert(vrealIte + 2, 78);
+	checkBasicAttr(v, vreal);
 
-	// std::cout << BOLDMAGENTA << "\nVector insert() n count testing..." << RESET << std::endl;
+	std::cout << BOLDMAGENTA << "\nVector insert() n count testing..." << RESET << std::endl;
 
-	// v.insert(vIte + 2, 5, 78);
-	// vreal.insert(vrealIte + 2, 5, 78);
-	// checkArray(v, vreal);
+	v.insert(vIte + 2, 5, 78);
+	vreal.insert(vrealIte + 2, 5, 78);
+	checkBasicAttr(v, vreal);
 
 	std::cout << BOLDMAGENTA << "\nVector insert() iterators testing..." << RESET << std::endl;
 
@@ -236,14 +236,13 @@ void vectorInsert(void)
 	{
 		v.push_back(x);
 		vreal.push_back(x);
-		// int val = rand() % 20;
-		tmp.push_back(52);
+		int val = rand() % 20;
+		tmp.push_back(val);
 	}
 	
 	v.insert(v.begin() + 2, tmp.begin(), tmp.end() - 1);
 	vreal.insert(vreal.begin() + 2, tmp.begin(), tmp.end());
 	checkBasicAttr(v, vreal);
-	checkArray(v, vreal);
 }
 
 void vectorAssign(void)

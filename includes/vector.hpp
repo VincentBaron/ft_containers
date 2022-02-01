@@ -388,9 +388,6 @@ namespace ft
 			vector_type tmp;
 			for (iterator ite = end() - 1; ite >= position; ite--)
 				tmp.push_back(*ite);
-			for (iterator tmpIte = tmp.begin(); tmpIte < tmp.end(); tmpIte++)
-				std::cout << *tmpIte << std::endl;
-			std::cout << "\n\n\n" << std::endl;
 			reallocate(size() + n);
 			for (pointer tmpPtr = _start + dist; tmpPtr < _end; tmpPtr++)
 				_data.destroy(tmpPtr);
@@ -399,9 +396,6 @@ namespace ft
 				push_back(*first);
 			for (iterator tmpIte = tmp.end() - 1; tmpIte >= tmp.begin(); tmpIte--)
 				push_back(*tmpIte);
-			for (iterator tmpIte = begin(); tmpIte < end(); tmpIte++)
-				std::cout << *tmpIte << std::endl;
-			std::cout << "\n\n\n" << std::endl;
 		};
 
 		void push_back(T elem)
