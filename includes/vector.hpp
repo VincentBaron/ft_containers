@@ -304,7 +304,7 @@ namespace ft
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////// MODIFIERS
 
-		iterator erase (iterator position)
+		iterator erase(iterator position)
 		{
 			_data.destroy(_start + (position - begin()));
 			if (position < end())
@@ -316,7 +316,7 @@ namespace ft
 			return (position);
 		};
 
-		iterator erase (iterator first, iterator last)
+		iterator erase(iterator first, iterator last)
 		{
 			for (iterator tmpFirst = first; tmpFirst <= last; tmpFirst++)
 				_data.destroy(_start + (tmpFirst - begin()));
@@ -328,7 +328,7 @@ namespace ft
 			}
 			return (first);
 		};
-		
+
 		void clear(void)
 		{
 			if (size())
@@ -360,22 +360,18 @@ namespace ft
 
 		void insert(iterator position, size_type n, const value_type &val)
 		{
-			size_type dist = position - _start;
+			vector_type tmp;
+			for (iterator ite = end() - 1; ite >= position; ite--)
+				tmp.push_back(*ite);
+			difference_type dist = position - begin();
 			reallocate(size() + n);
-			pointer newPos = _start + dist;
-			pointer tmp = _end - 1;
-			while (tmp > newPos + n)
-			{
-				_data.construct(tmp, *(tmp - n));
-				--tmp;
-			}
-			while (n > 0)
-			{
-				_data.destroy(newPos);
-				_data.construct(newPos, val);
-				n--;
-				newPos++;
-			}
+			for (pointer tmpPtr = _start + dist; tmpPtr < _end; tmpPtr++)
+				_data.destroy(tmpPtr);
+			_end = _start + dist;
+			for (n; n > 0; n++)
+				push_back(*val);
+			for (iterator tmpIte = tmp.end() - 1; tmpIte >= tmp.begin(); tmpIte--)
+				push_back(*tmpIte);
 		};
 
 		template <class InputIterator>
@@ -434,7 +430,6 @@ namespace ft
 				}
 			}
 		};
-
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
