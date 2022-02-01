@@ -216,9 +216,10 @@ void vectorInsert(void)
 	ft::vector<int>::iterator vIte = v.begin();
 	std::vector<int>::iterator vrealIte = vreal.begin();
 
-	// v.insert(vIte + 2, 78);
-	// vreal.insert(vrealIte + 2, 78);
-	// checkBasicAttr(v, vreal);
+	v.insert(vIte + 2, 78);
+	vreal.insert(vrealIte + 2, 78);
+	checkOutput(*(vIte + 2), *(vrealIte + 2), "Checking insert iterator value");
+	checkBasicAttr(v, vreal);
 
 	std::cout << BOLDMAGENTA << "\nVector insert() n count testing..." << RESET << std::endl;
 

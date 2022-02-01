@@ -343,18 +343,18 @@ namespace ft
 
 			iterator insert(iterator position, const value_type &val)
 			{
-				size_type dist = position - _start;
+				vector_type tmp;
+				for (iterator ite = end() - 1; ite >= position; ite--)
+					tmp.push_back(*ite);
+				difference_type dist = position - begin();
 				reallocate(size() + 1);
-				pointer newPos = _start + dist;
-				pointer tmp = _end - 1;
-				while (tmp > newPos)
-				{
-					_data.construct(tmp, *(tmp - 1));
-					tmp--;
-				}
-				_data.destroy(newPos);
-				_data.construct(newPos, val);
-				return (newPos);
+				for (pointer tmpPtr = _start + dist; tmpPtr < _end; tmpPtr++)
+					_data.destroy(tmpPtr);
+				_end = _start + dist;
+				push_back(val);
+				for (iterator tmpIte = tmp.end() - 1; tmpIte >= tmp.begin(); tmpIte--)
+					push_back(*tmpIte);
+				return (_start + dist);
 			};
 
 			void insert(iterator position, size_type n, const value_type &val)
@@ -367,7 +367,7 @@ namespace ft
 				for (pointer tmpPtr = _start + dist; tmpPtr < _end; tmpPtr++)
 					_data.destroy(tmpPtr);
 				_end = _start + dist;
-				for (n; n > 0; n++)
+				for (n; n > 0; n--)
 					push_back(val);
 				for (iterator tmpIte = tmp.end() - 1; tmpIte >= tmp.begin(); tmpIte--)
 					push_back(*tmpIte);
@@ -383,9 +383,6 @@ namespace ft
 				vector_type tmp;
 				for (iterator ite = end() - 1; ite >= position; ite--)
 					tmp.push_back(*ite);
-				for (iterator tmpIte = tmp.begin(); tmpIte < tmp.end(); tmpIte++)
-					std::cout << *tmpIte << std::endl;
-				std::cout << "\n\n\n" << std::endl;
 				reallocate(size() + n);
 				for (pointer tmpPtr = _start + dist; tmpPtr < _end; tmpPtr++)
 					_data.destroy(tmpPtr);
