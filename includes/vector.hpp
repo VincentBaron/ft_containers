@@ -303,8 +303,30 @@ namespace ft
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////// MODIFIERS
-		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+		iterator erase (iterator position)
+		{
+			_data.destroy(poosition);
+			if (position < end())
+			{
+				_data.insert(position, position + 1, end() - 1);
+				_data.destroy(end() - 1);
+				_end--;
+			}
+		};
+
+		iterator erase (iterator first, iterator last)
+		{
+			for (iterator tmpFirst = first; tmpFirst <= last; tmpFirst++)
+				_data.destroy(tmpFirst);
+			if (first < end())
+			{
+				_data.insert(first, last + 1, end() - 1);
+				_data.destroy(end() - 1);
+				_end--;
+			}
+		};
+		
 		void clear(void)
 		{
 			if (size())
@@ -415,6 +437,8 @@ namespace ft
 				}
 			}
 		};
+
+
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	private:

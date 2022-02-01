@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 09:13:07 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/21 15:14:10 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/01 12:48:21 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,6 +272,28 @@ void vectorAssign(void)
 	v.assign(tmp.begin(), tmp.end());
 	vreal.assign(tmp.begin(), tmp.end());
 	
+	checkBasicAttr(v, vreal);
+	checkArray(v, vreal);
+}
+
+void vectorErase(void)
+{
+	std::cout << BOLDMAGENTA << "\nVector erase() single position..." << RESET << std::endl;
+
+	srand(time(NULL));
+	long long size = 6;
+	ft::vector<int> v;
+	std::vector<int> vreal;
+
+	for (long long x = 0; x < size; x++)
+	{
+		int val = rand() % 20;
+		v.push_back(val);
+		vreal.push_back(val);
+	}
+	v.erase(v.begin() + 2);
+	v.erase(vreal.begin() + 2);
+
 	checkBasicAttr(v, vreal);
 	checkArray(v, vreal);
 }
