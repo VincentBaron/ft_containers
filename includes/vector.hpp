@@ -344,33 +344,35 @@ namespace ft
 			iterator insert(iterator position, const value_type &val)
 			{
 				vector_type tmp;
+				tmp.reserve(size() - (position - begin()));
 				for (iterator ite = end() - 1; ite >= position; ite--)
-					tmp.push_back(*ite);
+					tmp.add_back(*ite);
 				difference_type dist = position - begin();
 				reallocate(size() + 1);
 				for (pointer tmpPtr = _start + dist; tmpPtr < _end; tmpPtr++)
 					_data.destroy(tmpPtr);
 				_end = _start + dist;
-				push_back(val);
+				add_back(val);
 				for (iterator tmpIte = tmp.end() - 1; tmpIte >= tmp.begin(); tmpIte--)
-					push_back(*tmpIte);
+					add_back(*tmpIte);
 				return (_start + dist);
 			};
 
 			void insert(iterator position, size_type n, const value_type &val)
 			{
 				vector_type tmp;
+				tmp.reserve(size() - (position - begin()));
 				for (iterator ite = end() - 1; ite >= position; ite--)
-					tmp.push_back(*ite);
+					tmp.add_back(*ite);
 				difference_type dist = position - begin();
 				reallocate(size() + n);
 				for (pointer tmpPtr = _start + dist; tmpPtr < _end; tmpPtr++)
 					_data.destroy(tmpPtr);
 				_end = _start + dist;
 				for (n; n > 0; n--)
-					push_back(val);
+					add_back(val);
 				for (iterator tmpIte = tmp.end() - 1; tmpIte >= tmp.begin(); tmpIte--)
-					push_back(*tmpIte);
+					add_back(*tmpIte);
 			};
 
 			template <class InputIterator>
@@ -381,16 +383,17 @@ namespace ft
 					n++;
 				difference_type dist = position - begin();
 				vector_type tmp;
+				tmp.reserve(size() - (position - begin()));
 				for (iterator ite = end() - 1; ite >= position; ite--)
-					tmp.push_back(*ite);
+					tmp.add_back(*ite);
 				reallocate(size() + n);
 				for (pointer tmpPtr = _start + dist; tmpPtr < _end; tmpPtr++)
 					_data.destroy(tmpPtr);
 				_end = _start + dist;
 				for (first; first <= last; first++)
-					push_back(*first);
+					add_back(*first);
 				for (iterator tmpIte = tmp.end() - 1; tmpIte >= tmp.begin(); tmpIte--)
-					push_back(*tmpIte);
+					add_back(*tmpIte);
 			};
 
 			void push_back(T elem)
@@ -470,6 +473,12 @@ namespace ft
 				size_type newCapacity = calculateCapacity(realocSize);
 				reserve(newCapacity);
 			}
+
+			void add_back(T elem)
+			{
+				_data.construct(_end, elem);
+				_end++;
+			};
 			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	};
 }
