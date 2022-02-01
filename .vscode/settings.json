@@ -60,7 +60,16 @@
 		"type_traits": "c",
 		"typeinfo": "c",
 		"utility": "c",
-		"*.tpp": "cpp"
+		"*.tpp": "cpp",
+		"*.tcc": "cpp",
+		"clocale": "cpp",
+		"compare": "cpp",
+		"concepts": "cpp",
+		"deque": "cpp",
+		"memory_resource": "cpp",
+		"numeric": "cpp",
+		"random": "cpp",
+		"ranges": "cpp"
 	},
 	"C_Cpp.errorSquiggles": "Disabled"
 }
