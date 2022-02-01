@@ -306,25 +306,27 @@ namespace ft
 
 		iterator erase (iterator position)
 		{
-			_data.destroy(poosition);
+			_data.destroy(_start + (position - begin()));
 			if (position < end())
 			{
-				_data.insert(position, position + 1, end() - 1);
+				insert(position, position + 1, end() - 1);
 				_data.destroy(end() - 1);
 				_end--;
 			}
+			return (position);
 		};
 
 		iterator erase (iterator first, iterator last)
 		{
 			for (iterator tmpFirst = first; tmpFirst <= last; tmpFirst++)
-				_data.destroy(tmpFirst);
+				_data.destroy(_start + (tmpFirst - begin()));
 			if (first < end())
 			{
-				_data.insert(first, last + 1, end() - 1);
+				insert(first, last + 1, end() - 1);
 				_data.destroy(end() - 1);
 				_end--;
 			}
+			return (first);
 		};
 		
 		void clear(void)

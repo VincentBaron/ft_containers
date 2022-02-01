@@ -290,9 +290,9 @@ void vectorErase(void)
 		int val = rand() % 20;
 		v.push_back(val);
 		vreal.push_back(val);
-	}
+	} 
 	v.erase(v.begin() + 2);
-	v.erase(vreal.begin() + 2);
+	vreal.erase(vreal.begin() + 2);
 
 	checkBasicAttr(v, vreal);
 	checkArray(v, vreal);
