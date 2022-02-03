@@ -353,9 +353,17 @@ void vectorOperators(void)
 		v.push_back(val);
 		vComp.push_back(val);
 	}
-	checkOutput(v == vComp, true, "Checking == operator true");
+	checkOutput(v == vComp, true, "Checking == operator");
+	checkOutput(v != vComp, false, "Checking != operator");
 	v.push_back(42);
-	checkOutput(v == vComp, false, "Checking == operator true");
+	checkOutput(v == vComp, false, "Checking == operator");
+	checkOutput(v != vComp, true, "Checking != operator");
+
+	checkOutput(v < vComp, false, "Checking < operator");
+	checkOutput(v <= vComp, false, "Checking <= operator");
+	checkOutput(v > vComp, true, "Checking > operator");
+	checkOutput(v >= vComp, true, "Checking >= operator");
+
 }
 
 void vectorDefaultConstructor(void)
