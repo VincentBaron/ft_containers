@@ -336,6 +336,11 @@ void vectorSwap(void)
 	vreal.swap(vrealSwap);
 	checkBasicAttr(v, vreal);
 	checkBasicAttr(vSwap, vrealSwap);
+	ft::swap(v, vSwap);
+	ft::swap(vreal, vrealSwap);
+	std::cout << BOLDMAGENTA << "\nVector non-member swap..." << RESET << std::endl;
+	checkBasicAttr(v, vreal);
+	checkBasicAttr(vSwap, vrealSwap);
 }
 
 void vectorOperators(void)
