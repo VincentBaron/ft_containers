@@ -321,7 +321,6 @@ namespace ft
 		{
 			vector_type tmp;
 			tmp.reserve(end() - last - 1);
-			std::cout << "tmp.capacity(): " << tmp.capacity() << std::endl;
 			for (iterator tmpIte = last; tmpIte < end(); tmpIte++)
 				tmp.add_back(*tmpIte);
 			for (pointer tmpPtr = _start + (first - begin()); tmpPtr < _end; tmpPtr++)
