@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   VectorTestUnit.hpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
+/*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 09:13:07 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/01 12:48:21 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/03 17:16:30 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

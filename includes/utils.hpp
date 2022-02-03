@@ -14,6 +14,7 @@
 #define UTILS_HPP
 #include <iterator>
 #include <sstream>
+# include <sys/time.h>
 
 namespace ft
 {
@@ -137,6 +138,14 @@ inline std::string to_string(const T &t)
 	std::stringstream ss;
 	ss << t;
 	return ss.str();
+}
+
+long get_time(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec / 1000000 + tv.tv_usec);
 }
 
 #endif
