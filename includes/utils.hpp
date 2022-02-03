@@ -103,6 +103,16 @@ namespace ft
 		typedef typename T::iterator_category iterator_category;
 	};
 
+	template <typename T>
+	void display(T begin, T end, std::string mssg)
+	{
+		std::cout << mssg << std::endl;
+		for (begin;  begin < end ; begin++)
+			std::cout << *begin << std::endl;
+		std::cout << std::endl;
+
+		std::cout << "------------" << std::endl;
+	}
 }
 
 template <class T>

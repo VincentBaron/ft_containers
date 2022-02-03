@@ -244,8 +244,8 @@ void vectorInsert(void)
 		tmp.push_back(val);
 	}
 	
-	v.insert(v.begin() + 2, tmp.begin(), tmp.end() - 1);
-	vreal.insert(vreal.begin() + 2, tmp.begin(), tmp.end());
+	v.insert(v.end() - 1, tmp.begin(), tmp.end() - 1);
+	vreal.insert(vreal.end() - 1, tmp.begin(), tmp.end());
 	checkBasicAttr(v, vreal);
 }
 
@@ -293,15 +293,69 @@ void vectorErase(void)
 
 	for (long long x = 0; x < size; x++)
 	{
-		int val = rand() % 20;
-		v.push_back(val);
-		vreal.push_back(val);
+		// int val = rand() % 20;
+		v.push_back(x);
+		vreal.push_back(x);
 	} 
 	v.erase(v.begin() + 2);
 	vreal.erase(vreal.begin() + 2);
 
 	checkBasicAttr(v, vreal);
 	checkArray(v, vreal);
+
+	std::cout << BOLDMAGENTA << "\nVector erase() iterators..." << RESET << std::endl;
+
+	v.erase(v.begin() + 1, v.begin() + 2);
+	vreal.erase(vreal.begin() + 1, vreal.begin() + 2);
+
+	checkBasicAttr(v, vreal);
+}
+
+void vectorSwap(void)
+{
+	std::cout << BOLDMAGENTA << "\nVector swap..." << RESET << std::endl;
+
+	srand(time(NULL));
+	long long size = 6;
+	ft::vector<int> v;
+	ft::vector<int> vSwap;
+	std::vector<int> vreal;
+	std::vector<int> vrealSwap;
+
+	for (long long x = 0; x < size; x++)
+	{
+		int val = rand() % 20;
+		int valSwap = rand() % 20;
+		v.push_back(val);
+		vreal.push_back(val);
+		vSwap.push_back(valSwap);
+		vrealSwap.push_back(valSwap);
+	}
+
+	v.swap(vSwap);
+	vreal.swap(vrealSwap);
+	checkBasicAttr(v, vreal);
+	checkBasicAttr(vSwap, vrealSwap);
+}
+
+void vectorOperators(void)
+{
+	std::cout << BOLDMAGENTA << "\nVector erase() single position..." << RESET << std::endl;
+
+	srand(time(NULL));
+	long long size = 6;
+	ft::vector<int> v;
+	ft::vector<int> vComp;
+
+	for (long long x = 0; x < size; x++)
+	{
+		int val = rand() % 20;
+		v.push_back(val);
+		vComp.push_back(val);
+	}
+	checkOutput(v == vComp, true, "Checking == operator true");
+	v.push_back(42);
+	checkOutput(v == vComp, false, "Checking == operator true");
 }
 
 void vectorDefaultConstructor(void)
