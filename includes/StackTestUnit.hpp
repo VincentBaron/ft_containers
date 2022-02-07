@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 17:11:55 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/07 16:28:20 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/07 16:32:39 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void stackConstructorsTesting(void)
 	ft::stack<int, ft::vector<int> > ctnr2(vect);
 	std::stack<int, std::vector<int> > ctnrReal2(vectReal);
 
-	checkOutput(ctnr.empty(), ctnrReal.empty(), "Checking if stack is empty...");
+	checkOutput(ctnr.empty(), ctnrReal.empty(), "Checking empty()...");
+	checkOutput(ctnr.size(), ctnrReal.size(), "Checking size()...");
 }
