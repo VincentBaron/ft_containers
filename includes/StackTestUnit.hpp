@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 17:11:55 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/07 15:08:41 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/07 16:28:20 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,17 @@ void stackConstructorsTesting(void)
 {
 	std::cout << BOLDMAGENTA << "\nStack Default Constructor..." << RESET << std::endl;
 
-	ft::stack<int> ctnr;
+	ft::stack<int, ft::vector<int> > ctnr;
+	std::stack<int, std::vector<int> > ctnrReal;
 
-	std::cout << "" << ctnr.empty() << std::endl;
+	checkOutput(ctnr.empty(), ctnrReal.empty(), "Checking if stack is empty...");
+
+	std::cout << BOLDMAGENTA << "\nStack Parametrized Constructor..." << RESET << std::endl;
+
+	ft::vector<int> vect(5, 42);
+	std::vector<int> vectReal(5, 42);
+	ft::stack<int, ft::vector<int> > ctnr2(vect);
+	std::stack<int, std::vector<int> > ctnrReal2(vectReal);
+
+	checkOutput(ctnr.empty(), ctnrReal.empty(), "Checking if stack is empty...");
 }
