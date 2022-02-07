@@ -75,15 +75,13 @@ namespace ft
 			_start = _data.allocate();
 		};
 
-		vector(const vector &other)
+		vector(const vector &other) : _data(other._data), _start(0), _end(0), _endCapacity(0)
 		{
-			std::cout << "size in vector()" << size() << std::endl;
 			*this = other;
 		};
 
 		virtual ~vector()
 		{
-			std::cout << "size at clear" << size() << std::endl;
 			clear();
 			_data.deallocate(_start, capacity());
 		};
@@ -95,11 +93,11 @@ namespace ft
 		//////////////////////////////////////////////////////////////////////////////////////////////// OPERATOR OVERLOADS
 		vector &operator=(const vector &rhs)
 		{
-			std::cout << "size at oeprator= " << size() << std::endl;
 			if (this == &rhs)
 				return (*this);
 			this->clear();
-			_data.deallocate(_start, capacity());
+			if (capacity())
+				_data.deallocate(_start, capacity());
 			_start = _data.allocate(rhs.capacity());
 			_endCapacity = _start + rhs.capacity();
 			_end = _start;
