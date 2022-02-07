@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RandomAccessIterator.hpp                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
+/*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:41:17 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/20 12:29:21 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/07 17:40:19 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ namespace ft
 				return ret;
 			}
 			difference_type operator-(const random_access_iterator &other) const { return (_data - other._data); }
-			pointer operator+(difference_type i) const { return(_data + i); }
-			pointer operator-(difference_type i) const { return _data - i; }
+			random_access_iterator operator+(difference_type i) const { return(_data + i); }
+			random_access_iterator operator-(difference_type i) const { return _data - i; }
 			random_access_iterator &operator+=(difference_type i)
 			{
 				_data += i;

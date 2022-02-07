@@ -293,6 +293,9 @@ namespace ft
 				tmpStartPtr++;
 				tmp._end++;
 			}
+			display(tmp.begin(), tmp.end(), "Displaying tmp...");
+			std::cout << "tmp.size()" << tmp.size() << std::endl;
+			std::cout << "tmp.capacity()" << tmp.capacity() << std::endl;
 			*this = tmp;
 		};
 
@@ -474,12 +477,12 @@ namespace ft
 		size_type calculateCapacity(size_type realocSize)
 		{
 			size_type newCapacity = capacity();
-			if (capacity() == 0)
-				newCapacity = 1;
-			else if (capacity() * 2 > _data.max_size())
+			if (capacity() * 2 > _data.max_size())
 				newCapacity = _data.max_size();
 			else
 			{
+				if (capacity() == 0)
+					newCapacity = 1;
 				while (newCapacity < realocSize)
 					newCapacity *= 2;
 			}

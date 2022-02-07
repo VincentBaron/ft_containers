@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 09:13:07 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/03 17:16:30 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/07 18:23:03 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ template<typename T>
 void checkArray(ft::vector<T> &v, std::vector<T> &vreal)
 {
 	std::cout << "\n" << BRIGHTBLACK << "Checking _array...    " << RESET << std::endl;
-	for (unsigned long long x = 0; x < v.size(); x++)
+	for (unsigned long long x = 0; x < vreal.size(); x++)
 		checkOutput(v.at(x), vreal.at(x), "Checking _data[" + to_string(x) + "]...");
 }
 
@@ -259,27 +259,26 @@ void vectorAssign(void)
 	v.assign(3, 42);
 	vreal.assign(3, 42);
 	
-	checkBasicAttr(v, vreal);
-	checkArray(v, vreal);
+	// checkBasicAttr(v, vreal);
 
-	std::cout << BOLDMAGENTA << "\nVector assign with Iterators testing..." << RESET << std::endl;
+	// std::cout << BOLDMAGENTA << "\nVector assign with Iterators testing..." << RESET << std::endl;
 
-	std::vector<int> tmp;
+	// ft::vector<int> tmp;
+	// std::vector<int> tmpReal;
 
-	srand(time(NULL));
-	long long size = 6;
+	// srand(time(NULL));
+	// long long size = 6;
 
-	for (long long x = 0; x < size; x++)
-	{
-		int val = rand() % 20;
-		tmp.push_back(val);
-	}
-
-	v.assign(tmp.begin(), tmp.end());
-	vreal.assign(tmp.begin(), tmp.end());
+	// for (long long x = 0; x < size; x++)
+	// {
+	// 	int val = rand() % 20;
+	// 	tmp.push_back(val);
+	// 	tmpReal.push_back(val);
+	// }
+	// vreal.assign(tmpReal.begin(), tmpReal.begin() + 1);
 	
-	checkBasicAttr(v, vreal);
-	checkArray(v, vreal);
+	// checkBasicAttr(v, vreal);
+	// checkArray(v, vreal);
 }
 
 void vectorErase(void)
