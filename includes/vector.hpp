@@ -44,12 +44,8 @@ namespace ft
 
 		//////////////////////////////////////////////////////////////////////////////////////// CONSTRUCTOR && DESTRUCTORS
 
-		explicit vector(const allocator_type &alloc = allocator_type()) : _data(alloc)
-		{
-			_start = 0;
-			_end = _start;
-			_endCapacity = _start;
-		};
+		explicit vector(const allocator_type &alloc = allocator_type()) : _data(alloc), _start(0), _end(0), _endCapacity(0)
+		{};
 
 		explicit vector(size_type count, const T &value = T(), const allocator_type &alloc = allocator_type()) : _data(alloc)
 		{
@@ -81,11 +77,13 @@ namespace ft
 
 		vector(const vector &other)
 		{
+			std::cout << "size in vector()" << size() << std::endl;
 			*this = other;
 		};
 
 		virtual ~vector()
 		{
+			std::cout << "size at clear" << size() << std::endl;
 			clear();
 			_data.deallocate(_start, capacity());
 		};
@@ -97,6 +95,7 @@ namespace ft
 		//////////////////////////////////////////////////////////////////////////////////////////////// OPERATOR OVERLOADS
 		vector &operator=(const vector &rhs)
 		{
+			std::cout << "size at oeprator= " << size() << std::endl;
 			if (this == &rhs)
 				return (*this);
 			this->clear();

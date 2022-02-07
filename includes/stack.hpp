@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 16:53:22 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/03 17:17:52 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/07 15:24:56 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,21 @@ namespace ft
 	class stack
 	{
 	public:
-		typedef typename Container container_type;
+		typedef Container container_type;
 		
-		explicit stack(const container_type& ctnr = container_type()) _ctnr(ctnr) {};
+		explicit stack(const container_type& ctnr = container_type()) : _ctnr(ctnr) {
+			std::cout << "Adress of _cntr" << &_ctnr << std::endl;
+		};
+
+		virtual ~stack() {};
 
 		bool empty() const
 		{
 			return (_ctnr.empty());
 		};
+	private:
+		container_type _ctnr;
 	};
-
-private:
-	container_type _ctnr;
-
 }
 
 #endif
