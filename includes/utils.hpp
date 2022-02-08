@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 10:20:45 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/07 14:15:15 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/08 13:23:37 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ namespace ft
 	void display(T begin, T end, std::string mssg)
 	{
 		std::cout << mssg << std::endl;
-		for (begin; begin < end; begin++)
+		for (; begin < end; begin++)
 			std::cout << *begin << std::endl;
 		std::cout << std::endl;
 

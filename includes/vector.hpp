@@ -31,9 +31,11 @@ namespace ft
 		typedef T value_type;
 		typedef vector<T, Alloc> vector_type;
 		typedef Alloc allocator_type;
-		typedef typename Alloc::pointer pointer;
-		typedef typename Alloc::difference_type difference_type;
 		typedef typename Alloc::reference reference;
+		typedef typename Alloc::const_reference const_reference;
+		typedef typename Alloc::pointer pointer;
+		typedef typename Alloc::const_pointer const_pointer;
+		typedef typename Alloc::difference_type difference_type;
 		typedef typename Alloc::size_type size_type;
 		typedef ft::random_access_iterator<value_type> iterator;
 		typedef ft::random_access_iterator<const value_type> const_iterator;
@@ -60,9 +62,11 @@ namespace ft
 		};
 
 		template <class InputIt>
-		vector(InputIt first, InputIt last, allocator_type alloc = allocator_type(), typename ft::enable_if<!ft::isIntegral<InputIt>::value, InputIt>::type * = 0) : _data(alloc)
+		vector(InputIt first, InputIt last, allocator_type alloc = allocator_type(), typename ft::enable_if<!ft::isIntegral<InputIt>::value, InputIt>::type * = 0) : _data(alloc), _start(0), _end(0), _endCapacity(0)
 		{
-			size_type count = last - first;
+			difference_type count = 0;
+			for (InputIt tmp = first; tmp != last; tmp++)
+				count++;
 			_start = _data.allocate(count);
 			_end = _start;
 			_endCapacity = _start + count;
@@ -72,7 +76,6 @@ namespace ft
 				_end++;
 				first++;
 			}
-			_start = _data.allocate();
 		};
 
 		vector(const vector &other) : _data(other._data), _start(0), _end(0), _endCapacity(0)
@@ -117,7 +120,7 @@ namespace ft
 			return (*(_start + n));
 		}
 
-		const reference operator[](size_type n) const
+		const_reference operator[](size_type n) const
 		{
 			rangeCheck(n);
 			return (*(_start + n));
@@ -128,7 +131,10 @@ namespace ft
 		template <class InputIterator>
 		void assign(InputIterator first, InputIterator last, typename ft::enable_if<!ft::isIntegral<InputIterator>::value, InputIterator>::type * = 0)
 		{
-			reallocate(last - first);
+			difference_type count = 0;
+			for (InputIterator tmp = first; tmp != last; tmp++)
+				count++;
+			reallocate(count);
 
 			pointer tmpStart = _start;
 			while (tmpStart != _end && first != last)
@@ -186,35 +192,19 @@ namespace ft
 			return (*(_start + n));
 		};
 
-		const reference at(size_type n) const
+		const_reference at(size_type n) const
 		{
 			rangeCheck(n);
 			return (*(_start + n));
 		};
 
-		reference front(size_type n)
-		{
-			rangeCheck(n);
-			return (*_start);
-		};
+		reference front(void) {return (*_start);};
 
-		const reference front(size_type n) const
-		{
-			rangeCheck(n);
-			return (*_start);
-		};
+		const_reference front(void) const {return (*_start);};
 
-		reference back(size_type n)
-		{
-			rangeCheck(n);
-			return (*_end);
-		};
+		reference back(void) {return (*(_end - 1));};
 
-		const reference back(size_type n) const
-		{
-			rangeCheck(n);
-			return (*_end);
-		};
+		const_reference back(void) const {return (*(_end - 1));};
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -252,7 +242,7 @@ namespace ft
 
 		const_reverse_iterator rbegin(void) const
 		{
-			const reverse_iterator tmp(_end);
+			const_reverse_iterator tmp(_end);
 			return (tmp);
 		}
 
@@ -264,7 +254,7 @@ namespace ft
 
 		const_reverse_iterator rend(void) const
 		{
-			const reverse_iterator tmp(_start);
+			const_reverse_iterator tmp(_start);
 			return (tmp);
 		}
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -293,9 +283,6 @@ namespace ft
 				tmpStartPtr++;
 				tmp._end++;
 			}
-			display(tmp.begin(), tmp.end(), "Displaying tmp...");
-			std::cout << "tmp.size()" << tmp.size() << std::endl;
-			std::cout << "tmp.capacity()" << tmp.capacity() << std::endl;
 			*this = tmp;
 		};
 
@@ -382,7 +369,7 @@ namespace ft
 		void insert(iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::isIntegral<InputIterator>::value, InputIterator>::type * = 0)
 		{
 			difference_type n = 0;
-			for (InputIterator tmp = first; tmp <= last; tmp++)
+			for (InputIterator tmp = first; tmp != last; tmp++)
 				n++;
 			difference_type dist = position - begin();
 			vector_type tmp;
@@ -393,7 +380,7 @@ namespace ft
 			for (pointer tmpPtr = _start + dist; tmpPtr < _end; tmpPtr++)
 				_data.destroy(tmpPtr);
 			_end = _start + dist;
-			for (first; first <= last; first++)
+			for (; first != last; first++)
 				add_back(*first);
 			for (iterator tmpIte = tmp.end() - 1; tmpIte >= tmp.begin(); tmpIte--)
 				add_back(*tmpIte);
