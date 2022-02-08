@@ -328,6 +328,7 @@ namespace ft
 					_data.destroy(tmp);
 					tmp++;
 				}
+				_end = _start;
 			}
 		};
 
