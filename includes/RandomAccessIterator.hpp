@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:41:17 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/09 20:00:23 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/09 20:56:23 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,8 @@ namespace ft
 			_data--;
 			return ret;
 		}
-		difference_type operator-(const random_access_iterator &other) const { return (_data - other._data); }
 		random_access_iterator operator+(difference_type i) const { return (_data + i); }
-		random_access_iterator operator-(difference_type i) const { return _data - i; }
+		random_access_iterator operator-(difference_type i) const { return (_data - i); }
 		random_access_iterator &operator+=(difference_type i)
 		{
 			_data += i;
@@ -113,10 +112,22 @@ namespace ft
 		return other + i;
 	}
 
+	template <typename It>
+	bool operator!=(ft::random_access_iterator<It> lhs, ft::random_access_iterator<It> rhs)
+	{
+		return (lhs.base() != rhs.base());
+	}
+
 	template <typename IteL, typename IteR>
 	bool operator!=(ft::random_access_iterator<IteL> lhs, ft::random_access_iterator<IteR> rhs)
 	{
 		return (lhs.base() != rhs.base());
+	}
+
+	template <typename It>
+	bool operator==(ft::random_access_iterator<It> lhs, ft::random_access_iterator<It> rhs)
+	{
+		return (lhs.base() == rhs.base());
 	}
 
 	template <typename IteL, typename IteR>
@@ -125,16 +136,34 @@ namespace ft
 		return (lhs.base() == rhs.base());
 	}
 
+	template <typename It>
+	bool operator<(ft::random_access_iterator<It> lhs, ft::random_access_iterator<It> rhs)
+	{
+		return (lhs.base() < rhs.base());
+	}
+
 	template <typename IteL, typename IteR>
 	bool operator<(ft::random_access_iterator<IteL> lhs, ft::random_access_iterator<IteR> rhs)
 	{
 		return (lhs.base() < rhs.base());
 	}
 
-		template <typename IteL, typename IteR>
+	template <typename It>
+	bool operator<=(ft::random_access_iterator<It> lhs, ft::random_access_iterator<It> rhs)
+	{
+		return (lhs.base() <= rhs.base());
+	}
+
+	template <typename IteL, typename IteR>
 	bool operator<=(ft::random_access_iterator<IteL> lhs, ft::random_access_iterator<IteR> rhs)
 	{
 		return (lhs.base() <= rhs.base());
+	}
+
+	template <typename It>
+	bool operator>(ft::random_access_iterator<It> lhs, ft::random_access_iterator<It> rhs)
+	{
+		return (lhs.base() > rhs.base());
 	}
 
 	template <typename IteL, typename IteR>
@@ -143,10 +172,28 @@ namespace ft
 		return (lhs.base() > rhs.base());
 	}
 
-		template <typename IteL, typename IteR>
+	template <typename It>
+	bool operator>=(ft::random_access_iterator<It> lhs, ft::random_access_iterator<It> rhs)
+	{
+		return (lhs.base() >= rhs.base());
+	}
+
+	template <typename IteL, typename IteR>
 	bool operator>=(ft::random_access_iterator<IteL> lhs, ft::random_access_iterator<IteR> rhs)
 	{
 		return (lhs.base() >= rhs.base());
+	}
+
+	template <typename It>
+	typename ft::random_access_iterator<It>::difference_type operator-(ft::random_access_iterator<It> lhs, ft::random_access_iterator<It> rhs)
+	{
+		return (lhs.base() - rhs.base());
+	}
+
+	template <typename IteL, typename IteR>
+	typename ft::random_access_iterator<IteL>::difference_type operator-(ft::random_access_iterator<IteL> lhs, ft::random_access_iterator<IteR> rhs)
+	{
+		return (lhs.base() - rhs.base());
 	}
 }
 
