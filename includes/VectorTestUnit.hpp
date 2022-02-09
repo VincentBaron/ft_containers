@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 09:13:07 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/07 18:23:03 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/09 11:22:50 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,8 +216,8 @@ void vectorInsert(void)
 	ft::vector<int>::iterator vIte = v.begin();
 	std::vector<int>::iterator vrealIte = vreal.begin();
 
-	v.insert(vIte + 2, 78);
-	vreal.insert(vrealIte + 2, 78);
+	v.insert(v.end(), 78);
+	vreal.insert(vreal.end(), 78);
 	checkOutput(*(vIte + 2), *(vrealIte + 2), "Checking insert iterator value");
 	checkBasicAttr(v, vreal);
 
@@ -226,8 +226,8 @@ void vectorInsert(void)
 	// v = ft::vector<int>();
 	// vreal = std::vector<int>();
 
-	v.insert(v.begin() + 2, 5, 78);
-	vreal.insert(vreal.begin() + 2, 5, 78);
+	v.insert(v.begin(), 5, 78);
+	vreal.insert(vreal.begin(), 5, 78);
 	checkBasicAttr(v, vreal);
 
 	std::cout << BOLDMAGENTA << "\nVector insert() iterators testing..." << RESET << std::endl;

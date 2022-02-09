@@ -336,7 +336,7 @@ namespace ft
 		{
 			vector_type tmp;
 			tmp.reserve(size() - (position - begin()));
-			for (iterator ite = end() - 1; ite >= position; ite--)
+			for (iterator ite = position; ite != end(); ite++)
 				tmp.add_back(*ite);
 			difference_type dist = position - begin();
 			reallocate(size() + 1);
@@ -344,7 +344,7 @@ namespace ft
 				_data.destroy(tmpPtr);
 			_end = _start + dist;
 			add_back(val);
-			for (iterator tmpIte = tmp.end() - 1; tmpIte >= tmp.begin(); tmpIte--)
+			for (iterator tmpIte = tmp.begin(); tmpIte < tmp.end(); tmpIte++)
 				add_back(*tmpIte);
 			return (_start + dist);
 		};
@@ -353,16 +353,16 @@ namespace ft
 		{
 			vector_type tmp;
 			tmp.reserve(size() - (position - begin()));
-			for (iterator ite = end() - 1; ite >= position; ite--)
+			for (iterator ite = position; ite != end(); ite++)
 				tmp.add_back(*ite);
 			difference_type dist = position - begin();
 			reallocate(size() + n);
 			for (pointer tmpPtr = _start + dist; tmpPtr < _end; tmpPtr++)
 				_data.destroy(tmpPtr);
 			_end = _start + dist;
-			for (n; n > 0; n--)
+			for (; n > 0; n--)
 				add_back(val);
-			for (iterator tmpIte = tmp.end() - 1; tmpIte >= tmp.begin(); tmpIte--)
+			for (iterator tmpIte = tmp.begin(); tmpIte < tmp.end(); tmpIte++)
 				add_back(*tmpIte);
 		};
 
@@ -375,7 +375,7 @@ namespace ft
 			difference_type dist = position - begin();
 			vector_type tmp;
 			tmp.reserve(size() - (position - begin()));
-			for (iterator ite = end() - 1; ite >= position; ite--)
+			for (iterator ite = position; ite != end(); ite++)
 				tmp.add_back(*ite);
 			reallocate(size() + n);
 			for (pointer tmpPtr = _start + dist; tmpPtr < _end; tmpPtr++)
@@ -383,7 +383,7 @@ namespace ft
 			_end = _start + dist;
 			for (; first != last; first++)
 				add_back(*first);
-			for (iterator tmpIte = tmp.end() - 1; tmpIte >= tmp.begin(); tmpIte--)
+			for (iterator tmpIte = tmp.begin(); tmpIte < tmp.end(); tmpIte++)
 				add_back(*tmpIte);
 		};
 
