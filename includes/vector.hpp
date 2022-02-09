@@ -290,7 +290,7 @@ namespace ft
 		{
 			vector_type tmp;
 			tmp.reserve(size() - (position - begin()));
-			for (iterator tmpIte = position + 1; tmpIte < end(); tmpIte++)
+			for (iterator tmpIte = position + 1; tmpIte != end(); tmpIte++)
 				tmp.add_back(*tmpIte);
 			for (pointer tmpPtr = _start + (position - begin()); tmpPtr < _end; tmpPtr++)
 				_data.destroy(tmpPtr);
@@ -303,13 +303,13 @@ namespace ft
 		iterator erase(iterator first, iterator last)
 		{
 			vector_type tmp;
-			tmp.reserve(end() - last - 1);
-			for (iterator tmpIte = last; tmpIte < end(); tmpIte++)
+			tmp.reserve(end() - last);
+			for (iterator tmpIte = last; tmpIte != end(); tmpIte++)
 				tmp.add_back(*tmpIte);
 			for (pointer tmpPtr = _start + (first - begin()); tmpPtr < _end; tmpPtr++)
 				_data.destroy(tmpPtr);
 			_end = _start + (first - begin());
-			for (iterator tmpIte = tmp.begin(); tmpIte < tmp.end(); tmpIte++)
+			for (iterator tmpIte = tmp.begin(); tmpIte != tmp.end(); tmpIte++)
 				add_back(*tmpIte);
 			return (first);
 		};
@@ -340,7 +340,7 @@ namespace ft
 				_data.destroy(tmpPtr);
 			_end = _start + dist;
 			add_back(val);
-			for (iterator tmpIte = tmp.begin(); tmpIte < tmp.end(); tmpIte++)
+			for (iterator tmpIte = tmp.begin(); tmpIte != tmp.end(); tmpIte++)
 				add_back(*tmpIte);
 			return (_start + dist);
 		};
@@ -358,7 +358,7 @@ namespace ft
 			_end = _start + dist;
 			for (; n > 0; n--)
 				add_back(val);
-			for (iterator tmpIte = tmp.begin(); tmpIte < tmp.end(); tmpIte++)
+			for (iterator tmpIte = tmp.begin(); tmpIte != tmp.end(); tmpIte++)
 				add_back(*tmpIte);
 		};
 
@@ -379,7 +379,7 @@ namespace ft
 			_end = _start + dist;
 			for (; first != last; first++)
 				add_back(*first);
-			for (iterator tmpIte = tmp.begin(); tmpIte < tmp.end(); tmpIte++)
+			for (iterator tmpIte = tmp.begin(); tmpIte != tmp.end(); tmpIte++)
 				add_back(*tmpIte);
 		};
 
