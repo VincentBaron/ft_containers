@@ -213,7 +213,7 @@ namespace ft
 		iterator begin(void)
 		{
 			iterator tmp(_start);
-			return (tmp);
+			return (_start);
 		}
 
 		const_iterator begin(void) const
