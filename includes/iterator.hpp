@@ -6,13 +6,12 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 19:16:05 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/07 17:37:09 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/09 15:35:40 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ITERATOR_HPP
 # define ITERATOR_HPP
-# include "RandomAccessIterator.hpp"
 
 namespace ft
 {
@@ -23,39 +22,9 @@ namespace ft
 		public:
 	
 			typedef Category iterator_category;
-			typedef Distance difference_type;
 			typedef T value_type;
-			typedef typename T::pointer pointer;
-			typedef typename T::reference reference;
-
-			// Constructors and destructor
-			iterator() : Category() {};
-			iterator(pointer ptr) : Category(ptr) {};
-			iterator(const iterator &src) : Category(src) {};
-			virtual ~iterator();
-	
-			// Operator overloads
-			iterator&	operator=(const iterator &rhs)
-			{
-				if (*this == rhs)
-					return (*this);
-				this->_data = rhs._data;
-				return (*this);
-			};
-	
-			// Getters / Setters
-	
-			// Member functions
-	
-		protected:
-	
-			// Attributes
-	
-		private:
-	
-			// Attributes
-
-	
+			typedef Pointer pointer;
+			typedef Reference reference;
 	};
 }
 

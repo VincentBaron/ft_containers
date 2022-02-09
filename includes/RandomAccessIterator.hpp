@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:41:17 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/09 12:07:38 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/09 15:30:14 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 #define RANDOMACCESSITERATOR_HPP
 
 #include <iterator>
+# include "utils.hpp"
+# include "iterator.hpp"
 
 namespace ft
 {
 	template <typename T>
-	class random_access_iterator : public std::iterator<std::random_access_iterator_tag, T>
+	class random_access_iterator : public ft::iterator<std::random_access_iterator_tag, T>
 	{
 		public:
-
 
 			typedef typename std::iterator<std::random_access_iterator_tag, T>::pointer pointer;
 			typedef typename std::iterator<std::random_access_iterator_tag, T>::reference reference;
