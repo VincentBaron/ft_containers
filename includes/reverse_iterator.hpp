@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 16:47:59 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/09 21:06:20 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/09 21:12:52 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,13 +165,13 @@ namespace ft
 		const reverse_iterator<Iterator> &rev_it) { return (rev_it + n); };
 
     template <class Ite>
-        typename reverse_iterator<Ite>::difference_type operator- (
+        typename reverse_iterator<Ite>::difference_type operator-(
             const reverse_iterator<Ite>& lhs,
             const reverse_iterator<Ite>& rhs) { return (lhs.base() - rhs.base()); }
 
     template <class IteL, class IteR>
-        typename reverse_iterator<IteL>::difference_type operator- (const reverse_iterator<IteL>& lhs,
-                        const reverse_iterator<IteR>& rhs) { return (lhs.base() - rhs.base()); }
+        typename reverse_iterator<IteL>::difference_type operator-(const reverse_iterator<IteL>& lhs,
+                        const reverse_iterator<IteR>& rhs) { return -1 * (lhs.base() - rhs.base()); }
 
 }
 
