@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_iterator.hpp                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
+/*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 16:47:59 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/01/20 12:39:49 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/09 20:10:38 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ namespace ft
 		reverse_iterator(void) : _data(0){};
 		explicit reverse_iterator(iterator_type it) : _data(it){};
 		template <class Iter>
-		reverse_iterator(const reverse_iterator<Iter> &rev_it) : _data(rev_it._data){};
+		reverse_iterator(const reverse_iterator<Iter> &rev_it) : _data(rev_it.base()){};
 		virtual ~reverse_iterator(){};
 		// Operator overloads
 		reverse_iterator operator+(difference_type n) const { return (reverse_iterator(_data - n)); };
@@ -125,12 +125,12 @@ namespace ft
 	template <class Iterator>
 	reverse_iterator<Iterator> operator+(
 		typename reverse_iterator<Iterator>::difference_type n,
-		const reverse_iterator<Iterator> &rev_it){return (rev_it + n);};
+		const reverse_iterator<Iterator> &rev_it) { return (rev_it + n); };
 
 	template <class Iterator>
 	reverse_iterator<Iterator> operator-(
 		typename reverse_iterator<Iterator>::difference_type n,
-		const reverse_iterator<Iterator> &rev_it){return (rev_it - n);};
+		const reverse_iterator<Iterator> &rev_it) { return (rev_it - n); };
 
 }
 
