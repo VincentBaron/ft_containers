@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 19:16:05 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/09 15:35:40 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/09 16:12:37 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ namespace ft
 	
 			typedef Category iterator_category;
 			typedef T value_type;
+			typedef Distance difference_type;
 			typedef Pointer pointer;
 			typedef Reference reference;
 	};

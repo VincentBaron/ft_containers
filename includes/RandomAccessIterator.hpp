@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:41:17 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/09 15:30:14 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/09 16:10:24 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ namespace ft
 	{
 		public:
 
-			typedef typename std::iterator<std::random_access_iterator_tag, T>::pointer pointer;
-			typedef typename std::iterator<std::random_access_iterator_tag, T>::reference reference;
-			typedef typename std::iterator<std::random_access_iterator_tag, T>::difference_type difference_type;
-			typedef typename std::iterator<std::random_access_iterator_tag, T>::value_type value_type;
+			typedef typename ft::iterator<std::random_access_iterator_tag, T>::pointer pointer;
+			typedef typename ft::iterator<std::random_access_iterator_tag, T>::reference reference;
+			typedef typename ft::iterator<std::random_access_iterator_tag, T>::difference_type difference_type;
+			typedef typename ft::iterator<std::random_access_iterator_tag, T>::value_type value_type;
+			typedef typename ft::random_access_iterator<const T> const_iterator;
 			// Constructors and destructor
 			random_access_iterator(void) : _data(0) {};
 			random_access_iterator(pointer ptr) : _data(ptr) {};
@@ -90,6 +91,11 @@ namespace ft
 				_data -= i;
 				return (*this);
 			}
+
+			operator const_iterator() const {
+				const_iterator tmp(_data);
+				return (tmp);
+			};
 
 		private:
 			// Attributes
