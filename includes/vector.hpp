@@ -212,26 +212,22 @@ namespace ft
 
 		iterator begin(void)
 		{
-			iterator tmp(_start);
 			return (_start);
 		}
 
 		const_iterator begin(void) const
 		{
-			const_iterator tmp(_start);
-			return (tmp);
+			return (_start);
 		}
 
 		iterator end(void)
 		{
-			iterator tmp(_end);
-			return (tmp);
+			return (_end);
 		}
 
 		const_iterator end(void) const
 		{
-			const_iterator tmp(_end);
-			return (tmp);
+			return (_end);
 		}
 
 		reverse_iterator rbegin(void)
