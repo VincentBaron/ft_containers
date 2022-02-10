@@ -35,12 +35,12 @@ namespace ft
 		typedef typename Alloc::const_reference const_reference;
 		typedef typename Alloc::pointer pointer;
 		typedef typename Alloc::const_pointer const_pointer;
-		typedef typename Alloc::difference_type difference_type;
 		typedef typename Alloc::size_type size_type;
 		typedef ft::random_access_iterator<value_type> iterator;
 		typedef ft::random_access_iterator<const value_type> const_iterator;
 		typedef typename ft::reverse_iterator<iterator> reverse_iterator;
 		typedef typename ft::reverse_iterator<const_iterator> const_reverse_iterator;
+		typedef typename ft::iterator_traits<iterator> difference_type;
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
