@@ -6,13 +6,14 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:01:30 by vbaron            #+#    #+#             */
-/*   Updated: 2022/02/09 16:43:52 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/11 14:41:47 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/VectorTestUnit.hpp"
 #include "../includes/RandomAccessIteTest.hpp"
 #include "../includes/StackTestUnit.hpp"
+#include "../includes/map.hpp"
 
 void vectorTesting(void)
 {
@@ -37,24 +38,39 @@ void stackTesting(void)
 	stackConstructorsTesting();
 }
 
-void randomTests(void)
+void vectorTimeTestsStd(void)
 {
-	ft::vector<std::string> vct(10, "Yo mama");
-	
-	vct.erase(vct.begin() + 2);
-	vct.erase(vct.begin());
-	vct.erase(vct.end() - 1);
-	vct.erase(vct.begin(), vct.begin() + 3);
-	vct.erase(vct.end() - 3, vct.end() - 1);
-	vct.push_back("Hello");
-	vct.push_back("Hi there");
-	vct.erase(vct.end() - 3, vct.end());
+	std::vector<int> vct(100000000, 42);
+	std::vector<int> vct2(10000000, 45);
+
+	vct.insert(vct.begin() + 345, vct2.begin(), vct2.end());
+}
+
+void vectorTimeTestsFt(void)
+{
+	ft::vector<int> vct(100000000, 42);
+	ft::vector<int> vct2(10000000, 45);
+
+	vct.insert(vct.begin() + 345, vct2.begin(), vct2.end());
+}
+
+void mapRandomTests(void)
+{
+	// ft::map<char, int> test;
+	std::pair<char, int> elem('a', 42);
+	ft::Node<std::pair<char, int> > tree(elem);
+
+	std::cout << "Key" << tree._pair.first << std::endl;
+	std::cout << "value" << tree._pair.second << std::endl;
 }
 
 int main(void)
 {
-	randomTests();
+	// vectorTimeTestsStd();
+	// vectorTimeTestsFt();
 	
 	// vectorTesting();
 	// stackTesting();
+
+	mapRandomTests();
 }
