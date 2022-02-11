@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:01:30 by vbaron            #+#    #+#             */
-/*   Updated: 2022/02/11 14:41:47 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/11 15:18:32 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ void mapRandomTests(void)
 	std::pair<char, int> elem('a', 42);
 	ft::Node<std::pair<char, int> > tree(elem);
 
-	std::cout << "Key" << tree._pair.first << std::endl;
-	std::cout << "value" << tree._pair.second << std::endl;
+	print_tree(&tree, 0);
 }
 
 int main(void)

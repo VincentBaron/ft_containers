@@ -28,13 +28,14 @@ namespace ft
 	public:
 		Node(Pair elem, const allocator_type &alloc = allocator_type()) : _color(REDT), _pair(elem), _data(alloc), _left(NULL), _right(NULL)
 		{
-			pointer tmp = _data.allocate(1);
-			_data.construct(tmp, elem);
+			_dataPtr = _data.allocate(1);
+			_data.construct(_dataPtr, elem);
 		};
 
 		~Node(void)
 		{
-			_data.destroy(&_data);
+			_data.destroy(_dataPtr);
+			_data.deallocate(_dataPtr, 1);
 		}
 
 		void add(Node *child, Pair elem)
@@ -47,6 +48,7 @@ namespace ft
 		bool _color;
 		Pair _pair;
 		allocator_type _data;
+		pointer _dataPtr;
 		Node* _left;
 		Node* _right;
 	};
