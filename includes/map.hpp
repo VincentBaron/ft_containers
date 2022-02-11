@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/11 18:14:40 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/11 18:22:27 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ namespace ft
 
 	public:
 
-		typedef typename allocator_type::template rebind<Node<value_type> >::other _node_allocator;
+		typedef typename allocator_type::template rebind<Node>::other _node_allocator;
 		typedef typename _node_allocator::pointer _node_pointer;
 
 		key_compare _comp;

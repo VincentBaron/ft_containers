@@ -22,11 +22,9 @@ namespace ft
 	template <class Pair>
 	class Node
 	{
-		typedef Alloc allocator_type;
-		typedef typename allocator_type::pointer pointer;
 
 	public:
-		Node(Pair elem) : _color(REDT), _pair(elem), _data(alloc), _left(NULL), _right(NULL)
+		Node(Pair elem) : _color(REDT), _data(elem), _left(NULL), _right(NULL)
 		{};
 
 		~Node(void)
@@ -35,7 +33,7 @@ namespace ft
 	public:
 	
 		bool _color;
-		Pair _pair;
+		Pair _data;
 		Node* _left;
 		Node* _right;
 	};
