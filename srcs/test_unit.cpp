@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:01:30 by vbaron            #+#    #+#             */
-/*   Updated: 2022/02/11 15:41:10 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/11 17:39:09 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ void mapRandomTests(void)
 {
 	// ft::map<char, int> test;
 	std::pair<char, int> elem('a', 42);
-	ft::Node<std::pair<char, int> > tree(elem);
-	tree.add(tree.left, elem)
+	ft::map<char, int> myMap;
+	myMap.insert(elem);
 
-	print_tree(&tree, 0);
+	std::cout << myMap._head->_data.first << std::endl;
 }
 
 int main(void)

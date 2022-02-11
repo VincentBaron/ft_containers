@@ -26,7 +26,7 @@ namespace ft
 		typedef typename allocator_type::pointer pointer;
 
 	public:
-		Node(Pair elem, const allocator_type &alloc = allocator_type()) : _color(REDT), _pair(elem), _data(alloc), _left(NULL), _right(NULL)
+		Node(Pair elem, const allocator_type &alloc = allocator_type()) : _color(REDT), _data(alloc), _left(NULL), _right(NULL)
 		{
 			_dataPtr = _data.allocate(1);
 			_data.construct(_dataPtr, elem);
@@ -38,19 +38,16 @@ namespace ft
 			_data.deallocate(_dataPtr, 1);
 		}
 
-		void add(Node *child, Pair elem)
-		{
-			child(elem);
-		}
-
 	public:
-	
+		typedef typename allocator_type::template rebind<Node>::other _node_allocator;
+		typedef typename _node_allocator::pointer _node_pointer;
+
 		bool _color;
-		Pair _pair;
 		allocator_type _data;
 		pointer _dataPtr;
-		Node* _left;
-		Node* _right;
+		_node_pointer _left;
+		_node_pointer _right;
+		_node_pointer _parent;
 	};
 }
 

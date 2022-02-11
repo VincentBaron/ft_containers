@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/11 14:34:19 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/11 17:37:51 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,28 +57,39 @@ namespace ft
 		// typedef typename ft::iterator_traits<iterator> difference_type;
 		typedef typename Alloc::size_type size_type;
 
-		explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _dataTree(NULL), _comp(comp), _alloc(alloc) {};
+		explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _comp(comp), _alloc(alloc) {};
 
 		template <class InputIterator>
 		map(InputIterator first, InputIterator last, const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type());
 
 		map(const map &x);
 
-		// std::pair<iterator, bool> insert(const value_type &val);
-		// {
-			
-		// }
+		void insert(const value_type &val)
+		{
+			_head = newNode(val);
+		};
 
 		// iterator insert(iterator position, const value_type &val);
 
 		// template <class InputIterator>
 		// void insert(InputIterator first, InputIterator last);
 
-	private:
+	public:
 
-		Node* _dataTree;
+		typedef typename allocator_type::template rebind<Node>::other _node_allocator;
+		typedef typename _node_allocator::pointer _node_pointer;
+
 		key_compare _comp;
+		_node_pointer _head;
 		allocator_type _alloc;
+		_node_allocator _node_alloc;
+
+		_node_pointer newNode(value_type elem)
+		{
+			_node_pointer newNode = _node_alloc.allocate(1);
+			_node_alloc.construct(newNode, Node(elem));
+			return (newNode);
+		}
 	};
 }
 
