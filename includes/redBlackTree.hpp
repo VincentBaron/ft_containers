@@ -32,6 +32,11 @@ namespace ft
 			_data.construct(tmp, elem);
 		};
 
+		~Node(void)
+		{
+			_data.destroy(&_data);
+		}
+
 		void add(Node *child, Pair elem)
 		{
 			child(elem);
