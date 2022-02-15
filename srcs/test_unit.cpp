@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:01:30 by vbaron            #+#    #+#             */
-/*   Updated: 2022/02/11 18:24:41 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/15 16:59:40 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void mapRandomTests(void)
 	ft::map<char, int> myMap;
 	myMap.insert(elem);
 
-	std::cout << myMap._head->_data.first << std::endl;
 	print_tree(myMap._head, 0);
 }
 

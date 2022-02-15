@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/11 18:22:27 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/15 17:02:32 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ namespace ft
 		typedef T mapped_type;
 		typedef std::pair<const key_type, mapped_type> value_type;
 		typedef Compare key_compare;
-		typedef ft::Node<value_type> Node;
+		typedef ft::Node<key_type, mapped_type, value_type> Node;
 
 		class value_compare : public std::binary_function<value_type, value_type, bool>
 		{
@@ -57,16 +57,24 @@ namespace ft
 		// typedef typename ft::iterator_traits<iterator> difference_type;
 		typedef typename Alloc::size_type size_type;
 
-		explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _comp(comp), _alloc(alloc) {};
+		explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _comp(comp), _head(NULL), _alloc(alloc) {};
 
 		template <class InputIterator>
 		map(InputIterator first, InputIterator last, const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type());
 
 		map(const map &x);
 
-		void insert(const value_type &val)
+		bool insert(const value_type &val)
 		{
-			_head = newNode(val);
+			if (_head == NULL)
+			{
+				_head = newNode(val);
+				return (true);
+			}
+			// if (keySearch(_head, val.first) != NULL)
+			// 	return (false);
+			// insertTree(val);
+			return (false);
 		};
 
 		// iterator insert(iterator position, const value_type &val);
@@ -89,6 +97,37 @@ namespace ft
 			_node_pointer newNode = _node_alloc.allocate(1);
 			_node_alloc.construct(newNode, Node(elem));
 			return (newNode);
+		}
+
+		void addNode(_node_pointer node, value_type elem)
+		{
+			node = newNode(elem);
+		};
+
+		_node_pointer keySearch(_node_pointer start, key_type key)
+		{
+			while (start != NULL && key != start->data.first)
+			{
+				if (key < start->data.first)
+					start = start->left;
+				else
+					start = start->right;
+			}
+			return (start);
+		}
+
+		void insertTree(value_type val)
+		{
+			_node_pointer y = NULL;
+			_node_pointer x = _head;
+			_node_pointer z = newNode(val);
+
+			while (x != NULL)
+			{
+				y = x;
+				if (z->pair.first < x.pair.first)
+					return ;
+			}
 		}
 	};
 }

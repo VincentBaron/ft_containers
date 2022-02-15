@@ -19,12 +19,12 @@
 
 namespace ft
 {
-	template <class Pair>
+	template <class Key, class T, class Pair>
 	class Node
 	{
 
 	public:
-		Node(Pair elem) : _color(REDT), _data(elem), _left(NULL), _right(NULL)
+		Node(Pair elem) : color(REDT), key(elem.first), value(elem.second), left(NULL), right(NULL)
 		{};
 
 		~Node(void)
@@ -32,10 +32,11 @@ namespace ft
 
 	public:
 	
-		bool _color;
-		Pair _data;
-		Node* _left;
-		Node* _right;
+		bool color;
+		Key key;
+		T value;
+		Node* left;
+		Node* right;
 	};
 }
 

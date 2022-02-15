@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 10:20:45 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/11 18:24:15 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/15 17:01:21 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,11 +166,11 @@ void print_tree(T *root, int level)
 	}
 	else
 	{
-		print_tree(root->_right, level + 1);
+		print_tree(root->right, level + 1);
 		padding('\t', level);
-		std::cout << "[" << root->_data.first << "]" << ":" << root->_data.second;	
+		std::cout << "[" << root->key << "]" << ":" << root->value;	
 		std::cout << std::endl;
-		print_tree(root->_left, level + 1);
+		print_tree(root->left, level + 1);
 	}
 }
 
