@@ -37,6 +37,7 @@ namespace ft
 		T value;
 		Node* left;
 		Node* right;
+		Node* parent;
 	};
 }
 

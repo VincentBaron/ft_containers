@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:01:30 by vbaron            #+#    #+#             */
-/*   Updated: 2022/02/15 16:59:40 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/16 12:51:27 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,14 @@ void vectorTimeTestsFt(void)
 void mapRandomTests(void)
 {
 	// ft::map<char, int> test;
-	std::pair<char, int> elem('a', 42);
+	std::pair<char, int> elem('e', 42);
 	ft::map<char, int> myMap;
 	myMap.insert(elem);
 
+	std::pair<char, int> elem2('g', 41);
+	std::pair<char, int> elem3('a', 41);
+	myMap.insert(elem2);
+	myMap.insert(elem3);
 	print_tree(myMap._head, 0);
 }
 

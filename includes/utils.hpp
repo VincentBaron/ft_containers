@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 10:20:45 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/15 17:01:21 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/16 12:56:48 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 #include <iterator>
 #include <sstream>
 # include <sys/time.h>
+# define RESET   "\033[0m"
+# define BLACK   "\033[30m"      /* Black */
+# define RED     "\033[31m"      /* Red */
 
 namespace ft
 {
@@ -168,7 +171,7 @@ void print_tree(T *root, int level)
 	{
 		print_tree(root->right, level + 1);
 		padding('\t', level);
-		std::cout << "[" << root->key << "]" << ":" << root->value;	
+		std::cout << (root->color == 1 ? RED : BLACK) << "[" << root->key << "]" << ":" << root->value << RESET;	
 		std::cout << std::endl;
 		print_tree(root->left, level + 1);
 	}

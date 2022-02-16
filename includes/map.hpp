@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/15 17:02:32 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/16 12:48:53 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ namespace ft
 		// typedef typename ft::iterator_traits<iterator> difference_type;
 		typedef typename Alloc::size_type size_type;
 
-		explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _comp(comp), _head(NULL), _alloc(alloc) {};
+		explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _comp(comp), _head(NULL), _alloc(alloc){};
 
 		template <class InputIterator>
 		map(InputIterator first, InputIterator last, const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type());
@@ -66,15 +66,10 @@ namespace ft
 
 		bool insert(const value_type &val)
 		{
-			if (_head == NULL)
-			{
-				_head = newNode(val);
-				return (true);
-			}
-			// if (keySearch(_head, val.first) != NULL)
-			// 	return (false);
-			// insertTree(val);
-			return (false);
+			if (keySearch(_head, val.first) != NULL)
+				return (false);
+			insertTree(val);
+			return (true);
 		};
 
 		// iterator insert(iterator position, const value_type &val);
@@ -83,7 +78,6 @@ namespace ft
 		// void insert(InputIterator first, InputIterator last);
 
 	public:
-
 		typedef typename allocator_type::template rebind<Node>::other _node_allocator;
 		typedef typename _node_allocator::pointer _node_pointer;
 
@@ -106,9 +100,9 @@ namespace ft
 
 		_node_pointer keySearch(_node_pointer start, key_type key)
 		{
-			while (start != NULL && key != start->data.first)
+			while (start != NULL && key != start->key)
 			{
-				if (key < start->data.first)
+				if (key < start->key)
 					start = start->left;
 				else
 					start = start->right;
@@ -125,9 +119,18 @@ namespace ft
 			while (x != NULL)
 			{
 				y = x;
-				if (z->pair.first < x.pair.first)
-					return ;
+				if (z->key < y->key)
+					x = x->left;
+				else
+					x = x->right;
 			}
+			z->parent = y;
+			if (y == NULL)
+				_head = z;
+			else if (z->key < y->key)
+				y->left = z;
+			else
+				y->right = z;
 		}
 	};
 }
