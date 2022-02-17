@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/17 12:51:05 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/17 15:07:49 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,24 +79,24 @@ namespace ft
 
 	public:
 		typedef typename allocator_type::template rebind<Node>::other _node_allocator;
-		typedef typename _node_allocator::pointer _node_pointer;
+		typedef typename _node_allocator::pointer nodePtr;
 
 		key_compare _comp;
 		_node_allocator _node_alloc;
-		_node_pointer _head;
-		_node_pointer TNULL;
+		nodePtr _head;
+		nodePtr TNULL;
 		allocator_type _alloc;
 
-		_node_pointer newNode(value_type elem)
+		nodePtr newNode(value_type elem)
 		{
-			_node_pointer newNode = _node_alloc.allocate(1);
+			nodePtr newNode = _node_alloc.allocate(1);
 			_node_alloc.construct(newNode, Node(elem));
 			newNode->left = TNULL;
 			newNode->right = TNULL;
 			return (newNode);
 		}
 
-		_node_pointer keySearch(_node_pointer start, key_type key)
+		nodePtr keySearch(nodePtr start, key_type key)
 		{
 			while (start != NULL && key != start->key)
 			{
@@ -108,14 +108,131 @@ namespace ft
 			return (start);
 		}
 
-		void insertTree (value_type value)
+		void insertTree(value_type value)
 		{
 			if (_head == NULL)
 			{
 				TNULL = _node_alloc.allocate(1);
 				_node_alloc.construct(TNULL, Node());
-				_head = newNode(value);
+				_head = TNULL;
 			}
+			nodePtr y = NULL;
+			nodePtr node = newNode(value);
+			nodePtr x = _head;
+			while (x != TNULL)
+			{
+				y = x;
+				if (node->key < x->key)
+					x = x->left;
+				else
+					x = x->right;
+			}
+
+			node->parent = y;
+			if (y == NULL)
+				_head = node;
+			else if (node->key < y->key)
+				y->left = node;
+			else
+				y->right = node;
+			if (node->parent == NULL)
+			{
+				node->color = BLACKT;
+				return;
+			}
+			balanceTreeInsert(node);
+		}
+
+		void balanceTreeInsert(nodePtr k)
+		{
+			nodePtr u;
+			while (k->parent->color == 1)
+			{
+				if (k->parent == k->parent->parent->right)
+				{
+					u = k->parent->parent->left;
+					if (u->color == 1)
+					{
+						u->color = 0;
+						k->parent->color = 0;
+						k->parent->parent->color = 1;
+						k = k->parent->parent;
+					}
+					else
+					{
+						if (k == k->parent->left)
+						{
+							k = k->parent;
+							rightRotate(k);
+						}
+						k->parent->color = 0;
+						k->parent->parent->color = 1;
+						leftRotate(k->parent->parent);
+					}
+				}
+				else
+				{
+					u = k->parent->parent->right;
+
+					if (u->color == 1)
+					{
+						u->color = 0;
+						k->parent->color = 0;
+						k->parent->parent->color = 1;
+						k = k->parent->parent;
+					}
+					else
+					{
+						if (k == k->parent->right)
+						{
+							k = k->parent;
+							leftRotate(k);
+						}
+						k->parent->color = 0;
+						k->parent->parent->color = 1;
+						rightRotate(k->parent->parent);
+					}
+				}
+				if (k == _head)
+				{
+					break;
+				}
+			}
+			_head->color = 0;
+		}
+
+		void leftRotate(nodePtr x)
+		{
+			nodePtr y = x->right;
+			x->right = y->left;
+			if (y->left != TNULL)
+				y->left->parent = x;
+			y->parent = x->parent;
+			if (x->parent == nullptr)
+				_head = y;
+			else if (x == x->parent->left)
+				x->parent->left = y;
+			else
+				x->parent->right = y;
+			y->left = x;
+			x->parent = y;
+		}
+
+		void rightRotate(nodePtr x)
+		{
+			nodePtr y = x->left;
+			x->left = y->right;
+			if (y->right != TNULL)
+				y->right->parent = x;
+			y->parent = x->parent;
+			if (x->parent == nullptr)
+				_head = y;
+			else if (x == x->parent->right)
+				x->parent->right = y;
+			else
+				x->parent->left = y;
+			y->right = x;
+			x->parent = y;
 		}
 	};
 }

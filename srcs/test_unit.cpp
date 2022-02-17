@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:01:30 by vbaron            #+#    #+#             */
-/*   Updated: 2022/02/17 12:57:57 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/17 15:10:43 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,16 @@ void mapRandomTests(void)
 	ft::map<char, int> myMap;
 	myMap.insert(elem);
 
-	// std::pair<char, int> elem2('g', 41);
-	// myMap.insert(elem2);
-	// std::pair<char, int> elem3('h', 41);
-	// myMap.insert(elem3);
-	// std::pair<char, int> elem3('a', 41);
-	// myMap.insert(std::make_pair<char, int>('i', 10));
+	std::pair<char, int> elem2('g', 41);
+	myMap.insert(elem2);
+	std::pair<char, int> elem3('h', 41);
+	myMap.insert(elem3);
+	myMap.insert(std::make_pair<char, int>('i', 10));
+	myMap.insert(std::make_pair<char, int>('j', 10));
+	myMap.insert(std::make_pair<char, int>('k', 10));
+	myMap.insert(std::make_pair<char, int>('l', 10));
+	myMap.insert(std::make_pair<char, int>('m', 10));
+	myMap.insert(std::make_pair<char, int>('n', 10));
 	print_tree(myMap._head, 0);
 }
 

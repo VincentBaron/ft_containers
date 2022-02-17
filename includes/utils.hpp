@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 10:20:45 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/17 13:01:02 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/17 14:51:12 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,6 @@ void print_tree(T *root, int level)
 	{
 		padding('\t', level);
 		std::cout << "[nill]" << std::endl;
-		std::cout << "" << root << std::endl;
 	}
 	else
 	{
