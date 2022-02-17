@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 10:20:45 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/16 12:56:48 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/17 13:01:02 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define RESET   "\033[0m"
 # define BLACK   "\033[30m"      /* Black */
 # define RED     "\033[31m"      /* Red */
+# define BRIGHTBLACK   "\033[90m"      /* White */
 
 namespace ft
 {
@@ -163,15 +164,18 @@ template<typename T>
 void print_tree(T *root, int level)
 {
 	if (root == NULL)
+		return ;
+	if (root->nill)
 	{
 		padding('\t', level);
 		std::cout << "[nill]" << std::endl;
+		std::cout << "" << root << std::endl;
 	}
 	else
 	{
 		print_tree(root->right, level + 1);
 		padding('\t', level);
-		std::cout << (root->color == 1 ? RED : BLACK) << "[" << root->key << "]" << ":" << root->value << RESET;	
+		std::cout << (root->color == 1 ? RED : BRIGHTBLACK) << "[" << root->key << "]" << ":" << root->value << RESET;	
 		std::cout << std::endl;
 		print_tree(root->left, level + 1);
 	}

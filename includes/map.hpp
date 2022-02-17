@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/16 12:48:53 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/17 12:51:05 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,19 +84,17 @@ namespace ft
 		key_compare _comp;
 		_node_allocator _node_alloc;
 		_node_pointer _head;
+		_node_pointer TNULL;
 		allocator_type _alloc;
 
 		_node_pointer newNode(value_type elem)
 		{
 			_node_pointer newNode = _node_alloc.allocate(1);
 			_node_alloc.construct(newNode, Node(elem));
+			newNode->left = TNULL;
+			newNode->right = TNULL;
 			return (newNode);
 		}
-
-		void addNode(_node_pointer node, value_type elem)
-		{
-			node = newNode(elem);
-		};
 
 		_node_pointer keySearch(_node_pointer start, key_type key)
 		{
@@ -110,27 +108,14 @@ namespace ft
 			return (start);
 		}
 
-		void insertTree(value_type val)
+		void insertTree (value_type value)
 		{
-			_node_pointer y = NULL;
-			_node_pointer x = _head;
-			_node_pointer z = newNode(val);
-
-			while (x != NULL)
+			if (_head == NULL)
 			{
-				y = x;
-				if (z->key < y->key)
-					x = x->left;
-				else
-					x = x->right;
+				TNULL = _node_alloc.allocate(1);
+				_node_alloc.construct(TNULL, Node());
+				_head = newNode(value);
 			}
-			z->parent = y;
-			if (y == NULL)
-				_head = z;
-			else if (z->key < y->key)
-				y->left = z;
-			else
-				y->right = z;
 		}
 	};
 }

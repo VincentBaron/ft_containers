@@ -20,17 +20,13 @@
 namespace ft
 {
 	template <class Key, class T, class Pair>
-	class Node
+	struct Node
 	{
 
 	public:
-		Node(Pair elem) : color(REDT), key(elem.first), value(elem.second), left(NULL), right(NULL)
-		{};
 
-		~Node(void)
-		{}
-
-	public:
+		Node() : color(BLACKT), key(Key()), value(T()), left(NULL), right(NULL), parent(NULL), nill(1) {};
+		Node(Pair elem) : color(REDT), key(elem.first), value(elem.second), left(NULL), right(NULL), parent(NULL), nill(0) {};
 	
 		bool color;
 		Key key;
@@ -38,6 +34,7 @@ namespace ft
 		Node* left;
 		Node* right;
 		Node* parent;
+		bool nill;
 	};
 }
 

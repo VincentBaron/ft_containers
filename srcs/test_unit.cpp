@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_unit.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:01:30 by vbaron            #+#    #+#             */
-/*   Updated: 2022/02/16 12:51:27 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/17 12:57:57 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,12 @@ void mapRandomTests(void)
 	ft::map<char, int> myMap;
 	myMap.insert(elem);
 
-	std::pair<char, int> elem2('g', 41);
-	std::pair<char, int> elem3('a', 41);
-	myMap.insert(elem2);
-	myMap.insert(elem3);
+	// std::pair<char, int> elem2('g', 41);
+	// myMap.insert(elem2);
+	// std::pair<char, int> elem3('h', 41);
+	// myMap.insert(elem3);
+	// std::pair<char, int> elem3('a', 41);
+	// myMap.insert(std::make_pair<char, int>('i', 10));
 	print_tree(myMap._head, 0);
 }
 
