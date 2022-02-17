@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BinaryTreeIterator.hpp                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 11:37:50 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/11 13:01:51 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/17 16:49:45 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ namespace ft
 		virtual ~binary_tree_iterator(){};
 
 	private:
+		
 		
 	}
 }

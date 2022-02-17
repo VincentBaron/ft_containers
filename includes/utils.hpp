@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 10:20:45 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/17 14:51:12 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/17 16:52:54 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,38 @@ namespace ft
 			++first2;
 		}
 		return (first2 != last2);
+	}
+
+	template <class T1, class T2>
+	struct pair
+	{
+		public:
+
+		T1 first;
+		T2 second;
+
+		pair() : first(), second() {};
+
+		pair(const T1 &x, const T2 &y) : first(x), second(y) {};
+
+		template<class X, class Y>
+		pair (const pair<X, Y> &srcs) : first(srcs.first), second(srcs.second) {};
+
+		pair& operator=(const pair &rhs)
+		{
+			if (*this == rhs)
+				return (*this);
+			first = rhs.first;
+			second = rhs.second;
+			return (*this);
+		}
+
+	}
+
+	template <class T1, class T2>
+	ft::pair<T1, T2> make_pair(T1 x, T2 y)
+	{
+		return (ft::pair<T1, T2>(x, y));
 	}
 }
 
