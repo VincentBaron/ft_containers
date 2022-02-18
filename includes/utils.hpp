@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 10:20:45 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/17 16:52:54 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/18 16:07:41 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ namespace ft
 			return (*this);
 		}
 
-	}
+	};
 
 	template <class T1, class T2>
 	ft::pair<T1, T2> make_pair(T1 x, T2 y)
