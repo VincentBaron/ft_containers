@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:01:30 by vbaron            #+#    #+#             */
-/*   Updated: 2022/02/21 11:24:55 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/21 16:08:15 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,27 @@ void vectorTimeTestsFt(void)
 void mapRandomTests(void)
 {
 	// ft::map<char, int> test;
-	std::pair<char, int> elem('e', 42);
+	ft::pair<char, int> elem('e', 42);
 	ft::map<char, int> myMap;
 	myMap.insert(elem);
 
-	std::pair<char, int> elem2('g', 41);
+	ft::pair<char, int> elem2('g', 41);
 	myMap.insert(elem2);
-	std::pair<char, int> elem3('h', 41);
+	ft::pair<char, int> elem3('h', 41);
 	myMap.insert(elem3);
-	myMap.insert(std::make_pair<char, int>('i', 10));
-	myMap.insert(std::make_pair<char, int>('j', 10));
-	myMap.insert(std::make_pair<char, int>('k', 10));
-	myMap.insert(std::make_pair<char, int>('l', 10));
-	myMap.insert(std::make_pair<char, int>('m', 10));
-	myMap.insert(std::make_pair<char, int>('n', 10));
-	myMap.insert(std::make_pair<char, int>('n', 10));
+	myMap.insert(ft::make_pair<char, int>('i', 10));
+	myMap.insert(ft::make_pair<char, int>('j', 10));
+	myMap.insert(ft::make_pair<char, int>('k', 10));
+	myMap.insert(ft::make_pair<char, int>('l', 10));
+	myMap.insert(ft::make_pair<char, int>('m', 10));
+	ft::pair<ft::map<char, int>::iterator, bool> ret = myMap.insert(ft::make_pair<char, int>('n', 10));
 	print_tree(myMap._head, 0);
+	std::cout << "key: " << (*(ret.first)).first << std::endl;
+	std::cout << "bool: " << ret.second << std::endl;
 }
 
 int main(void)
-{
+{ 
 	// vectorTimeTestsStd();
 	// vectorTimeTestsFt();
 	

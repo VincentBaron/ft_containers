@@ -19,20 +19,20 @@
 
 namespace ft
 {
-	template <class Key, class T, class Pair>
+	template <class Pair>
 	struct Node
 	{
 
 	public:
-
-		typedef typename T::value_type value_type;
 		
-		Node() : color(BLACKT), key(Key()), value(T()), left(NULL), right(NULL), parent(NULL), nill(1) {};
-		Node(Pair elem) : color(REDT), key(elem.first), value(elem.second), left(NULL), right(NULL), parent(NULL), nill(0) {};
+		typedef Pair value_type;
+		
+		Node() : color(BLACKT), value(Pair()), left(NULL), right(NULL), parent(NULL), nill(1) {};
+		Node(Pair elem) : color(REDT), value(elem), left(NULL), right(NULL), parent(NULL), nill(0) {};
+		// Node(Node &srcs) : color(srcs.color), key(srcs.key), value(srcs.value), left(srcs.left), right(srcs.right), left(srcs.right), parent(srcs.parent), nill(0) {};
 	
 		bool color;
-		Key key;
-		T value;
+		Pair value;
 		Node* left;
 		Node* right;
 		Node* parent;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
+/*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 10:20:45 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/18 16:07:41 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/21 15:42:25 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,7 +206,7 @@ void print_tree(T *root, int level)
 	{
 		print_tree(root->right, level + 1);
 		padding('\t', level);
-		std::cout << (root->color == 1 ? RED : BRIGHTBLACK) << "[" << root->key << "]" << ":" << root->value << RESET;	
+		std::cout << (root->color == 1 ? RED : BRIGHTBLACK) << "[" << root->value.first << "]" << ":" << root->value.second << RESET;	
 		std::cout << std::endl;
 		print_tree(root->left, level + 1);
 	}

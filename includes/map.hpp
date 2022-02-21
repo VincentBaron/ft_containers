@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/21 11:24:44 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/21 16:08:45 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ namespace ft
 	public:
 		typedef Key key_type;
 		typedef T mapped_type;
-		typedef std::pair<const key_type, mapped_type> value_type;
+		typedef ft::pair<const key_type, mapped_type> value_type;
 		typedef Compare key_compare;
-		typedef ft::Node<key_type, mapped_type, value_type> Node;
+		typedef ft::Node<value_type> Node;
 
 		class value_compare : public std::binary_function<value_type, value_type, bool>
 		{
@@ -51,14 +51,16 @@ namespace ft
 		typedef typename Alloc::const_reference const_reference;
 		typedef typename Alloc::pointer pointer;
 		typedef typename Alloc::const_pointer const_pointer;
-		typedef typename ft::binary_tree_iterator<Node, Compare> iterator;
-		typedef typename ft::binary_tree_iterator<Node, Compare> const_iterator;
+		typedef typename ft::binary_tree_iterator<Node> iterator;
+		typedef typename ft::binary_tree_iterator<Node> const_iterator;
 		typedef typename ft::reverse_iterator<iterator> reverse_iterator;
 		typedef typename ft::reverse_iterator<const_iterator> const_reverse_iterator;
 		typedef typename ft::iterator_traits<iterator> difference_type;
 		typedef typename Alloc::size_type size_type;
+		typedef typename allocator_type::template rebind<Node>::other _node_allocator;
+		typedef typename _node_allocator::pointer nodePtr;
 
-		explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _comp(comp), _head(NULL), _alloc(alloc){};
+		explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _comp(comp), _head(NULL), TNULL(NULL), _alloc(alloc){};
 
 		template <class InputIterator>
 		map(InputIterator first, InputIterator last, const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type());
@@ -67,8 +69,7 @@ namespace ft
 
 		pair<iterator, bool> insert(const value_type &val)
 		{
-			insertTree(val);
-			return (true);
+			return (insertTree(val));
 		};
 
 		// iterator insert(iterator position, const value_type &val);
@@ -76,9 +77,7 @@ namespace ft
 		// template <class InputIterator>
 		// void insert(InputIterator first, InputIterator last);
 
-	private:
-		typedef typename allocator_type::template rebind<Node>::other _node_allocator;
-		typedef typename _node_allocator::pointer nodePtr;
+	public:
 
 		key_compare _comp;
 		_node_allocator _node_alloc;
@@ -97,9 +96,9 @@ namespace ft
 
 		nodePtr keySearch(nodePtr start, key_type key)
 		{
-			while (start != NULL && key != start->key)
+			while (start != NULL && key != start->value.first)
 			{
-				if (key < start->key)
+				if (key < start->value.first)
 					start = start->left;
 				else
 					start = start->right;
@@ -107,7 +106,7 @@ namespace ft
 			return (start);
 		}
 
-		void insertTree(value_type value)
+		ft::pair<iterator, bool> insertTree(value_type value)
 		{	
 			if (_head == NULL)
 			{
@@ -121,9 +120,9 @@ namespace ft
 			while (x != TNULL)
 			{
 				y = x;
-				if (node->key == x->key)
-					return (make_pair(iterator(node, _nillNode), false))
-				else if (node->key < x->key)
+				if (node->value.first == x->value.first)
+					return (ft::make_pair(iterator(node, TNULL), false));
+				else if (node->value.first < x->value.first)
 					x = x->left;
 				else
 					x = x->right;
@@ -132,16 +131,17 @@ namespace ft
 			node->parent = y;
 			if (y == NULL)
 				_head = node;
-			else if (node->key < y->key)
+			else if (node->value.first < y->value.first)
 				y->left = node;
 			else
 				y->right = node;
 			if (node->parent == NULL)
 			{
 				node->color = BLACKT;
-				return;
+				return (ft::make_pair(iterator(node, TNULL), true));
 			}
 			balanceTreeInsert(node);
+			return (ft::make_pair(iterator(node, TNULL), true));
 		}
 
 		void balanceTreeInsert(nodePtr k)

@@ -6,32 +6,33 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 16:02:26 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/21 11:33:10 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/21 16:06:27 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BINARYTREEITERATOR_HPP
 #define BINARYTREEITERATOR_HPP
 #include "utils.hpp"
+#include "redBlackTree.hpp"
 
 namespace ft
 {
-	template <typename T, class Compare>
-	class binary_tree_iterator : ft::iterator<std::bidirectional_iterator_tag, T>
+	template <typename Node>
+	class binary_tree_iterator : ft::iterator<std::bidirectional_iterator_tag, Node>
 	{
 	public:
-		typedef typename T::value_type value_type;
+
+		typedef Node value_type;
 		typedef typename ft::iterator<std::bidirectional_iterator_tag, value_type>::iterator_category iterator_category;
 		typedef typename ft::iterator<std::bidirectional_iterator_tag, value_type>::difference_type difference_type;
-		typedef typename ft::iterator<std::bidirectional_iterator_tag, value_type>::pointer pointer;
+		typedef typename Node::value_type *pointer;
+		typedef typename Node::value_type reference;
 
-		typedef typename ft::iterator<std::bidirectional_iterator_tag, value_type>::reference reference;
+		binary_tree_iterator() : _head(NULL), _nillNode(NULL){};
 
-		binary_tree_iterator(const Compare &comp = Compare()) : _head(), _nillNode(), _comp(comp){};
+		binary_tree_iterator(Node *head, Node *nillNode) : _head(head), _nillNode(nillNode){};
 
-		binary_tree_iterator(T *head, T *nillNode, const Compare &comp = Compare()) : _head(head), _nillNode(nillNode), _comp(comp){};
-
-		binary_tree_iterator(const binary_tree_iterator &srcs) : _head(srcs._head), _nillNode(srcs._nillNode), _comp(){};
+		binary_tree_iterator(const binary_tree_iterator &srcs) : _head(srcs._head), _nillNode(srcs._nillNode){};
 
 		virtual ~binary_tree_iterator() {}
 
@@ -75,7 +76,7 @@ namespace ft
 				return (_head);
 			}
 
-			T *y = _head->parent;
+			Node *y = _head->parent;
 			while (y != _nillNode && _head == y->right)
 			{
 				_head = y;
@@ -100,13 +101,12 @@ namespace ft
 				return (_head);
 			}
 
-			T *y = _head->parent;
+			Node *y = _head->parent;
 			while (y != _nillNode && _head == y->left)
 			{
 				_head = y;
 				y = y->parent;
 			}
-		}
 		}
 
 		binary_tree_iterator operator--(int)
@@ -117,30 +117,28 @@ namespace ft
 		}
 
 	private:
-		T *_head;
-		T *_nillNode;
-		Compare _comp;
+		Node *_head;
+		Node *_nillNode;
 	};
 
-	template <typename T, class Compare>
-	class binary_tree_const_iterator : ft::iterator<std::bidirectional_iterator_tag, T>
+	template <typename Node>
+	class binary_tree_const_iterator : ft::iterator<std::bidirectional_iterator_tag, Node>
 	{
 	public:
-		typedef typename T::value_type value_type;
+		typedef typename Node::value_type value_type;
 		typedef typename ft::iterator<std::bidirectional_iterator_tag, value_type>::iterator_category iterator_category;
 		typedef typename ft::iterator<std::bidirectional_iterator_tag, value_type>::difference_type difference_type;
 		typedef typename ft::iterator<std::bidirectional_iterator_tag, value_type>::pointer pointer;
-
 		typedef typename ft::iterator<std::bidirectional_iterator_tag, value_type>::reference reference;
 
-		binary_tree_const_iterator(const Compare &comp = Compare()) : _head(), _nillNode(), _comp(comp){};
+		binary_tree_const_iterator() : _head(NULL), _nillNode(NULL){};
 
-		binary_tree_const_iterator(T *head, T *nillNode, const Compare &comp = Compare()) : _head(head), _nillNode(nillNode), _comp(comp){};
+		binary_tree_const_iterator(Node *head, Node *nillNode) : _head(head), _nillNode(nillNode){};
 
-		binary_tree_const_iterator(const binary_tree_const_iterator &srcs) : _head(srcs._head), _nillNode(srcs._nillNode), _comp(){};
+		binary_tree_const_iterator(const binary_tree_const_iterator &srcs) : _head(srcs._head), _nillNode(srcs._nillNode){};
 
-		binary_tree_const_iterator(const binary_tree_iterator<T, Compare>& srcs) : _node(srcs._node), _last_node(srcs._last_node), _comp() {}
-		
+		binary_tree_const_iterator(const binary_tree_iterator<Node> &srcs) : _head(srcs._node), _nillNode(srcs._nillNode) {}
+
 		virtual ~binary_tree_const_iterator() {}
 
 		binary_tree_const_iterator &operator=(const binary_tree_const_iterator &srcs)
@@ -183,7 +181,7 @@ namespace ft
 				return (_head);
 			}
 
-			T *y = _head->parent;
+			Node *y = _head->parent;
 			while (y != _nillNode && _head == y->right)
 			{
 				_head = y;
@@ -208,13 +206,12 @@ namespace ft
 				return (_head);
 			}
 
-			T *y = _head->parent;
+			Node *y = _head->parent;
 			while (y != _nillNode && _head == y->left)
 			{
 				_head = y;
 				y = y->parent;
 			}
-		}
 		}
 
 		binary_tree_const_iterator operator--(int)
@@ -225,9 +222,8 @@ namespace ft
 		}
 
 	private:
-		T *_head;
-		T *_nillNode;
-		Compare _comp;
+		Node *_head;
+		Node *_nillNode;
 	};
 }
 
