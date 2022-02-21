@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
+/*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/17 15:07:49 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/21 11:24:44 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "utils.hpp"
 #include "reverse_iterator.hpp"
 #include "redBlackTree.hpp"
+# include "BinaryTreeIterator.hpp"
 
 namespace ft
 {
@@ -50,11 +51,11 @@ namespace ft
 		typedef typename Alloc::const_reference const_reference;
 		typedef typename Alloc::pointer pointer;
 		typedef typename Alloc::const_pointer const_pointer;
-		// typedef ft::bidirectional_iterator<value_type> iterator;
-		// typedef ft::bidirectional_iterator<const value_type> const_iterator;
-		// typedef typename ft::reverse_iterator<iterator> reverse_iterator;
-		// typedef typename ft::reverse_iterator<const_iterator> const_reverse_iterator;
-		// typedef typename ft::iterator_traits<iterator> difference_type;
+		typedef typename ft::binary_tree_iterator<Node, Compare> iterator;
+		typedef typename ft::binary_tree_iterator<Node, Compare> const_iterator;
+		typedef typename ft::reverse_iterator<iterator> reverse_iterator;
+		typedef typename ft::reverse_iterator<const_iterator> const_reverse_iterator;
+		typedef typename ft::iterator_traits<iterator> difference_type;
 		typedef typename Alloc::size_type size_type;
 
 		explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _comp(comp), _head(NULL), _alloc(alloc){};
@@ -64,10 +65,8 @@ namespace ft
 
 		map(const map &x);
 
-		bool insert(const value_type &val)
+		pair<iterator, bool> insert(const value_type &val)
 		{
-			if (keySearch(_head, val.first) != NULL)
-				return (false);
 			insertTree(val);
 			return (true);
 		};
@@ -77,7 +76,7 @@ namespace ft
 		// template <class InputIterator>
 		// void insert(InputIterator first, InputIterator last);
 
-	public:
+	private:
 		typedef typename allocator_type::template rebind<Node>::other _node_allocator;
 		typedef typename _node_allocator::pointer nodePtr;
 
@@ -109,7 +108,7 @@ namespace ft
 		}
 
 		void insertTree(value_type value)
-		{
+		{	
 			if (_head == NULL)
 			{
 				TNULL = _node_alloc.allocate(1);
@@ -122,7 +121,9 @@ namespace ft
 			while (x != TNULL)
 			{
 				y = x;
-				if (node->key < x->key)
+				if (node->key == x->key)
+					return (make_pair(iterator(node, _nillNode), false))
+				else if (node->key < x->key)
 					x = x->left;
 				else
 					x = x->right;
@@ -208,7 +209,7 @@ namespace ft
 			if (y->left != TNULL)
 				y->left->parent = x;
 			y->parent = x->parent;
-			if (x->parent == nullptr)
+			if (x->parent == NULL)
 				_head = y;
 			else if (x == x->parent->left)
 				x->parent->left = y;
@@ -225,7 +226,7 @@ namespace ft
 			if (y->right != TNULL)
 				y->right->parent = x;
 			y->parent = x->parent;
-			if (x->parent == nullptr)
+			if (x->parent == NULL)
 				_head = y;
 			else if (x == x->parent->right)
 				x->parent->right = y;

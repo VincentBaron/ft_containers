@@ -25,6 +25,8 @@ namespace ft
 
 	public:
 
+		typedef typename T::value_type value_type;
+		
 		Node() : color(BLACKT), key(Key()), value(T()), left(NULL), right(NULL), parent(NULL), nill(1) {};
 		Node(Pair elem) : color(REDT), key(elem.first), value(elem.second), left(NULL), right(NULL), parent(NULL), nill(0) {};
 	

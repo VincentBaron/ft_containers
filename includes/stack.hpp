@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 16:53:22 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/09 21:47:01 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/21 11:43:29 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ namespace ft
 			return (lhs._ctnr >= rhs._ctnr);
 		};
 
-	private:
+	protected:
 		container_type _ctnr;
 	};
 }
