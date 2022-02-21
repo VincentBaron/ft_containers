@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/21 16:08:45 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/21 16:16:33 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,18 @@ namespace ft
 			return (insertTree(val));
 		};
 
-		// iterator insert(iterator position, const value_type &val);
+		iterator insert(iterator position, const value_type &val)
+		{
+			(void)position;
+			return(insertTree(val).first);
+		};
 
-		// template <class InputIterator>
-		// void insert(InputIterator first, InputIterator last);
+		template <class InputIterator>
+		void insert(InputIterator first, InputIterator last, typename ft::enable_if<!ft::isIntegral<InputIterator>::value, InputIterator>::type * = 0)
+		{
+			while (first++ != last)
+				insert(*(first));
+		};
 
 	public:
 
