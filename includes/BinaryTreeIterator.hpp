@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BinaryTreeIterator.hpp                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 16:02:26 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/22 11:17:04 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/22 16:18:00 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ namespace ft
 			}
 
 			Node *y = _head->parent;
-			while (y != _nillNode && _head == y->right)
+			while (y != NULL && _head == y->right)
 			{
 				_head = y;
 				y = y->parent;
@@ -88,7 +88,7 @@ namespace ft
 
 		binary_tree_iterator operator++(int)
 		{
-			binary_tree_iterator tmp(*this);
+			binary_tree_iterator tmp = *this;
 			operator++();
 			return (tmp);
 		}
@@ -120,7 +120,7 @@ namespace ft
 			return (tmp);
 		}
 
-	private:
+	public:
 		Node *_head;
 		Node *_nillNode;
 	};

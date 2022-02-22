@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MapTestUnit.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:07:19 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/22 12:42:10 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/22 16:42:16 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "map.hpp"
 # include "VectorTestUnit.hpp"
 # include <map>
+# include "utils.hpp"
 
 template<typename T1, typename T2>
 void checkOutputMap(T1 res1, T2 res2, std::string mssg)
@@ -67,9 +68,36 @@ void mapInsert(void)
 
 void mapConstructors(void)
 {
+	std::cout << BOLDMAGENTA << "\nmap Default Constructor testing..." << RESET << std::endl;
+	
 	ft::map<char, int> myMap;
 	std::map<char, int> realMap;
 	checkBasicAttrMap(myMap, realMap);
+
+	std::cout << BOLDMAGENTA << "\nmap Iterators Constructor testing..." << RESET << std::endl;
+
+	ft::map<char, int> tmp;
+	tmp.insert(ft::make_pair('a', 10));
+	tmp.insert(ft::make_pair('b', 10));
+	// tmp.insert(ft::make_pair('c', 10));
+	print_tree(tmp._head, 0);
+	ft::map<char, int>::iterator ite = tmp.begin();
+	for (; ite != tmp.end(); ite++)
+	{
+		std::cout << "tmp index:" << (*ite).first << std::endl;
+		std::cout << "tmp value:" << (*ite).second << std::endl;
+	}
+	// std::map<char, int> tmpReal;
+	// tmpReal.insert(std::make_pair('a', 10));
+	// tmpReal.insert(std::make_pair('b', 10));
+	// tmpReal.insert(std::make_pair('c', 10));
+	// tmpReal.insert(std::make_pair('d', 10));
+	// tmpReal.insert(std::make_pair('e', 10));
+
+	// print_tree(tmp._head, 0);
+	// ft::map<char, int> myMap2(tmp.begin(), tmp.end());
+	// std::map<char, int> realMap2(tmpReal.begin(), tmpReal.end());
+	// checkBasicAttrMap(myMap2, realMap2);
 }
 
 #endif

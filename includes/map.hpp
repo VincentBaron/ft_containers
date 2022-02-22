@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/22 12:44:20 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/22 17:01:53 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,13 @@ namespace ft
 		typedef typename ft::reverse_iterator<const_iterator> const_reverse_iterator;
 		typedef typename ft::iterator_traits<iterator> difference_type;
 
-		explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _comp(comp), _head(NULL), TNULL(NULL), _alloc(alloc), _size(0) {};
+		explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _comp(comp), _head(NULL), TNULL(NULL), _alloc(alloc), _size(0){};
 
 		template <class InputIterator>
-		map(InputIterator first, InputIterator last, const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type());
+		map(InputIterator first, InputIterator last, const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type(), typename ft::enable_if<!ft::isIntegral<InputIterator>::value, InputIterator>::type * = 0) : _comp(comp), _head(NULL), TNULL(NULL), _alloc(alloc), _size(0)
+		{
+			insert(first, last);
+		};
 
 		map(const map &x);
 
@@ -129,11 +132,11 @@ namespace ft
 		};
 
 		size_type max_size() const
-		{	
+		{
 			return (_node_alloc.max_size());
 		};
 
-		mapped_type& operator[] (const key_type& k)
+		mapped_type &operator[](const key_type &k)
 		{
 			return (*(treeInsert(ft::make_pair(k, mapped_type())).first).second);
 		};
@@ -152,8 +155,8 @@ namespace ft
 		template <class InputIterator>
 		void insert(InputIterator first, InputIterator last, typename ft::enable_if<!ft::isIntegral<InputIterator>::value, InputIterator>::type * = 0)
 		{
-			while (first++ != last)
-				insert(*(first));
+			for (; first != last; ++first)
+				insert(*first);
 		};
 
 		iterator find(const key_type &k)
@@ -174,6 +177,7 @@ namespace ft
 		_node_allocator _node_alloc;
 		nodePtr _head;
 		nodePtr TNULL;
+		nodePtr _end;
 		allocator_type _alloc;
 		size_type _size;
 
@@ -183,6 +187,7 @@ namespace ft
 			_node_alloc.construct(newNode, Node(elem));
 			newNode->left = TNULL;
 			newNode->right = TNULL;
+			newNode->parent = TNULL;
 			return (newNode);
 		}
 
@@ -205,6 +210,7 @@ namespace ft
 				TNULL = _node_alloc.allocate(1);
 				_node_alloc.construct(TNULL, Node());
 				_head = TNULL;
+				_size++;
 			}
 			nodePtr y = NULL;
 			nodePtr node = newNode(value);
@@ -231,10 +237,14 @@ namespace ft
 			{
 				node->color = BLACKT;
 				_size++;
+				if (node == maximum(_head))
+					TNULL->parent = node;
 				return (ft::make_pair(iterator(node, TNULL), true));
 			}
 			balanceTreeInsert(node);
 			_size++;
+			if (node == maximum(_head))
+				TNULL->parent = node;
 			return (ft::make_pair(iterator(node, TNULL), true));
 		}
 
