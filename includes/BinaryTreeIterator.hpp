@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 16:02:26 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/22 21:47:46 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/22 21:51:45 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,12 +107,15 @@ namespace ft
 			}
 
 			Node *y = _head->parent;
-			while (y != _nillNode && _head == y->left)
+			while (y != NULL && _head == y->left)
 			{
 				_head = y;
 				y = y->parent;
 			}
-			_head = y;
+			if (y == NULL)
+				_head = _nillNode;
+			else
+				_head = y;
 			return (*this);
 		}
 
