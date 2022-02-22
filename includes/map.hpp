@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/22 17:01:53 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/22 17:13:42 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,7 +210,8 @@ namespace ft
 				TNULL = _node_alloc.allocate(1);
 				_node_alloc.construct(TNULL, Node());
 				_head = TNULL;
-				_size++;
+				_head->right = TNULL;
+				_head->left = TNULL;
 			}
 			nodePtr y = NULL;
 			nodePtr node = newNode(value);
