@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 16:02:26 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/22 21:51:45 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/22 22:10:41 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ namespace ft
 	class binary_tree_iterator : ft::iterator<std::bidirectional_iterator_tag, Node>
 	{
 	public:
-
 		typedef Node value_type;
 		typedef typename ft::iterator<std::bidirectional_iterator_tag, value_type>::iterator_category iterator_category;
 		typedef typename ft::iterator<std::bidirectional_iterator_tag, value_type>::difference_type difference_type;
@@ -98,6 +97,12 @@ namespace ft
 
 		binary_tree_iterator &operator--(void)
 		{
+			if (_head == _nillNode)
+			{
+				_head = _head->parent;
+				return (*this); 
+			}
+			
 			if (_head->left != _nillNode)
 			{
 				_head = _head->left;
@@ -112,10 +117,7 @@ namespace ft
 				_head = y;
 				y = y->parent;
 			}
-			if (y == NULL)
-				_head = _nillNode;
-			else
-				_head = y;
+			_head = y;
 			return (*this);
 		}
 
