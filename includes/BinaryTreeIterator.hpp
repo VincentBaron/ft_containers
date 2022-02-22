@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 16:02:26 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/22 16:18:00 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/22 21:47:46 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,10 @@ namespace ft
 				_head = y;
 				y = y->parent;
 			}
-			_head = y;
+			if (y == NULL)
+				_head = _nillNode;
+			else
+				_head = y;
 			return (*this);
 		}
 
