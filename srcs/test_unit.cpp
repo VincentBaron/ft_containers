@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:01:30 by vbaron            #+#    #+#             */
-/*   Updated: 2022/02/21 16:08:15 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/22 10:59:17 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../includes/RandomAccessIteTest.hpp"
 #include "../includes/StackTestUnit.hpp"
 #include "../includes/map.hpp"
+#include "../includes/MapTestUnit.hpp"
 
 void vectorTesting(void)
 {
@@ -72,17 +73,23 @@ void mapRandomTests(void)
 	myMap.insert(ft::make_pair<char, int>('m', 10));
 	ft::pair<ft::map<char, int>::iterator, bool> ret = myMap.insert(ft::make_pair<char, int>('n', 10));
 	print_tree(myMap._head, 0);
-	std::cout << "key: " << (*(ret.first)).first << std::endl;
-	std::cout << "bool: " << ret.second << std::endl;
 }
 
 int main(void)
 { 
+	
+	///////////////////////////////////////VECTOR TESTING
 	// vectorTimeTestsStd();
 	// vectorTimeTestsFt();
-	
 	// vectorTesting();
+	//////////////////////////////////////////////////////
+	
+	///////////////////////////////////////STACK TESTING
 	// stackTesting();
+	//////////////////////////////////////////////////////
 
-	mapRandomTests();
+	///////////////////////////////////////MAP TESTING
+	// mapRandomTests();
+	mapConstructors();
+	//////////////////////////////////////////////////////
 }

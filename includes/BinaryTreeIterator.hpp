@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 16:02:26 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/21 16:06:27 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/22 11:17:04 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ namespace ft
 				_head = _head->right;
 				while (_head->left != _nillNode)
 					_head = _head->left;
-				return (_head);
+				return (*this);
 			}
 
 			Node *y = _head->parent;
@@ -82,6 +82,8 @@ namespace ft
 				_head = y;
 				y = y->parent;
 			}
+			_head = y;
+			return (*this);
 		}
 
 		binary_tree_iterator operator++(int)
@@ -98,7 +100,7 @@ namespace ft
 				_head = _head->left;
 				while (_head->right != _nillNode)
 					_head = _head->right;
-				return (_head);
+				return (*this);
 			}
 
 			Node *y = _head->parent;
@@ -107,6 +109,8 @@ namespace ft
 				_head = y;
 				y = y->parent;
 			}
+			_head = y;
+			return (*this);
 		}
 
 		binary_tree_iterator operator--(int)
@@ -178,7 +182,7 @@ namespace ft
 				_head = _head->right;
 				while (_head->left != _nillNode)
 					_head = _head->left;
-				return (_head);
+				return (*this);
 			}
 
 			Node *y = _head->parent;
@@ -187,6 +191,8 @@ namespace ft
 				_head = y;
 				y = y->parent;
 			}
+			_head = y;
+			return (*this);
 		}
 
 		binary_tree_const_iterator operator++(int)
@@ -203,7 +209,7 @@ namespace ft
 				_head = _head->left;
 				while (_head->right != _nillNode)
 					_head = _head->right;
-				return (_head);
+				return (*this);
 			}
 
 			Node *y = _head->parent;
@@ -212,6 +218,8 @@ namespace ft
 				_head = y;
 				y = y->parent;
 			}
+			_head = y;
+			return (*this);
 		}
 
 		binary_tree_const_iterator operator--(int)

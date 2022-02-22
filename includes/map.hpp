@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/21 16:16:33 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/22 12:44:20 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "utils.hpp"
 #include "reverse_iterator.hpp"
 #include "redBlackTree.hpp"
-# include "BinaryTreeIterator.hpp"
+#include "BinaryTreeIterator.hpp"
 
 namespace ft
 {
@@ -30,6 +30,7 @@ namespace ft
 		typedef ft::pair<const key_type, mapped_type> value_type;
 		typedef Compare key_compare;
 		typedef ft::Node<value_type> Node;
+		typedef size_t size_type;
 
 		class value_compare : public std::binary_function<value_type, value_type, bool>
 		{
@@ -56,16 +57,86 @@ namespace ft
 		typedef typename ft::reverse_iterator<iterator> reverse_iterator;
 		typedef typename ft::reverse_iterator<const_iterator> const_reverse_iterator;
 		typedef typename ft::iterator_traits<iterator> difference_type;
-		typedef typename Alloc::size_type size_type;
-		typedef typename allocator_type::template rebind<Node>::other _node_allocator;
-		typedef typename _node_allocator::pointer nodePtr;
 
-		explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _comp(comp), _head(NULL), TNULL(NULL), _alloc(alloc){};
+		explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _comp(comp), _head(NULL), TNULL(NULL), _alloc(alloc), _size(0) {};
 
 		template <class InputIterator>
 		map(InputIterator first, InputIterator last, const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type());
 
 		map(const map &x);
+
+		// ~map(void)
+		// {
+		// 	clear();
+		// }
+
+		iterator begin()
+		{
+			return (iterator(minimum(_head), TNULL));
+		};
+
+		const_iterator begin() const
+		{
+			return (const_iterator(minimum(_head), TNULL));
+		};
+
+		iterator end()
+		{
+			if (!_size)
+				return (begin());
+			return (iterator(maximum(_head)->right, TNULL));
+		};
+
+		const_iterator end() const
+		{
+			if (!_size)
+				return (begin());
+			return (const_iterator(maximum(_head)->right, TNULL));
+		};
+
+		reverse_iterator rbegin()
+		{
+			return (reverse_iterator(maximum(_head), TNULL));
+		};
+
+		const_reverse_iterator rbegin() const
+		{
+			return (const_reverse_iterator(maximum(_head), TNULL));
+		};
+
+		reverse_iterator rend()
+		{
+			if (!_size)
+				return (rbegin());
+			return (reverse_iterator(minimum(_head)->left, TNULL));
+		};
+
+		const_reverse_iterator rend() const
+		{
+			if (!_size)
+				return (rbegin());
+			return (const_reverse_iterator(minimum(_head)->left, TNULL));
+		};
+
+		bool empty() const
+		{
+			return (!_size ? true : false);
+		};
+
+		size_type size(void)
+		{
+			return (_size);
+		};
+
+		size_type max_size() const
+		{	
+			return (_node_alloc.max_size());
+		};
+
+		mapped_type& operator[] (const key_type& k)
+		{
+			return (*(treeInsert(ft::make_pair(k, mapped_type())).first).second);
+		};
 
 		pair<iterator, bool> insert(const value_type &val)
 		{
@@ -75,7 +146,7 @@ namespace ft
 		iterator insert(iterator position, const value_type &val)
 		{
 			(void)position;
-			return(insertTree(val).first);
+			return (insertTree(val).first);
 		};
 
 		template <class InputIterator>
@@ -85,13 +156,26 @@ namespace ft
 				insert(*(first));
 		};
 
+		iterator find(const key_type &k)
+		{
+			nodePtr ret = keySearch(_head, k);
+			if (ret == TNULL)
+				return (end());
+			return (iterator(ret, TNULL));
+		};
+
+		const_iterator find(const key_type &k) const;
+
 	public:
+		typedef typename allocator_type::template rebind<Node>::other _node_allocator;
+		typedef typename _node_allocator::pointer nodePtr;
 
 		key_compare _comp;
 		_node_allocator _node_alloc;
 		nodePtr _head;
 		nodePtr TNULL;
 		allocator_type _alloc;
+		size_type _size;
 
 		nodePtr newNode(value_type elem)
 		{
@@ -104,7 +188,7 @@ namespace ft
 
 		nodePtr keySearch(nodePtr start, key_type key)
 		{
-			while (start != NULL && key != start->value.first)
+			while (start != TNULL && key != start->value.first)
 			{
 				if (key < start->value.first)
 					start = start->left;
@@ -115,7 +199,7 @@ namespace ft
 		}
 
 		ft::pair<iterator, bool> insertTree(value_type value)
-		{	
+		{
 			if (_head == NULL)
 			{
 				TNULL = _node_alloc.allocate(1);
@@ -146,9 +230,11 @@ namespace ft
 			if (node->parent == NULL)
 			{
 				node->color = BLACKT;
+				_size++;
 				return (ft::make_pair(iterator(node, TNULL), true));
 			}
 			balanceTreeInsert(node);
+			_size++;
 			return (ft::make_pair(iterator(node, TNULL), true));
 		}
 
@@ -242,6 +328,20 @@ namespace ft
 				x->parent->left = y;
 			y->right = x;
 			x->parent = y;
+		}
+
+		nodePtr minimum(nodePtr node)
+		{
+			while (node != NULL && node->left != TNULL)
+				node = node->left;
+			return (node);
+		}
+
+		nodePtr maximum(nodePtr node)
+		{
+			while (node != NULL && node->right != TNULL)
+				node = node->right;
+			return (node);
 		}
 	};
 }
