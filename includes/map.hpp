@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
+/*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/22 21:44:59 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/23 10:50:07 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,20 @@ namespace ft
 		typedef typename ft::reverse_iterator<const_iterator> const_reverse_iterator;
 		typedef typename ft::iterator_traits<iterator> difference_type;
 
-		explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) : _comp(comp), _head(NULL), TNULL(NULL), _alloc(alloc), _size(0){};
+		explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) 
+		: _comp(comp), _head(NULL), TNULL(NULL), _alloc(alloc), _size(0){};
 
 		template <class InputIterator>
-		map(InputIterator first, InputIterator last, const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type(), typename ft::enable_if<!ft::isIntegral<InputIterator>::value, InputIterator>::type * = 0) : _comp(comp), _head(NULL), TNULL(NULL), _alloc(alloc), _size(0)
+		map(InputIterator first, InputIterator last, const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type(), typename ft::enable_if<!ft::isIntegral<InputIterator>::value, InputIterator>::type * = 0) 
+		: _comp(comp), _head(NULL), TNULL(NULL), _alloc(alloc), _size(0)
 		{
 			insert(first, last);
 		};
 
-		map(const map &x);
+		map(const map &x) : _comp(x._comp), _head(NULL), TNULL(NULL), _alloc(x._alloc), _size(0)
+		{
+			this->insert(x.begin(), x.end());
+		};
 
 		// ~map(void)
 		// {
@@ -341,14 +346,14 @@ namespace ft
 			x->parent = y;
 		}
 
-		nodePtr minimum(nodePtr node)
+		nodePtr minimum(nodePtr node) const
 		{
 			while (node != NULL && node->left != TNULL)
 				node = node->left;
 			return (node);
 		}
 
-		nodePtr maximum(nodePtr node)
+		nodePtr maximum(nodePtr node) const
 		{
 			while (node != NULL && node->right != TNULL)
 				node = node->right;

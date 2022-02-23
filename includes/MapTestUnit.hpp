@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MapTestUnit.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
+/*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:07:19 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/22 22:18:05 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/23 10:43:39 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,34 +84,22 @@ void mapConstructors(void)
 	tmp.insert(ft::make_pair('c', 10));
 	tmp.insert(ft::make_pair('d', 10));
 	tmp.insert(ft::make_pair('e', 10));
-	tmp.insert(ft::make_pair('f', 10));
-	tmp.insert(ft::make_pair('g', 10));
-	tmp.insert(ft::make_pair('h', 10));
-	tmp.insert(ft::make_pair('i', 10));
-	print_tree(tmp._head, 0);
-	ft::map<char, int>::iterator ite = tmp.end();
-	for (; ite != tmp.begin(); ite--)
-	{
-		std::cout << "_head" << ite._head << std::endl;
-		std::cout << "_end" << tmp.end()._head << std::endl;
-		std::cout << "tmp index:" << (*ite).first << std::endl;
-		std::cout << "tmp value:" << (*ite).second << std::endl;
-	}
-	std::cout << "_head" << ite._head << std::endl;
-	std::cout << "_end" << tmp.end()._head << std::endl;
-	std::cout << "tmp index:" << (*ite).first << std::endl;
-	std::cout << "tmp value:" << (*ite).second << std::endl;
-	// std::map<char, int> tmpReal;
-	// tmpReal.insert(std::make_pair('a', 10));
-	// tmpReal.insert(std::make_pair('b', 10));
-	// tmpReal.insert(std::make_pair('c', 10));
-	// tmpReal.insert(std::make_pair('d', 10));
-	// tmpReal.insert(std::make_pair('e', 10));
+	std::map<char, int> tmpReal;
+	tmpReal.insert(std::make_pair('a', 10));
+	tmpReal.insert(std::make_pair('b', 10));
+	tmpReal.insert(std::make_pair('c', 10));
+	tmpReal.insert(std::make_pair('d', 10));
+	tmpReal.insert(std::make_pair('e', 10));
 
-	// print_tree(tmp._head, 0);
-	// ft::map<char, int> myMap2(tmp.begin(), tmp.end());
-	// std::map<char, int> realMap2(tmpReal.begin(), tmpReal.end());
-	// checkBasicAttrMap(myMap2, realMap2);
+	ft::map<char, int> myMap2(tmp.begin(), tmp.end());
+	std::map<char, int> realMap2(tmpReal.begin(), tmpReal.end());
+	checkBasicAttrMap(myMap2, realMap2);
+
+	std::cout << BOLDMAGENTA << "\nmap copy constructor testing..." << RESET << std::endl;
+
+	ft::map<char, int> myMap3(myMap2);
+	std::map<char, int> realMap3(realMap2);
+	checkBasicAttrMap(myMap3, realMap3);
 }
 
 #endif
