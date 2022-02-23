@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/23 16:13:13 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/23 17:18:59 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ namespace ft
 		typedef typename Alloc::pointer pointer;
 		typedef typename Alloc::const_pointer const_pointer;
 		typedef typename ft::binary_tree_iterator<Node> iterator;
-		typedef typename ft::binary_tree_iterator<Node> const_iterator;
+		typedef typename ft::binary_tree_const_iterator<Node> const_iterator;
 		typedef typename ft::reverse_iterator<iterator> reverse_iterator;
 		typedef typename ft::reverse_iterator<const_iterator> const_reverse_iterator;
 		typedef typename ft::iterator_traits<iterator> difference_type;
@@ -136,7 +136,7 @@ namespace ft
 
 		size_type max_size() const
 		{
-			return (_node_alloc.max_size());
+			return (_node_allocator(_alloc).max_size());
 		};
 
 		mapped_type &operator[](const key_type &k)
@@ -178,6 +178,39 @@ namespace ft
 				erase(first++);
 		};
 
+		void swap(map &x)
+		{
+			key_compare _compTmp;
+			_node_allocator _node_allocTmp;
+			nodePtr _headTmp;
+			nodePtr TNULLTmp;
+			allocator_type _allocTmp;
+			size_type _sizeTmp;
+
+			_comp = x._comp;
+			_node_alloc = x._node_alloc;
+			_head = x._head;
+			TNULL = x.TNULL;
+			_alloc = x._alloc;
+			_size = x._size;
+
+			x._comp = _compTmp;
+			x._node_alloc = _node_allocTmp;
+			x._head = _headTmp;
+			x.TNULL = TNULLTmp;
+			x._alloc = _allocTmp;
+			x._size = _sizeTmp;
+		};
+
+		key_compare key_comp() const { return _comp; }
+
+		value_compare value_comp() const
+		{
+			value_compare ret(_comp);
+
+			return ret;
+		}
+
 		void clear(void)
 		{
 			erase(begin(), end());
@@ -191,7 +224,94 @@ namespace ft
 			return (iterator(ret, TNULL));
 		};
 
-		const_iterator find(const key_type &k) const;
+		const_iterator find(const key_type &k) const
+		{
+			nodePtr ret = keySearch(_head, k);
+			if (ret == TNULL)
+				return (end());
+			return (const_iterator(ret, TNULL));
+		};
+
+		size_type count(const key_type &k) const
+		{
+			const_iterator ite = find(k);
+
+			if (ite == end())
+				return 0;
+			else
+				return 1;
+		}
+
+		iterator lower_bound(const key_type &k)
+		{
+			iterator start = begin();
+			iterator end = end();
+
+			while (start != end)
+			{
+				if (_comp((*start).first, k) == false)
+					break ;
+				start++;
+			}
+			return (start);
+		}
+
+		const_iterator lower_bound(const key_type &k) const
+		{
+			const_iterator start = begin();
+			const_iterator end = end();
+
+			while (start != end)
+			{
+				if (_comp((*start).first, k) == false)
+					break ;
+				start++;
+			}
+			return (start);
+		}
+
+		iterator upper_bound(const key_type &k)
+		{
+			iterator start = begin();
+			iterator end = end();
+
+			while (start != end)
+			{
+				if (_comp(k, (*start).first) == false)
+					break ;
+				start++;
+			}
+			return (start);
+		}
+
+		const_iterator upper_bound(const key_type &k) const
+		{
+			const_iterator start = begin();
+			const_iterator end = end();
+
+			while (start != end)
+			{
+				if (_comp(k, (*start).first) == false)
+					break ;
+				start++;
+			}
+			return (start);
+		}
+
+		ft::pair<iterator, iterator> equal_range(const key_type &k)
+		{
+			return (ft::make_pair(this->lower_bound(k), this->upper_bound(k)));
+		}
+
+		ft::pair<const_iterator, const_iterator> equal_range(const key_type &k) const
+		{
+			return (ft::make_pair(this->lower_bound(k), this->upper_bound(k)));
+		}
+
+		allocator_type get_allocator() const
+		{
+			return (_alloc);
+		}
 
 	public:
 		typedef typename allocator_type::template rebind<Node>::other _node_allocator;
