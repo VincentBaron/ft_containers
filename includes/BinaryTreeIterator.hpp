@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 16:02:26 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/23 17:28:48 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/23 20:10:30 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,6 +250,12 @@ namespace ft
 
 	template <typename It>
 	bool operator==(ft::binary_tree_iterator<It> lhs, ft::binary_tree_iterator<It> rhs)
+	{
+		return (lhs._head == rhs._head);
+	}
+
+	template <typename It>
+	bool operator==(ft::binary_tree_const_iterator<It> lhs, ft::binary_tree_const_iterator<It> rhs)
 	{
 		return (lhs._head == rhs._head);
 	}

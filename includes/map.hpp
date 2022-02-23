@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/23 17:31:29 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/23 20:14:06 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,11 +245,11 @@ namespace ft
 		iterator lower_bound(const key_type &k)
 		{
 			iterator start = begin();
-			iterator end = end();
+			iterator endIte = end();
 
-			while (start != end)
+			while (start != endIte)
 			{
-				if (_comp((*start).first, k) == false)
+				if (!_comp((*start).first, k))
 					break ;
 				start++;
 			}
@@ -259,11 +259,11 @@ namespace ft
 		const_iterator lower_bound(const key_type &k) const
 		{
 			const_iterator start = begin();
-			const_iterator end = end();
+			const_iterator endIte = end();
 
-			while (start != end)
+			while (start != endIte)
 			{
-				if (_comp((*start).first, k) == false)
+				if (!_comp((*start).first, k))
 					break ;
 				start++;
 			}
@@ -273,11 +273,11 @@ namespace ft
 		iterator upper_bound(const key_type &k)
 		{
 			iterator start = begin();
-			iterator end = end();
+			iterator endIte = end();
 
-			while (start != end)
+			while (start != endIte)
 			{
-				if (_comp(k, (*start).first) == false)
+				if (_comp(k, (*start).first))
 					break ;
 				start++;
 			}
@@ -287,11 +287,11 @@ namespace ft
 		const_iterator upper_bound(const key_type &k) const
 		{
 			const_iterator start = begin();
-			const_iterator end = end();
+			const_iterator endIte = end();
 
-			while (start != end)
+			while (start != endIte)
 			{
-				if (_comp(k, (*start).first) == false)
+				if (_comp(k, (*start).first))
 					break ;
 				start++;
 			}
