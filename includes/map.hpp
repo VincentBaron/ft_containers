@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/23 21:08:08 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/23 22:01:57 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ namespace ft
 
 		map(const map &x) : _comp(x._comp), _head(NULL), TNULL(NULL), _alloc(x._alloc), _size(0)
 		{
-			this->insert(x.begin(), x.end());
+			insert(x.begin(), x.end());
 		};
 
 		~map(void)
@@ -146,7 +146,7 @@ namespace ft
 				return (node->value.second);
 			value_type tmp = ft::make_pair(k, mapped_type());
 			insert(tmp);
-			nodePtr tmp2 = keySearch(_head, k);	
+			nodePtr tmp2 = keySearch(_head, k);
 			return (tmp2->value.second);
 		};
 
@@ -256,7 +256,7 @@ namespace ft
 			while (start != endIte)
 			{
 				if (!_comp((*start).first, k))
-					break ;
+					break;
 				start++;
 			}
 			return (start);
@@ -270,7 +270,7 @@ namespace ft
 			while (start != endIte)
 			{
 				if (!_comp((*start).first, k))
-					break ;
+					break;
 				start++;
 			}
 			return (start);
@@ -284,7 +284,7 @@ namespace ft
 			while (start != endIte)
 			{
 				if (_comp(k, (*start).first))
-					break ;
+					break;
 				start++;
 			}
 			return (start);
@@ -298,7 +298,7 @@ namespace ft
 			while (start != endIte)
 			{
 				if (_comp(k, (*start).first))
-					break ;
+					break;
 				start++;
 			}
 			return (start);
@@ -342,9 +342,12 @@ namespace ft
 
 		void deleteNode(nodePtr node)
 		{
-			_node_allocator(_alloc).destroy(node);
-			_node_allocator(_alloc).deallocate(node, 1);
-			_size--;
+			if (node != NULL)
+			{
+				_node_allocator(_alloc).destroy(node);
+				_node_allocator(_alloc).deallocate(node, 1);
+				_size--;
+			}
 		}
 
 		nodePtr keySearch(nodePtr start, key_type key)
