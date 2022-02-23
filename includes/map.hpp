@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/23 11:23:47 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/23 14:58:22 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,12 @@ namespace ft
 			this->insert(x.begin(), x.end());
 		};
 
-		// ~map(void)
-		// {
-		// 	clear();
-		// }
+		~map(void)
+		{
+			clear();
+			_node_allocator(_alloc).destroy(TNULL);
+			_node_allocator(_alloc).deallocate(TNULL, 1);
+		}
 
 		iterator begin()
 		{
@@ -164,14 +166,26 @@ namespace ft
 				insert(*first);
 		};
 
-		void erase(iterator position);
+		void erase(iterator position)
+		{
+			deleteTree((*position).first);
+		};
 
 		size_type erase(const key_type &k)
 		{
 			return (deleteTree(k));
 		};
 
-		void erase(iterator first, iterator last);
+		void erase(iterator first, iterator last)
+		{
+			for (; first != last; first++)
+				deleteTree((*first).first);
+		};
+
+		void clear(void)
+		{
+			erase(begin(), end());
+		}
 
 		iterator find(const key_type &k)
 		{
@@ -191,7 +205,6 @@ namespace ft
 		_node_allocator _node_alloc;
 		nodePtr _head;
 		nodePtr TNULL;
-		nodePtr _end;
 		allocator_type _alloc;
 		size_type _size;
 
@@ -207,8 +220,8 @@ namespace ft
 
 		void deleteNode(nodePtr node)
 		{
-			_node_alloc.destroy(node);
-			_node_alloc.deallocate(node, 1);
+			_node_allocator(_alloc).destroy(node);
+			_node_allocator(_alloc).deallocate(node, 1);
 			_size--;
 		}
 
@@ -328,26 +341,26 @@ namespace ft
 			_head->color = 0;
 		}
 
-		size_type deleteTree(const key_type &k)
+		size_type deleteTree(const key_type &key)
 		{
 			nodePtr node = _head;
 			nodePtr z = TNULL;
 			nodePtr x, y;
-
 			while (node != TNULL)
 			{
-				if (node->value.first == k)
+				if (node->value.first == key)
 					z = node;
-				if (node->value.first <= k)
+				if (node->value.first <= key)
 					node = node->right;
 				else
 					node = node->left;
 			}
 
 			if (z == TNULL)
-				return (0);
+				return 0;
+
 			y = z;
-			bool y_original_color = y->color;
+			int y_original_color = y->color;
 			if (z->left == TNULL)
 			{
 				x = z->right;
@@ -371,10 +384,15 @@ namespace ft
 					y->right = z->right;
 					y->right->parent = y;
 				}
-				deleteNode(z);
-				if (y_original_color == 0)
-					balanceTreeDelete(x);
+
+				rbTransplant(z, y);
+				y->left = z->left;
+				y->left->parent = y;
+				y->color = z->color;
 			}
+			deleteNode(z);
+			if (y_original_color == 0)
+				balanceTreeDelete(x);
 			return (1);
 		}
 

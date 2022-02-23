@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BinaryTreeIterator.hpp                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
+/*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 16:02:26 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/22 22:10:41 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/23 14:47:15 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

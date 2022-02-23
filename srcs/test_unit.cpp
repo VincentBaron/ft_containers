@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:01:30 by vbaron            #+#    #+#             */
-/*   Updated: 2022/02/23 11:24:02 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/23 14:43:04 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,27 +57,29 @@ void vectorTimeTestsFt(void)
 
 void mapRandomTests(void)
 {
-	// ft::map<char, int> test;
-	ft::pair<char, int> elem('e', 42);
+	// // ft::map<char, int> test;
+	// ft::pair<char, int> elem('e', 42);
+	// ft::map<char, int> myMap;
+	// myMap.insert(elem);
+
+	// ft::pair<char, int> elem2('g', 41);
+	// myMap.insert(elem2);
+	// ft::pair<char, int> elem3('h', 41);
+	// myMap.insert(elem3);
+	// myMap.insert(ft::make_pair<char, int>('i', 10));
+	// myMap.insert(ft::make_pair<char, int>('j', 10));
+	// myMap.insert(ft::make_pair<char, int>('k', 10));
+	// myMap.insert(ft::make_pair<char, int>('l', 10));
+	// myMap.insert(ft::make_pair<char, int>('m', 10));
+	// ft::pair<ft::map<char, int>::iterator, bool> ret = myMap.insert(ft::make_pair<char, int>('n', 10));
+	// print_tree(myMap._head, 0);
+
+	// myMap.erase('i');
+
+	// print_tree(myMap._head, 0);
+
 	ft::map<char, int> myMap;
-	myMap.insert(elem);
-
-	ft::pair<char, int> elem2('g', 41);
-	myMap.insert(elem2);
-	ft::pair<char, int> elem3('h', 41);
-	myMap.insert(elem3);
 	myMap.insert(ft::make_pair<char, int>('i', 10));
-	myMap.insert(ft::make_pair<char, int>('j', 10));
-	myMap.insert(ft::make_pair<char, int>('k', 10));
-	myMap.insert(ft::make_pair<char, int>('l', 10));
-	myMap.insert(ft::make_pair<char, int>('m', 10));
-	ft::pair<ft::map<char, int>::iterator, bool> ret = myMap.insert(ft::make_pair<char, int>('n', 10));
-	print_tree(myMap._head, 0);
-
-	myMap.erase('h');
-
-	print_tree(myMap._head, 0);
-
 }
 
 int main(void)
@@ -94,7 +96,7 @@ int main(void)
 	//////////////////////////////////////////////////////
 
 	///////////////////////////////////////MAP TESTING
-	mapRandomTests();
-	// mapConstructors();
+	// mapRandomTests();
+	mapConstructors();
 	//////////////////////////////////////////////////////
 }
