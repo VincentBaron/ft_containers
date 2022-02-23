@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/23 14:58:22 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/23 15:06:01 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,8 +178,8 @@ namespace ft
 
 		void erase(iterator first, iterator last)
 		{
-			for (; first != last; first++)
-				deleteTree((*first).first);
+			while (first != last)
+				erase(first++);
 		};
 
 		void clear(void)
