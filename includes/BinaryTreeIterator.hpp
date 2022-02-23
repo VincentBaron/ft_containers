@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 16:02:26 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/23 17:21:19 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/23 17:28:48 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,9 @@ namespace ft
 			if (_head == _nillNode)
 			{
 				_head = _head->parent;
-				return (*this); 
+				return (*this);
 			}
-			
+
 			if (_head->left != _nillNode)
 			{
 				_head = _head->left;
@@ -137,19 +137,17 @@ namespace ft
 	class binary_tree_const_iterator : ft::iterator<std::bidirectional_iterator_tag, Node>
 	{
 	public:
-		typedef typename Node::value_type value_type;
+		typedef Node value_type;
 		typedef typename ft::iterator<std::bidirectional_iterator_tag, value_type>::iterator_category iterator_category;
 		typedef typename ft::iterator<std::bidirectional_iterator_tag, value_type>::difference_type difference_type;
-		typedef typename ft::iterator<std::bidirectional_iterator_tag, value_type>::pointer pointer;
-		typedef typename ft::iterator<std::bidirectional_iterator_tag, value_type>::reference reference;
+		typedef typename Node::value_type *pointer;
+		typedef typename Node::value_type reference;
 
 		binary_tree_const_iterator() : _head(NULL), _nillNode(NULL){};
 
 		binary_tree_const_iterator(Node *head, Node *nillNode) : _head(head), _nillNode(nillNode){};
 
 		binary_tree_const_iterator(const binary_tree_const_iterator &srcs) : _head(srcs._head), _nillNode(srcs._nillNode){};
-
-		binary_tree_const_iterator(const binary_tree_iterator<Node> &srcs) : _head(srcs._node), _nillNode(srcs._nillNode) {}
 
 		virtual ~binary_tree_const_iterator() {}
 
@@ -217,9 +215,9 @@ namespace ft
 			if (_head == _nillNode)
 			{
 				_head = _head->parent;
-				return (*this); 
+				return (*this);
 			}
-			
+
 			if (_head->left != _nillNode)
 			{
 				_head = _head->left;
@@ -245,7 +243,7 @@ namespace ft
 			return (tmp);
 		}
 
-	private:
+	public:
 		Node *_head;
 		Node *_nillNode;
 	};
