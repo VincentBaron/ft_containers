@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/23 10:50:07 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/23 11:23:47 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@ namespace ft
 		typedef typename ft::reverse_iterator<const_iterator> const_reverse_iterator;
 		typedef typename ft::iterator_traits<iterator> difference_type;
 
-		explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()) 
-		: _comp(comp), _head(NULL), TNULL(NULL), _alloc(alloc), _size(0){};
+		explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type())
+			: _comp(comp), _head(NULL), TNULL(NULL), _alloc(alloc), _size(0){};
 
 		template <class InputIterator>
-		map(InputIterator first, InputIterator last, const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type(), typename ft::enable_if<!ft::isIntegral<InputIterator>::value, InputIterator>::type * = 0) 
-		: _comp(comp), _head(NULL), TNULL(NULL), _alloc(alloc), _size(0)
+		map(InputIterator first, InputIterator last, const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type(), typename ft::enable_if<!ft::isIntegral<InputIterator>::value, InputIterator>::type * = 0)
+			: _comp(comp), _head(NULL), TNULL(NULL), _alloc(alloc), _size(0)
 		{
 			insert(first, last);
 		};
@@ -164,6 +164,15 @@ namespace ft
 				insert(*first);
 		};
 
+		void erase(iterator position);
+
+		size_type erase(const key_type &k)
+		{
+			return (deleteTree(k));
+		};
+
+		void erase(iterator first, iterator last);
+
 		iterator find(const key_type &k)
 		{
 			nodePtr ret = keySearch(_head, k);
@@ -194,6 +203,13 @@ namespace ft
 			newNode->right = TNULL;
 			newNode->parent = TNULL;
 			return (newNode);
+		}
+
+		void deleteNode(nodePtr node)
+		{
+			_node_alloc.destroy(node);
+			_node_alloc.deallocate(node, 1);
+			_size--;
 		}
 
 		nodePtr keySearch(nodePtr start, key_type key)
@@ -310,6 +326,142 @@ namespace ft
 				}
 			}
 			_head->color = 0;
+		}
+
+		size_type deleteTree(const key_type &k)
+		{
+			nodePtr node = _head;
+			nodePtr z = TNULL;
+			nodePtr x, y;
+
+			while (node != TNULL)
+			{
+				if (node->value.first == k)
+					z = node;
+				if (node->value.first <= k)
+					node = node->right;
+				else
+					node = node->left;
+			}
+
+			if (z == TNULL)
+				return (0);
+			y = z;
+			bool y_original_color = y->color;
+			if (z->left == TNULL)
+			{
+				x = z->right;
+				rbTransplant(z, z->right);
+			}
+			else if (z->right == TNULL)
+			{
+				x = z->left;
+				rbTransplant(z, z->left);
+			}
+			else
+			{
+				y = minimum(z->right);
+				y_original_color = y->color;
+				x = y->right;
+				if (y->parent == z)
+					x->parent = y;
+				else
+				{
+					rbTransplant(y, y->right);
+					y->right = z->right;
+					y->right->parent = y;
+				}
+				deleteNode(z);
+				if (y_original_color == 0)
+					balanceTreeDelete(x);
+			}
+			return (1);
+		}
+
+		void balanceTreeDelete(nodePtr x)
+		{
+			nodePtr s;
+			while (x != _head && x->color == 0)
+			{
+				if (x == x->parent->left)
+				{
+					s = x->parent->right;
+					if (s->color == 1)
+					{
+						s->color = 0;
+						x->parent->color = 1;
+						leftRotate(x->parent);
+						s = x->parent->right;
+					}
+
+					if (s->left->color == 0 && s->right->color == 0)
+					{
+						s->color = 1;
+						x = x->parent;
+					}
+					else
+					{
+						if (s->right->color == 0)
+						{
+							s->left->color = 0;
+							s->color = 1;
+							rightRotate(s);
+							s = x->parent->right;
+						}
+
+						s->color = x->parent->color;
+						x->parent->color = 0;
+						s->right->color = 0;
+						leftRotate(x->parent);
+						x = _head;
+					}
+				}
+				else
+				{
+					s = x->parent->left;
+					if (s->color == 1)
+					{
+						s->color = 0;
+						x->parent->color = 1;
+						rightRotate(x->parent);
+						s = x->parent->left;
+					}
+
+					if (s->right->color == 0 && s->right->color == 0)
+					{
+						s->color = 1;
+						x = x->parent;
+					}
+					else
+					{
+						if (s->left->color == 0)
+						{
+							s->right->color = 0;
+							s->color = 1;
+							leftRotate(s);
+							s = x->parent->left;
+						}
+
+						s->color = x->parent->color;
+						x->parent->color = 0;
+						s->left->color = 0;
+						rightRotate(x->parent);
+						x = _head;
+					}
+				}
+			}
+			x->color = 0;
+		}
+
+		void rbTransplant(nodePtr u, nodePtr v)
+		{
+			if (u->parent == NULL)
+				_head = v;
+			else if (u == u->parent->left)
+				u->parent->left = v;
+			else
+				u->parent->right = v;
+			v->parent = u->parent;
 		}
 
 		void leftRotate(nodePtr x)
