@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/23 20:14:06 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/23 21:08:08 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,13 @@ namespace ft
 
 		mapped_type &operator[](const key_type &k)
 		{
-			return (*(treeInsert(ft::make_pair(k, mapped_type())).first).second);
+			nodePtr node = keySearch(_head, k);
+			if (node != TNULL)
+				return (node->value.second);
+			value_type tmp = ft::make_pair(k, mapped_type());
+			insert(tmp);
+			nodePtr tmp2 = keySearch(_head, k);	
+			return (tmp2->value.second);
 		};
 
 		pair<iterator, bool> insert(const value_type &val)
@@ -353,7 +359,7 @@ namespace ft
 			return (start);
 		}
 
-		ft::pair<iterator, bool> insertTree(value_type value)
+		ft::pair<iterator, bool> insertTree(const value_type &value)
 		{
 			if (_head == NULL)
 			{

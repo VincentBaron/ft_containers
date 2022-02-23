@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:01:30 by vbaron            #+#    #+#             */
-/*   Updated: 2022/02/23 15:41:26 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/23 21:02:13 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void mapRandomTests(void)
 
 	ft::map<char, int> myMap;
 	myMap.insert(ft::make_pair<char, int>('i', 10));
+	myMap['g'] = 6;
 }
 
 int main(void)
