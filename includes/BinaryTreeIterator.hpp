@@ -6,13 +6,14 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 16:02:26 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/23 14:47:15 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/23 16:12:47 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BINARYTREEITERATOR_HPP
 #define BINARYTREEITERATOR_HPP
 #include "utils.hpp"
+#include "iterator.hpp"
 #include "redBlackTree.hpp"
 
 namespace ft
@@ -41,7 +42,6 @@ namespace ft
 				return (*this);
 			this->_head = srcs._head;
 			this->_nillNode = srcs._nillNode;
-			this->_comp = srcs._comp;
 			return (*this);
 		}
 
@@ -159,7 +159,6 @@ namespace ft
 				return (*this);
 			this->_head = srcs._head;
 			this->_nillNode = srcs._nillNode;
-			this->_comp = srcs._comp;
 			return (*this);
 		}
 
@@ -194,24 +193,33 @@ namespace ft
 			}
 
 			Node *y = _head->parent;
-			while (y != _nillNode && _head == y->right)
+			while (y != NULL && _head == y->right)
 			{
 				_head = y;
 				y = y->parent;
 			}
-			_head = y;
+			if (y == NULL)
+				_head = _nillNode;
+			else
+				_head = y;
 			return (*this);
 		}
 
 		binary_tree_const_iterator operator++(int)
 		{
-			binary_tree_const_iterator tmp(*this);
+			binary_tree_const_iterator tmp = *this;
 			operator++();
 			return (tmp);
 		}
 
 		binary_tree_const_iterator &operator--(void)
 		{
+			if (_head == _nillNode)
+			{
+				_head = _head->parent;
+				return (*this); 
+			}
+			
 			if (_head->left != _nillNode)
 			{
 				_head = _head->left;
@@ -221,7 +229,7 @@ namespace ft
 			}
 
 			Node *y = _head->parent;
-			while (y != _nillNode && _head == y->left)
+			while (y != NULL && _head == y->left)
 			{
 				_head = y;
 				y = y->parent;
@@ -241,6 +249,12 @@ namespace ft
 		Node *_head;
 		Node *_nillNode;
 	};
+
+	template <typename It>
+	bool operator==(ft::binary_tree_iterator<It> lhs, ft::binary_tree_iterator<It> rhs)
+	{
+		return (lhs._head == rhs._head);
+	}
 }
 
 #endif

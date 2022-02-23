@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/23 15:06:01 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/23 16:13:13 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,26 +106,22 @@ namespace ft
 
 		reverse_iterator rbegin()
 		{
-			return (reverse_iterator(maximum(_head), TNULL));
+			return (reverse_iterator(end()));
 		};
 
 		const_reverse_iterator rbegin() const
 		{
-			return (const_reverse_iterator(maximum(_head), TNULL));
+			return (const_reverse_iterator(end()));
 		};
 
 		reverse_iterator rend()
 		{
-			if (!_size)
-				return (rbegin());
-			return (reverse_iterator(minimum(_head)->left, TNULL));
+			return (reverse_iterator(begin()));
 		};
 
 		const_reverse_iterator rend() const
 		{
-			if (!_size)
-				return (rbegin());
-			return (const_reverse_iterator(minimum(_head)->left, TNULL));
+			return (const_reverse_iterator(begin()));
 		};
 
 		bool empty() const
@@ -133,7 +129,7 @@ namespace ft
 			return (!_size ? true : false);
 		};
 
-		size_type size(void)
+		size_type size(void) const
 		{
 			return (_size);
 		};

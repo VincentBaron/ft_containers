@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 10:20:45 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/21 15:42:25 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/23 16:04:51 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 #define UTILS_HPP
 #include <iterator>
 #include <sstream>
-# include <sys/time.h>
-# define RESET   "\033[0m"
-# define BLACK   "\033[30m"      /* Black */
-# define RED     "\033[31m"      /* Red */
-# define BRIGHTBLACK   "\033[90m"      /* White */
+#include <sys/time.h>
+#define RESET "\033[0m"
+#define BLACK "\033[30m"	   /* Black */
+#define RED "\033[31m"		   /* Red */
+#define BRIGHTBLACK "\033[90m" /* White */
 
 namespace ft
 {
@@ -138,19 +138,18 @@ namespace ft
 	template <class T1, class T2>
 	struct pair
 	{
-		public:
-
+	public:
 		T1 first;
 		T2 second;
 
-		pair() : first(), second() {};
+		pair() : first(), second(){};
 
-		pair(const T1 &x, const T2 &y) : first(x), second(y) {};
+		pair(const T1 &x, const T2 &y) : first(x), second(y){};
 
-		template<class X, class Y>
-		pair (const pair<X, Y> &srcs) : first(srcs.first), second(srcs.second) {};
+		template <class X, class Y>
+		pair(const pair<X, Y> &srcs) : first(srcs.first), second(srcs.second){};
 
-		pair& operator=(const pair &rhs)
+		pair &operator=(const pair &rhs)
 		{
 			if (*this == rhs)
 				return (*this);
@@ -158,8 +157,13 @@ namespace ft
 			second = rhs.second;
 			return (*this);
 		}
-
 	};
+
+	template <class T1, class T2>
+	bool operator==(const ft::pair<T1, T2> &lhs, const ft::pair<T1, T2> &rhs)
+	{
+		return (lhs.first == rhs.first && lhs.second == rhs.second);
+	}
 
 	template <class T1, class T2>
 	ft::pair<T1, T2> make_pair(T1 x, T2 y)
@@ -178,7 +182,7 @@ inline std::string to_string(const T &t)
 
 long get_time(void)
 {
-	struct timeval	tv;
+	struct timeval tv;
 
 	gettimeofday(&tv, NULL);
 	return (tv.tv_sec / 1000000 + tv.tv_usec);
@@ -192,11 +196,11 @@ void padding(char ch, int n)
 		std::cout << ch;
 }
 
-template<typename T>
+template <typename T>
 void print_tree(T *root, int level)
 {
 	if (root == NULL)
-		return ;
+		return;
 	if (root->nill)
 	{
 		padding('\t', level);
@@ -206,7 +210,8 @@ void print_tree(T *root, int level)
 	{
 		print_tree(root->right, level + 1);
 		padding('\t', level);
-		std::cout << (root->color == 1 ? RED : BRIGHTBLACK) << "[" << root->value.first << "]" << ":" << root->value.second << RESET;	
+		std::cout << (root->color == 1 ? RED : BRIGHTBLACK) << "[" << root->value.first << "]"
+				  << ":" << root->value.second << RESET;
 		std::cout << std::endl;
 		print_tree(root->left, level + 1);
 	}

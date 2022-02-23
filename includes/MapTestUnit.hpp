@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:07:19 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/23 10:43:39 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/23 15:57:16 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,32 @@ void mapInsert(void)
 	myMap.insert(ft::make_pair<char, int>('k', 10));
 	myMap.insert(ft::make_pair<char, int>('l', 10));
 	myMap.insert(ft::make_pair<char, int>('m', 10));
+}
+
+void mapIterators(void)
+{
+	std::cout << BOLDMAGENTA << "\nmap iterators testing..." << RESET << std::endl;
+	
+	ft::map<char, int> myMap;
+	std::map<char, int> realMap;
+
+	myMap.insert(ft::make_pair<char, int>('i', 10));
+	myMap.insert(ft::make_pair<char, int>('j', 10));
+	myMap.insert(ft::make_pair<char, int>('k', 10));
+	myMap.insert(ft::make_pair<char, int>('l', 10));
+	myMap.insert(ft::make_pair<char, int>('m', 10));
+	realMap.insert(std::make_pair<char, int>('i', 10));
+	realMap.insert(std::make_pair<char, int>('j', 10));
+	realMap.insert(std::make_pair<char, int>('k', 10));
+	realMap.insert(std::make_pair<char, int>('l', 10));
+	realMap.insert(std::make_pair<char, int>('m', 10));
+
+	checkBasicAttrMap(myMap, realMap);
+
+	ft::map<char, int>::reverse_iterator ite = myMap.rend();
+	std::map<char, int>::reverse_iterator iteReal = realMap.rend();
+	for (; iteReal != realMap.rbegin(), ite != myMap.rbegin(); --iteReal, --ite)
+		checkOutputMap((*iteReal).first, (*ite).first, "Checking reverse iterators...");
 }
 
 void mapConstructors(void)
