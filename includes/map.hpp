@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/23 22:01:57 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/24 09:08:56 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,22 @@ namespace ft
 		map(const map &x) : _comp(x._comp), _head(NULL), TNULL(NULL), _alloc(x._alloc), _size(0)
 		{
 			insert(x.begin(), x.end());
+		};
+
+		map& operator= (const map& x)
+		{
+			if (this == &x)
+				return (*this);
+			clear();
+			_node_allocator(_alloc).destroy(TNULL);
+			_node_allocator(_alloc).deallocate(TNULL, 1);
+			_comp = x._comp;
+			_head = NULL;
+			TNULL = NULL;
+			_alloc = x._alloc;
+			_size = 0;
+			insert (x.begin(), x.end());
+			return (*this);
 		};
 
 		~map(void)
