@@ -6,7 +6,7 @@
 /*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 10:20:45 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/23 20:47:12 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/24 09:56:55 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,7 @@ void padding(char ch, int n)
 }
 
 template <typename T>
-void print_tree(T *root, int level)
+void print_treeBis(T *root, int level)
 {
 	if (root == NULL)
 		return;
@@ -208,13 +208,21 @@ void print_tree(T *root, int level)
 	}
 	else
 	{
-		print_tree(root->right, level + 1);
+		print_treeBis(root->right, level + 1);
 		padding('\t', level);
 		std::cout << (root->color == 1 ? RED : BRIGHTBLACK) << "[" << root->value.first << "]"
 				  << ":" << root->value.second << RESET;
 		std::cout << std::endl;
-		print_tree(root->left, level + 1);
+		print_treeBis(root->left, level + 1);
 	}
+}
+
+template<typename T>
+void print_tree(T *root, int level)
+{
+	std::cout << "----------------------------------------" << std::endl;
+	print_treeBis(root, level);
+	std::cout << "----------------------------------------" << std::endl;
 }
 
 #endif

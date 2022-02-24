@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/24 09:08:56 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/24 16:19:27 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,26 +98,36 @@ namespace ft
 
 		iterator begin()
 		{
+			if (!_size)
+				return(iterator(TNULL, TNULL));
 			return (iterator(minimum(_head), TNULL));
 		};
 
 		const_iterator begin() const
 		{
+			if (!_size)
+				return(iterator(TNULL, TNULL));
 			return (const_iterator(minimum(_head), TNULL));
 		};
 
 		iterator end()
 		{
 			if (!_size)
-				return (begin());
-			return (iterator(maximum(_head)->right, TNULL));
+				return(iterator(TNULL, TNULL));
+			nodePtr max = maximum(_head);
+			iterator it(max, TNULL);
+			++it;
+			return (it);
 		};
 
 		const_iterator end() const
 		{
 			if (!_size)
-				return (begin());
-			return (const_iterator(maximum(_head)->right, TNULL));
+				return(const_iterator(TNULL, TNULL));
+			nodePtr max = maximum(_head);
+			const_iterator it(max, TNULL);
+			++it;
+			return (it);
 		};
 
 		reverse_iterator rbegin()
@@ -186,18 +196,33 @@ namespace ft
 
 		void erase(iterator position)
 		{
+			if (position == end())
+				return ;
 			deleteTree((*position).first);
 		};
 
 		size_type erase(const key_type &k)
 		{
+			iterator pos = find(k);
+			if (pos == end())
+				return (0);
 			return (deleteTree(k));
 		};
 
 		void erase(iterator first, iterator last)
 		{
+			int i = 0;
 			while (first != last)
+			{
+				// std::cout << "first._head: " << first._head << std::endl;
+				// std::cout << "first._head.key: " << first._head->value.first << std::endl;
+				// std::cout << "last._head: " << last._head << std::endl;
+				// std::cout << "last._head.key: " << last._head->value.first << std::endl;
 				erase(first++);
+				i++;
+				if (i > 6)
+					break ;
+			}
 		};
 
 		void swap(map &x)
@@ -487,7 +512,7 @@ namespace ft
 			nodePtr node = _head;
 			nodePtr z = TNULL;
 			nodePtr x, y;
-			while (node != TNULL)
+			while (node != NULL && node != TNULL)
 			{
 				if (node->value.first == key)
 					z = node;
@@ -498,7 +523,10 @@ namespace ft
 			}
 
 			if (z == TNULL)
+			{
+				print_tree(_head, 0);
 				return 0;
+			}
 
 			y = z;
 			int y_original_color = y->color;
@@ -532,8 +560,11 @@ namespace ft
 				y->color = z->color;
 			}
 			deleteNode(z);
+			TNULL->parent = maximum(_head);
+			maximum(_head)->right = TNULL;
 			if (y_original_color == 0)
 				balanceTreeDelete(x);
+			// print_tree(_head, 0);
 			return (1);
 		}
 

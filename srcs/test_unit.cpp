@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_unit.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:01:30 by vbaron            #+#    #+#             */
-/*   Updated: 2022/02/23 21:52:22 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/24 16:19:10 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,7 @@ void mapRandomTests(void)
 	// myMap.insert(elem2);
 	// ft::pair<char, int> elem3('h', 41);
 	// myMap.insert(elem3);
-	// myMap.insert(ft::make_pair<char, int>('i', 10));
-	// myMap.insert(ft::make_pair<char, int>('j', 10));
-	// myMap.insert(ft::make_pair<char, int>('k', 10));
-	// myMap.insert(ft::make_pair<char, int>('l', 10));
-	// myMap.insert(ft::make_pair<char, int>('m', 10));
+	
 	// ft::pair<ft::map<char, int>::iterator, bool> ret = myMap.insert(ft::make_pair<char, int>('n', 10));
 	// print_tree(myMap._head, 0);
 
@@ -79,10 +75,18 @@ void mapRandomTests(void)
 	// print_tree(myMap._head, 0);
 
 	ft::map<char, int> myMap;
-	myMap.insert(ft::make_pair<char, int>('i', 10));
-	myMap['g'] = 6;
-	ft::map<char, int> newMap(myMap);
-	myMap.clear();
+	myMap.insert(ft::make_pair<char, int>('b', 10));
+	myMap.insert(ft::make_pair<char, int>('a', 10));
+	myMap.insert(ft::make_pair<char, int>('c', 10));
+	// myMap.insert(ft::make_pair<char, int>('d', 10));
+	print_tree(myMap._head, 0);
+	// std::cout << "ite: " << ite._head << std::endl;
+	// std::cout << "TNULL: " << myMap.TNULL << std::endl;
+	std::cout << "end: " << myMap.end()._head->parent->value.first << std::endl;
+	myMap.erase(myMap.begin());
+	std::cout << "end after: " << myMap.end()._head->parent->value.first << std::endl;
+	
+	print_tree(myMap._head, 0);
 }
 
 int main(void)
