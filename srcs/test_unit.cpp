@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:01:30 by vbaron            #+#    #+#             */
-/*   Updated: 2022/02/24 16:19:10 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/24 17:42:59 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,11 @@ void mapRandomTests(void)
 
 	ft::map<char, int> myMap;
 	myMap.insert(ft::make_pair<char, int>('b', 10));
-	myMap.insert(ft::make_pair<char, int>('a', 10));
-	myMap.insert(ft::make_pair<char, int>('c', 10));
-	// myMap.insert(ft::make_pair<char, int>('d', 10));
-	print_tree(myMap._head, 0);
-	// std::cout << "ite: " << ite._head << std::endl;
-	// std::cout << "TNULL: " << myMap.TNULL << std::endl;
-	std::cout << "end: " << myMap.end()._head->parent->value.first << std::endl;
-	myMap.erase(myMap.begin());
-	std::cout << "end after: " << myMap.end()._head->parent->value.first << std::endl;
+	// myMap.insert(ft::make_pair<char, int>('a', 10));
+	// myMap.insert(ft::make_pair<char, int>('c', 10));
 	
-	print_tree(myMap._head, 0);
+	
+	print_tree(myMap._root, 0);
 }
 
 int main(void)
@@ -107,4 +101,5 @@ int main(void)
 	// mapConstructors();
 	// mapIterators();
 	//////////////////////////////////////////////////////
+	return (0);
 }
