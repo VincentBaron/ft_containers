@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/25 17:18:48 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/25 17:21:02 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -545,7 +545,7 @@ namespace ft
 				y->left->parent = y;
 				y->color = nodeToDelete->color;
 			}
-			// deleteNode(nodeToDelete);
+			deleteNode(nodeToDelete);
 			_size--;
 			if (originalColor == 0)
 				balanceTreeDelete(x);
