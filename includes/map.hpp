@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/25 12:40:38 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/25 12:42:30 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -528,6 +528,7 @@ namespace ft
 		{
 			nodePtr y = x->left;
 			x->left = y->right;
+			y->right->parent = x;
 			if (!y->right->nill)
 				y->right->parent = x;
 			y->parent = x->parent;
