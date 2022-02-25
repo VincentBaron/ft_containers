@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 10:20:45 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/25 12:40:02 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/25 23:10:43 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,19 @@ namespace ft
 		return (first2 != last2);
 	}
 
+	template <class InputIterator1, class InputIterator2>
+	bool equal(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2)
+	{
+		while (first1 != last1)
+		{
+			if (!(*first1 == *first2))
+				return false;
+			++first1;
+			++first2;
+		}
+		return true;
+	}
+
 	template <class T1, class T2>
 	struct pair
 	{
@@ -158,11 +171,41 @@ namespace ft
 			return (*this);
 		}
 	};
+	
+	template <class T1, class T2>
+	bool operator==(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
+	{
+		return lhs.first == rhs.first && lhs.second == rhs.second;
+	}
 
 	template <class T1, class T2>
-	bool operator==(const ft::pair<T1, T2> &lhs, const ft::pair<T1, T2> &rhs)
+	bool operator!=(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
 	{
-		return (lhs.first == rhs.first && lhs.second == rhs.second);
+		return !(lhs == rhs);
+	}
+
+	template <class T1, class T2>
+	bool operator<(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
+	{
+		return lhs.first < rhs.first || (!(rhs.first < lhs.first) && lhs.second < rhs.second);
+	}
+
+	template <class T1, class T2>
+	bool operator<=(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
+	{
+		return !(rhs < lhs);
+	}
+
+	template <class T1, class T2>
+	bool operator>(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
+	{
+		return rhs < lhs;
+	}
+
+	template <class T1, class T2>
+	bool operator>=(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
+	{
+		return !(lhs < rhs);
 	}
 
 	template <class T1, class T2>
@@ -219,7 +262,7 @@ void print_treeBis(T *root, int level)
 	}
 }
 
-template<typename T>
+template <typename T>
 void print_tree(T *root, int level)
 {
 	std::cout << "----------------------------------------" << std::endl;

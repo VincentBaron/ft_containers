@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/25 23:04:35 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/25 23:06:50 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -685,14 +685,14 @@ namespace ft
 		}
 	};
 
-	// template <class Key, class T, class Compare, class Alloc>
-	// bool operator==(const map<Key, T, Compare, Alloc> &lhs, const map<Key, T, Compare, Alloc> &rhs)
-	// {
-	// 	if (lhs.size() != rhs.size())
-	// 		return false;
-	// 	else
-	// 		return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
-	// }
+	template <class Key, class T, class Compare, class Alloc>
+	bool operator==(const map<Key, T, Compare, Alloc> &lhs, const map<Key, T, Compare, Alloc> &rhs)
+	{
+		if (lhs.size() != rhs.size())
+			return false;
+		else
+			return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
+	}
 
 	template <class Key, class T, class Compare, class Alloc>
 	bool operator<(const map<Key, T, Compare, Alloc> &lhs, const map<Key, T, Compare, Alloc> &rhs)
