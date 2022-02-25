@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/25 15:55:40 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/25 17:18:48 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,7 +268,7 @@ namespace ft
 			for (; first != last; ++first)
 			{
 				if (first->first == k)
-					break ;
+					break;
 			}
 			return first;
 		};
@@ -399,17 +399,13 @@ namespace ft
 		{
 			_node_allocator(_alloc).destroy(node);
 			_node_allocator(_alloc).deallocate(node, 1);
-			if (node->left && node->left->nill)
-			{
-				_node_allocator(_alloc).destroy(node->left);
-				_node_allocator(_alloc).deallocate(node->left, 1);
-			}
-			if (node->right && node->right->nill)
-			{
-				_node_allocator(_alloc).destroy(node->right);
-				_node_allocator(_alloc).deallocate(node->right, 1);
-			}
-			_size--;
+		}
+
+		void deleteNodeAndChild(nodePtr node)
+		{
+			deleteNode(node->right);
+			deleteNode(node->left);
+			deleteNode(node);
 		}
 
 		ft::pair<iterator, bool> insertTree(const value_type &value)
@@ -419,6 +415,7 @@ namespace ft
 				_root = newNillChild(NULL);
 			if (_root->nill)
 			{
+				deleteNode(_root);
 				_root = node;
 				_root->color = 0;
 			}
@@ -431,7 +428,7 @@ namespace ft
 						tmp = tmp->right;
 					else if (node->value.first == tmp->value.first)
 					{
-						deleteNode(node);
+						deleteNodeAndChild(node);
 						return (ft::make_pair(iterator(tmp), false));
 					}
 					else
@@ -445,6 +442,7 @@ namespace ft
 					node->parent->right = node;
 				balanceTreeInsert(node);
 			}
+			_size++;
 			return (ft::make_pair(iterator(node), true));
 		}
 
@@ -505,22 +503,33 @@ namespace ft
 
 		void deleteTree(nodePtr nodeToDelete)
 		{
+			if (_size == 1 && nodeToDelete == _root)
+			{
+				deleteNodeAndChild(nodeToDelete);
+				_root = NULL;
+				_size--;
+				return ;
+			}
 			bool originalColor = nodeToDelete->color;
 			nodePtr x, y;
-		
+
 			if (nodeToDelete->left->nill)
 			{
 				x = nodeToDelete->right;
+				deleteNode(nodeToDelete->left);
 				rbTransplant(nodeToDelete, x);
+
 			}
 			else if (nodeToDelete->right->nill)
 			{
 				x = nodeToDelete->left;
+				deleteNode(nodeToDelete->right);
 				rbTransplant(nodeToDelete, x);
 			}
 			else
 			{
 				y = minimum(nodeToDelete->right);
+				deleteNode(y->left);
 				originalColor = y->color;
 				x = y->right;
 				if (y->parent == nodeToDelete)
@@ -537,10 +546,83 @@ namespace ft
 				y->color = nodeToDelete->color;
 			}
 			// deleteNode(nodeToDelete);
-			// if (originalColor == 0)
-			// 	balanceTreeDelete(x);
+			_size--;
+			if (originalColor == 0)
+				balanceTreeDelete(x);
+		}
 
+		void balanceTreeDelete(nodePtr x)
+		{
+			nodePtr s;
+			while (x != _root && x->color == 0)
+			{
+				if (x == x->parent->left)
+				{
+					s = x->parent->right;
+					if (s->color == 1)
+					{
+						s->color = 0;
+						x->parent->color = 1;
+						leftRotate(x->parent);
+						s = x->parent->right;
+					}
 
+					if (s->left->color == 0 && s->right->color == 0)
+					{
+						s->color = 1;
+						x = x->parent;
+					}
+					else
+					{
+						if (s->right->color == 0)
+						{
+							s->left->color = 0;
+							s->color = 1;
+							rightRotate(s);
+							s = x->parent->right;
+						}
+						s->color = x->parent->color;
+						x->parent->color = 0;
+						s->right->color = 0;
+						leftRotate(x->parent);
+						x = _root;
+					}
+				}
+				else
+				{
+					s = x->parent->left;
+					if (s->color == 1)
+					{
+						s->color = 0;
+						x->parent->color = 1;
+						rightRotate(x->parent);
+						s = x->parent->left;
+					}
+
+					if (s->right->color == 0 && s->right->color == 0)
+					{
+						s->color = 1;
+						x = x->parent;
+					}
+					else
+					{
+						if (s->left->color == 0)
+						{
+							s->right->color = 0;
+							s->color = 1;
+							leftRotate(s);
+							s = x->parent->left;
+						}
+
+						s->color = x->parent->color;
+						x->parent->color = 0;
+						s->left->color = 0;
+						rightRotate(x->parent);
+						x = _root;
+					}
+				}
+			}
+			x->color = 0;
 		}
 
 		void rbTransplant(nodePtr u, nodePtr v)
@@ -548,11 +630,10 @@ namespace ft
 			if (u->parent == NULL)
 				_root = v;
 			else if (u == u->parent->right)
-			 u->parent->right = v;
+				u->parent->right = v;
 			else if (u == u->parent->left)
 				u->parent->left = v;
 			v->parent = u->parent;
-
 		}
 
 		void leftRotate(nodePtr x)
