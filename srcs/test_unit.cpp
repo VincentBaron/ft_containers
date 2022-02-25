@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:01:30 by vbaron            #+#    #+#             */
-/*   Updated: 2022/02/25 10:17:37 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/25 12:01:02 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void mapRandomTests(void)
 	// print_tree(myMap._head, 0);
 
 	ft::map<char, int> myMap;
+	myMap.insert(ft::make_pair<char, int>('a', 10));
 	myMap.insert(ft::make_pair<char, int>('b', 10));
 	myMap.insert(ft::make_pair<char, int>('c', 10));
 	// myMap.insert(ft::make_pair<char, int>('a', 10));

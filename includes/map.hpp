@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/25 11:00:42 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/25 12:40:38 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -446,8 +446,99 @@ namespace ft
 					node->parent->left = node;
 				else
 					node->parent->right = node;
+				balanceTreeInsert(node);
 			}
 			return (ft::make_pair(iterator(), bool()));
+		}
+
+		void balanceTreeInsert(nodePtr node)
+		{
+			nodePtr u;
+			while (node->parent->color == 1)
+			{
+				if (node->parent->parent->right == node->parent)
+				{
+					u = node->parent->parent->left;
+					if (u->color == 1)
+					{
+						u->color = 0;
+						node->parent->color = 0;
+						node->parent->parent->color = 1;
+						node = node->parent->parent;
+					}
+					else
+					{
+						if (node == node->parent->left)
+						{
+							node = node->parent;
+							rightRotate(node);
+						}
+						node->parent->color = 0;
+						node->parent->parent->color = 1;
+						leftRotate(node->parent->parent);
+					}
+				}
+				else
+				{
+					u = node->parent->parent->parent->right;
+					if (u->color == 1)
+					{
+						u->color = 0;
+						node->parent->color = 0;
+						node->parent->parent->color = 1;
+						node = node->parent->parent;
+					}
+					else
+					{
+						if (node == node->parent->right)
+						{
+							node = node->parent;
+							leftRotate(node);
+						}
+						node->parent->color = 0;
+						node->parent->parent->color = 1;
+						rightRotate(node->parent->parent);
+					}
+				}
+				if (node == _root)
+					break;
+			}
+			_root->color = 0;
+		}
+
+		void leftRotate(nodePtr x)
+		{
+			nodePtr y = x->right;
+			x->right = y->left;
+			y->left->parent = x;
+			if (!y->left->nill)
+				y->left->parent = x;
+			y->parent = x->parent;
+			if (x->parent == NULL)
+				_root = y;
+			else if (x == x->parent->left)
+				x->parent->left = y;
+			else
+				x->parent->right = y;
+			y->left = x;
+			x->parent = y;
+		}
+
+		void rightRotate(nodePtr x)
+		{
+			nodePtr y = x->left;
+			x->left = y->right;
+			if (!y->right->nill)
+				y->right->parent = x;
+			y->parent = x->parent;
+			if (x->parent == NULL)
+				_root = y;
+			else if (x == x->parent->right)
+				x->parent->right = y;
+			else
+				x->parent->left = y;
+			y->right = x;
+			x->parent = y;
 		}
 	};
 }
