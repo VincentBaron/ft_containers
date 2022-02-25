@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/25 15:12:10 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/25 15:55:40 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,13 +197,14 @@ namespace ft
 		// 	deleteTree((*position).first);
 		// };
 
-		// size_type erase(const key_type &k)
-		// {
-		// 	iterator pos = find(k);
-		// 	if (pos == end())
-		// 		return (0);
-		// 	return (deleteTree(k));
-		// };
+		size_type erase(const key_type &k)
+		{
+			iterator pos = find(k);
+			if (pos == end())
+				return (0);
+			deleteTree(pos._head);
+			return (1);
+		};
 
 		// void erase(iterator first, iterator last)
 		// {
@@ -259,18 +260,18 @@ namespace ft
 		// 	erase(begin(), end());
 		// }
 
-		// iterator find(const key_type &k)
-		// {
-		// 	iterator first = begin();
-		// 	iterator last = end();
+		iterator find(const key_type &k)
+		{
+			iterator first = begin();
+			iterator last = end();
 
-		// 	for (; first != last; ++first)
-		// 	{
-		// 		if (first->first == k)
-		// 			return first;
-		// 	}
-		// 	return last;
-		// };
+			for (; first != last; ++first)
+			{
+				if (first->first == k)
+					break ;
+			}
+			return first;
+		};
 
 		// const_iterator find(const key_type &k) const
 		// {
@@ -398,12 +399,12 @@ namespace ft
 		{
 			_node_allocator(_alloc).destroy(node);
 			_node_allocator(_alloc).deallocate(node, 1);
-			if (node->left != NULL)
+			if (node->left && node->left->nill)
 			{
 				_node_allocator(_alloc).destroy(node->left);
 				_node_allocator(_alloc).deallocate(node->left, 1);
 			}
-			if (node->right != NULL)
+			if (node->right && node->right->nill)
 			{
 				_node_allocator(_alloc).destroy(node->right);
 				_node_allocator(_alloc).deallocate(node->right, 1);
@@ -500,6 +501,58 @@ namespace ft
 					break;
 			}
 			_root->color = 0;
+		}
+
+		void deleteTree(nodePtr nodeToDelete)
+		{
+			bool originalColor = nodeToDelete->color;
+			nodePtr x, y;
+		
+			if (nodeToDelete->left->nill)
+			{
+				x = nodeToDelete->right;
+				rbTransplant(nodeToDelete, x);
+			}
+			else if (nodeToDelete->right->nill)
+			{
+				x = nodeToDelete->left;
+				rbTransplant(nodeToDelete, x);
+			}
+			else
+			{
+				y = minimum(nodeToDelete->right);
+				originalColor = y->color;
+				x = y->right;
+				if (y->parent == nodeToDelete)
+					x->parent = y;
+				else
+				{
+					rbTransplant(y, y->right);
+					y->right = nodeToDelete->right;
+					y->right->parent = y;
+				}
+				rbTransplant(nodeToDelete, y);
+				y->left = nodeToDelete->left;
+				y->left->parent = y;
+				y->color = nodeToDelete->color;
+			}
+			// deleteNode(nodeToDelete);
+			// if (originalColor == 0)
+			// 	balanceTreeDelete(x);
+
+
+		}
+
+		void rbTransplant(nodePtr u, nodePtr v)
+		{
+			if (u->parent == NULL)
+				_root = v;
+			else if (u == u->parent->right)
+			 u->parent->right = v;
+			else if (u == u->parent->left)
+				u->parent->left = v;
+			v->parent = u->parent;
+
 		}
 
 		void leftRotate(nodePtr x)
