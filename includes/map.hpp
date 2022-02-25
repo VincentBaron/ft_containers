@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/25 17:21:02 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/25 17:55:34 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ namespace ft
 
 		~map(void)
 		{
-			// clear();
+			clear();
 			_node_allocator(_alloc).destroy(NIL);
 			_node_allocator(_alloc).deallocate(NIL, 1);
 		}
@@ -190,12 +190,12 @@ namespace ft
 				insert(*first);
 		};
 
-		// void erase(iterator position)
-		// {
-		// 	if (position == end())
-		// 		return;
-		// 	deleteTree((*position).first);
-		// };
+		void erase(iterator position)
+		{
+			if (position == end())
+				return;
+			erase((*position).first);
+		};
 
 		size_type erase(const key_type &k)
 		{
@@ -206,21 +206,11 @@ namespace ft
 			return (1);
 		};
 
-		// void erase(iterator first, iterator last)
-		// {
-		// 	int i = 0;
-		// 	while (first != last)
-		// 	{
-		// 		// std::cout << "first._root: " << first._root << std::endl;
-		// 		// std::cout << "first._root.key: " << first._root->value.first << std::endl;
-		// 		// std::cout << "last._root: " << last._root << std::endl;
-		// 		// std::cout << "last._root.key: " << last._root->value.first << std::endl;
-		// 		erase(first++);
-		// 		i++;
-		// 		if (i > 6)
-		// 			break;
-		// 	}
-		// };
+		void erase(iterator first, iterator last)
+		{
+			while (first != last)
+				erase(first++);
+		};
 
 		// void swap(map &x)
 		// {
@@ -255,10 +245,10 @@ namespace ft
 		// 	return ret;
 		// }
 
-		// void clear(void)
-		// {
-		// 	erase(begin(), end());
-		// }
+		void clear(void)
+		{
+			erase(begin(), end());
+		}
 
 		iterator find(const key_type &k)
 		{
@@ -475,7 +465,7 @@ namespace ft
 				}
 				else
 				{
-					u = node->parent->parent->parent->right;
+					u = node->parent->parent->right;
 					if (u->color == 1)
 					{
 						u->color = 0;

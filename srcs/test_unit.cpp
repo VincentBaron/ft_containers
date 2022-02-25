@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:01:30 by vbaron            #+#    #+#             */
-/*   Updated: 2022/02/25 17:22:22 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/25 17:56:17 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,30 +79,24 @@ void mapRandomTests(void)
 	myMap.insert(ft::make_pair<char, int>('b', 10));
 	myMap.insert(ft::make_pair<char, int>('a', 10));
 	myMap.insert(ft::make_pair<char, int>('c', 10));
-	// myMap.insert(ft::make_pair<char, int>('d', 10));
-	// myMap.insert(ft::make_pair<char, int>('x', 10));
-	// myMap.insert(ft::make_pair<char, int>('m', 10));
-	// myMap.insert(ft::make_pair<char, int>('m', 10));
-	// myMap.insert(ft::make_pair<char, int>('l', 10));
-	// myMap.insert(ft::make_pair<char, int>('r', 10));
-	// myMap.insert(ft::make_pair<char, int>('o', 10));
-	// myMap.insert(ft::make_pair<char, int>('m', 10));
-	// myMap.insert(ft::make_pair<char, int>('y', 10));
-	// myMap.insert(ft::make_pair<char, int>('p', 10));
-	// myMap.insert(ft::make_pair<char, int>('q', 10));
-	// myMap.insert(ft::make_pair<char, int>('f', 10));
-	// myMap.insert(ft::make_pair<char, int>('g', 10));
-	// myMap.insert(ft::make_pair<char, int>('z', 10));
-	// myMap.insert(ft::make_pair<char, int>('a', 10));
-	// myMap.insert(ft::make_pair<char, int>('c', 10));
+	myMap.insert(ft::make_pair<char, int>('d', 10));
+	myMap.insert(ft::make_pair<char, int>('x', 10));
+	myMap.insert(ft::make_pair<char, int>('m', 10));
+	myMap.insert(ft::make_pair<char, int>('m', 10));
+	myMap.insert(ft::make_pair<char, int>('l', 10));
+	myMap.insert(ft::make_pair<char, int>('r', 10));
+	myMap.insert(ft::make_pair<char, int>('o', 10));
+	myMap.insert(ft::make_pair<char, int>('m', 10));
+	myMap.insert(ft::make_pair<char, int>('y', 10));
+	myMap.insert(ft::make_pair<char, int>('p', 10));
+	myMap.insert(ft::make_pair<char, int>('q', 10));
+	myMap.insert(ft::make_pair<char, int>('f', 10));
+	myMap.insert(ft::make_pair<char, int>('g', 10));
+	myMap.insert(ft::make_pair<char, int>('z', 10));
+	myMap.insert(ft::make_pair<char, int>('a', 10));
+	myMap.insert(ft::make_pair<char, int>('c', 10));
 	print_tree(myMap._root, 0);
-	myMap.erase('b');
-	print_tree(myMap._root, 0);
-	// myMap.erase('d');
-	myMap.erase('a');
-	print_tree(myMap._root, 0);
-	myMap.erase('c');
-	print_tree(myMap._root, 0);
+	myMap.erase(myMap.begin(), myMap.end());
 }
 
 int main(void)
