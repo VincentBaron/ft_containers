@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 16:02:26 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/24 16:19:59 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/25 15:10:40 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ namespace ft
 		typedef typename Node::value_type *pointer;
 		typedef typename Node::value_type reference;
 
-		binary_tree_const_iterator() : _head(NULL), _nillNode(NULL){};
+		binary_tree_const_iterator() : _head(NULL) {};
 
-		binary_tree_const_iterator(Node *head, Node *nillNode) : _head(head), _nillNode(nillNode){};
+		binary_tree_const_iterator(Node *head) : _head(head){};
 
-		binary_tree_const_iterator(const binary_tree_const_iterator &srcs) : _head(srcs._head), _nillNode(srcs._nillNode){};
+		binary_tree_const_iterator(const binary_tree_const_iterator &srcs) : _head(srcs._head){};
 
 		virtual ~binary_tree_const_iterator() {}
 
@@ -41,7 +41,6 @@ namespace ft
 			if (*this == srcs)
 				return (*this);
 			this->_head = srcs._head;
-			this->_nillNode = srcs._nillNode;
 			return (*this);
 		}
 
@@ -67,22 +66,25 @@ namespace ft
 
 		binary_tree_const_iterator &operator++(void)
 		{
-			if (_head->right != _nillNode)
+			if (_head->nill)
+				return (*this);
+			if (!_head->right->nill)
 			{
 				_head = _head->right;
-				while (_head->left != _nillNode)
+				while (!_head->left->nill)
 					_head = _head->left;
 				return (*this);
 			}
 
-			Node *y = _head->parent;
-			while (y != NULL && _head == y->right)
+			Node *x = _head;
+			Node *y = x->parent;
+			while (y != NULL && x == y->right)
 			{
-				_head = y;
+				x = y;
 				y = y->parent;
 			}
 			if (y == NULL)
-				_head = _nillNode;
+				_head = _head->right;
 			else
 				_head = y;
 			return (*this);
@@ -97,28 +99,27 @@ namespace ft
 
 		binary_tree_const_iterator &operator--(void)
 		{
-			if (_head == _nillNode)
-			{
-				_head = _head->parent;
-				return (*this);
-			}
-
-			if (_head->left != _nillNode)
+			if (!_head->left->nill)
 			{
 				_head = _head->left;
-				while (_head->right != _nillNode)
+				while (!_head->right->nill)
 					_head = _head->right;
 				return (*this);
 			}
-
-			Node *y = _head->parent;
-			while (y != NULL && _head == y->left)
+			
+			Node *x = _head;
+			Node *y = x->parent;
+			while (y != NULL && x == y->left)
 			{
-				_head = y;
+				x = y;
 				y = y->parent;
 			}
-			_head = y;
+			if (y == NULL)
+				return (*this);
+			else
+				_head = y;
 			return (*this);
+
 		}
 
 		binary_tree_const_iterator operator--(int)
@@ -130,7 +131,6 @@ namespace ft
 
 	public:
 		Node *_head;
-		Node *_nillNode;
 	};
 
 	template <typename Node>
@@ -142,13 +142,12 @@ namespace ft
 		typedef typename ft::iterator<std::bidirectional_iterator_tag, value_type>::difference_type difference_type;
 		typedef typename Node::value_type *pointer;
 		typedef typename Node::value_type reference;
-		typedef ft::binary_tree_const_iterator<Node> const_iterator;
 
-		binary_tree_iterator() : _head(NULL), _nillNode(NULL){};
+		binary_tree_iterator() : _head(NULL) {};
 
-		binary_tree_iterator(Node *head, Node *nillNode) : _head(head), _nillNode(nillNode){};
+		binary_tree_iterator(Node *head) : _head(head){};
 
-		binary_tree_iterator(const binary_tree_iterator &srcs) : _head(srcs._head), _nillNode(srcs._nillNode){};
+		binary_tree_iterator(const binary_tree_iterator &srcs) : _head(srcs._head){};
 
 		virtual ~binary_tree_iterator() {}
 
@@ -157,7 +156,6 @@ namespace ft
 			if (*this == srcs)
 				return (*this);
 			this->_head = srcs._head;
-			this->_nillNode = srcs._nillNode;
 			return (*this);
 		}
 
@@ -183,22 +181,25 @@ namespace ft
 
 		binary_tree_iterator &operator++(void)
 		{
-			if (_head->right != _nillNode)
+			if (_head->nill)
+				return (*this);
+			if (!_head->right->nill)
 			{
 				_head = _head->right;
-				while (_head->left != _nillNode)
+				while (!_head->left->nill)
 					_head = _head->left;
 				return (*this);
 			}
 
-			Node *y = _head->parent;
-			while (y != NULL && _head == y->right)
+			Node *x = _head;
+			Node *y = x->parent;
+			while (y != NULL && x == y->right)
 			{
-				_head = y;
+				x = y;
 				y = y->parent;
 			}
 			if (y == NULL)
-				_head = _nillNode;
+				_head = _head->right;
 			else
 				_head = y;
 			return (*this);
@@ -213,28 +214,27 @@ namespace ft
 
 		binary_tree_iterator &operator--(void)
 		{
-			if (_head == _nillNode)
-			{
-				_head = _head->parent;
-				return (*this);
-			}
-
-			if (_head->left != _nillNode)
+			if (!_head->left->nill)
 			{
 				_head = _head->left;
-				while (_head->right != _nillNode)
+				while (!_head->right->nill)
 					_head = _head->right;
 				return (*this);
 			}
-
-			Node *y = _head->parent;
-			while (y != NULL && _head == y->left)
+			
+			Node *x = _head;
+			Node *y = x->parent;
+			while (y != NULL && x == y->left)
 			{
-				_head = y;
+				x = y;
 				y = y->parent;
 			}
-			_head = y;
+			if (y == NULL)
+				return (*this);
+			else
+				_head = y;
 			return (*this);
+
 		}
 
 		binary_tree_iterator operator--(int)
@@ -244,15 +244,8 @@ namespace ft
 			return (tmp);
 		}
 
-		operator const_iterator() const
-		{
-			const_iterator tmp(_head, _nillNode);
-			return tmp;
-		}
-
 	public:
 		Node *_head;
-		Node *_nillNode;
 	};
 
 	template <typename It>

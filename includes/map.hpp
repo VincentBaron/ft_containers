@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/25 12:42:30 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/25 15:12:10 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,74 +96,70 @@ namespace ft
 			_node_allocator(_alloc).deallocate(NIL, 1);
 		}
 
-		// iterator begin()
-		// {
-		// 	if (!_size)
-		// 		return (iterator(NIL, NIL));
-		// 	return (iterator(minimum(_root), NIL));
-		// };
+		iterator begin()
+		{
+			if (!_size)
+				return (iterator());
+			return (iterator(minimum(_root)));
+		};
 
-		// const_iterator begin() const
-		// {
-		// 	if (!_size)
-		// 		return (iterator(NIL, NIL));
-		// 	return (const_iterator(minimum(_root), NIL));
-		// };
+		const_iterator begin() const
+		{
+			if (!_size)
+				return (const_iterator());
+			return (const_iterator(minimum(_root)));
+		};
 
-		// iterator end()
-		// {
-		// 	if (!_size)
-		// 		return (iterator(NIL, NIL));
-		// 	nodePtr max = maximum(_root);
-		// 	iterator it(max->right, NIL);
-		// 	++it;
-		// 	return (it);
-		// };
+		iterator end()
+		{
+			if (!_size)
+				return (iterator());
+			nodePtr last = maximum(_root);
+			return (iterator(last->right));
+		};
 
-		// const_iterator end() const
-		// {
-		// 	if (!_size)
-		// 		return (const_iterator(NIL, NIL));
-		// 	nodePtr max = maximum(_root);
-		// 	const_iterator it(max, NIL);
-		// 	++it;
-		// 	return (it);
-		// };
+		const_iterator end() const
+		{
+			if (!_size)
+				return (const_iterator());
+			nodePtr last = maximum(_root);
+			return (const_iterator(last->right));
+		};
 
-		// reverse_iterator rbegin()
-		// {
-		// 	return (reverse_iterator(end()));
-		// };
+		reverse_iterator rbegin()
+		{
+			return (reverse_iterator(end()));
+		};
 
-		// const_reverse_iterator rbegin() const
-		// {
-		// 	return (const_reverse_iterator(end()));
-		// };
+		const_reverse_iterator rbegin() const
+		{
+			return (const_reverse_iterator(end()));
+		};
 
-		// reverse_iterator rend()
-		// {
-		// 	return (reverse_iterator(begin()));
-		// };
+		reverse_iterator rend()
+		{
+			return (reverse_iterator(begin()));
+		};
 
-		// const_reverse_iterator rend() const
-		// {
-		// 	return (const_reverse_iterator(begin()));
-		// };
+		const_reverse_iterator rend() const
+		{
+			return (const_reverse_iterator(begin()));
+		};
 
-		// bool empty() const
-		// {
-		// 	return (!_size ? true : false);
-		// };
+		bool empty() const
+		{
+			return (!_size ? true : false);
+		};
 
-		// size_type size(void) const
-		// {
-		// 	return (_size);
-		// };
+		size_type size(void) const
+		{
+			return (_size);
+		};
 
-		// size_type max_size() const
-		// {
-		// 	return (_node_allocator(_alloc).max_size());
-		// };
+		size_type max_size() const
+		{
+			return (_node_alloc.max_size());
+		};
 
 		// mapped_type &operator[](const key_type &k)
 		// {
@@ -181,18 +177,18 @@ namespace ft
 			return (insertTree(val));
 		};
 
-		// iterator insert(iterator position, const value_type &val)
-		// {
-		// 	(void)position;
-		// 	return (insertTree(val).first);
-		// };
+		iterator insert(iterator position, const value_type &val)
+		{
+			(void)position;
+			return (insertTree(val).first);
+		};
 
-		// template <class InputIterator>
-		// void insert(InputIterator first, InputIterator last, typename ft::enable_if<!ft::isIntegral<InputIterator>::value, InputIterator>::type * = 0)
-		// {
-		// 	for (; first != last; ++first)
-		// 		insert(*first);
-		// };
+		template <class InputIterator>
+		void insert(InputIterator first, InputIterator last, typename ft::enable_if<!ft::isIntegral<InputIterator>::value, InputIterator>::type * = 0)
+		{
+			for (; first != last; ++first)
+				insert(*first);
+		};
 
 		// void erase(iterator position)
 		// {
@@ -435,7 +431,7 @@ namespace ft
 					else if (node->value.first == tmp->value.first)
 					{
 						deleteNode(node);
-						return (ft::make_pair(iterator(tmp, NIL), false));
+						return (ft::make_pair(iterator(tmp), false));
 					}
 					else
 						tmp = tmp->left;
@@ -448,7 +444,7 @@ namespace ft
 					node->parent->right = node;
 				balanceTreeInsert(node);
 			}
-			return (ft::make_pair(iterator(), bool()));
+			return (ft::make_pair(iterator(node), true));
 		}
 
 		void balanceTreeInsert(nodePtr node)
@@ -540,6 +536,20 @@ namespace ft
 				x->parent->left = y;
 			y->right = x;
 			x->parent = y;
+		}
+
+		nodePtr minimum(nodePtr node)
+		{
+			while (!node->left->nill)
+				node = node->left;
+			return (node);
+		}
+
+		nodePtr maximum(nodePtr node)
+		{
+			while (!node->right->nill)
+				node = node->right;
+			return (node);
 		}
 	};
 }
