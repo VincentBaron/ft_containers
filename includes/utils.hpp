@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 10:20:45 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/24 09:56:55 by vscode           ###   ########.fr       */
+/*   Updated: 2022/02/25 11:13:50 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,7 @@ void print_treeBis(T *root, int level)
 	{
 		padding('\t', level);
 		std::cout << "[nill]" << std::endl;
+		// std::cout << (root->color == 1 ? RED : BRIGHTBLACK) << "R: " << root->right << RESET;
 	}
 	else
 	{
@@ -212,6 +213,7 @@ void print_treeBis(T *root, int level)
 		padding('\t', level);
 		std::cout << (root->color == 1 ? RED : BRIGHTBLACK) << "[" << root->value.first << "]"
 				  << ":" << root->value.second << RESET;
+		// std::cout << (root->color == 1 ? RED : BRIGHTBLACK) << "P: " << root << RESET;
 		std::cout << std::endl;
 		print_treeBis(root->left, level + 1);
 	}

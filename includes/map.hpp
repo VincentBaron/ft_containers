@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/24 17:44:32 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/25 11:00:42 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,16 @@ namespace ft
 		typedef typename ft::iterator_traits<iterator> difference_type;
 
 		explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type())
-			: _comp(comp), _root(NULL), TNULL(NULL), _alloc(alloc), _size(0){};
+			: _comp(comp), _root(NULL), NIL(NULL), _alloc(alloc), _size(0){};
 
 		template <class InputIterator>
 		map(InputIterator first, InputIterator last, const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type(), typename ft::enable_if<!ft::isIntegral<InputIterator>::value, InputIterator>::type * = 0)
-			: _comp(comp), _root(NULL), TNULL(NULL), _alloc(alloc), _size(0)
+			: _comp(comp), _root(NULL), NIL(NULL), _alloc(alloc), _size(0)
 		{
 			insert(first, last);
 		};
 
-		map(const map &x) : _comp(x._comp), _root(NULL), TNULL(NULL), _alloc(x._alloc), _size(0)
+		map(const map &x) : _comp(x._comp), _root(NULL), NIL(NULL), _alloc(x._alloc), _size(0)
 		{
 			insert(x.begin(), x.end());
 		};
@@ -78,11 +78,11 @@ namespace ft
 			if (this == &x)
 				return (*this);
 			// clear();
-			_node_allocator(_alloc).destroy(TNULL);
-			_node_allocator(_alloc).deallocate(TNULL, 1);
+			_node_allocator(_alloc).destroy(NIL);
+			_node_allocator(_alloc).deallocate(NIL, 1);
 			_comp = x._comp;
 			_root = NULL;
-			TNULL = NULL;
+			NIL = NULL;
 			_alloc = x._alloc;
 			_size = 0;
 			insert(x.begin(), x.end());
@@ -92,30 +92,30 @@ namespace ft
 		~map(void)
 		{
 			// clear();
-			_node_allocator(_alloc).destroy(TNULL);
-			_node_allocator(_alloc).deallocate(TNULL, 1);
+			_node_allocator(_alloc).destroy(NIL);
+			_node_allocator(_alloc).deallocate(NIL, 1);
 		}
 
 		// iterator begin()
 		// {
 		// 	if (!_size)
-		// 		return (iterator(TNULL, TNULL));
-		// 	return (iterator(minimum(_root), TNULL));
+		// 		return (iterator(NIL, NIL));
+		// 	return (iterator(minimum(_root), NIL));
 		// };
 
 		// const_iterator begin() const
 		// {
 		// 	if (!_size)
-		// 		return (iterator(TNULL, TNULL));
-		// 	return (const_iterator(minimum(_root), TNULL));
+		// 		return (iterator(NIL, NIL));
+		// 	return (const_iterator(minimum(_root), NIL));
 		// };
 
 		// iterator end()
 		// {
 		// 	if (!_size)
-		// 		return (iterator(TNULL, TNULL));
+		// 		return (iterator(NIL, NIL));
 		// 	nodePtr max = maximum(_root);
-		// 	iterator it(max->right, TNULL);
+		// 	iterator it(max->right, NIL);
 		// 	++it;
 		// 	return (it);
 		// };
@@ -123,9 +123,9 @@ namespace ft
 		// const_iterator end() const
 		// {
 		// 	if (!_size)
-		// 		return (const_iterator(TNULL, TNULL));
+		// 		return (const_iterator(NIL, NIL));
 		// 	nodePtr max = maximum(_root);
-		// 	const_iterator it(max, TNULL);
+		// 	const_iterator it(max, NIL);
 		// 	++it;
 		// 	return (it);
 		// };
@@ -168,7 +168,7 @@ namespace ft
 		// mapped_type &operator[](const key_type &k)
 		// {
 		// 	nodePtr node = keySearch(_root, k);
-		// 	if (node != TNULL)
+		// 	if (node != NIL)
 		// 		return (node->value.second);
 		// 	value_type tmp = ft::make_pair(k, mapped_type());
 		// 	insert(tmp);
@@ -230,21 +230,21 @@ namespace ft
 		// 	key_compare _compTmp;
 		// 	_node_allocator _node_allocTmp;
 		// 	nodePtr _rootTmp;
-		// 	nodePtr TNULLTmp;
+		// 	nodePtr NILTmp;
 		// 	allocator_type _allocTmp;
 		// 	size_type _sizeTmp;
 
 		// 	_comp = x._comp;
 		// 	_node_alloc = x._node_alloc;
 		// 	_root = x._root;
-		// 	TNULL = x.TNULL;
+		// 	NIL = x.NIL;
 		// 	_alloc = x._alloc;
 		// 	_size = x._size;
 
 		// 	x._comp = _compTmp;
 		// 	x._node_alloc = _node_allocTmp;
 		// 	x._root = _rootTmp;
-		// 	x.TNULL = TNULLTmp;
+		// 	x.NIL = NILTmp;
 		// 	x._alloc = _allocTmp;
 		// 	x._size = _sizeTmp;
 		// };
@@ -377,7 +377,7 @@ namespace ft
 		key_compare _comp;
 		_node_allocator _node_alloc;
 		nodePtr _root;
-		nodePtr TNULL;
+		nodePtr NIL;
 		allocator_type _alloc;
 		size_type _size;
 
@@ -385,25 +385,67 @@ namespace ft
 		{
 			nodePtr newNode = _node_alloc.allocate(1);
 			_node_alloc.construct(newNode, Node(elem));
+			newNode->left = newNillChild(newNode);
+			newNode->right = newNillChild(newNode);
 			return (newNode);
+		}
+
+		nodePtr newNillChild(nodePtr parent)
+		{
+			nodePtr child = _node_alloc.allocate(1);
+			_node_alloc.construct(child, Node());
+			child->parent = parent;
+			return (child);
 		}
 
 		void deleteNode(nodePtr node)
 		{
 			_node_allocator(_alloc).destroy(node);
 			_node_allocator(_alloc).deallocate(node, 1);
+			if (node->left != NULL)
+			{
+				_node_allocator(_alloc).destroy(node->left);
+				_node_allocator(_alloc).deallocate(node->left, 1);
+			}
+			if (node->right != NULL)
+			{
+				_node_allocator(_alloc).destroy(node->right);
+				_node_allocator(_alloc).deallocate(node->right, 1);
+			}
 			_size--;
 		}
 
 		ft::pair<iterator, bool> insertTree(const value_type &value)
 		{
-			(void)value;
+			nodePtr node = newNode(value);
 			if (_root == NULL)
+				_root = newNillChild(NULL);
+			if (_root->nill)
 			{
-				TNULL = newNode(value_type());
-				TNULL->color = 0;
-				TNULL->nill = 1;
-				_root = TNULL;
+				_root = node;
+				_root->color = 0;
+			}
+			else
+			{
+				nodePtr tmp = _root;
+				while (!tmp->nill)
+				{
+					if (node->value.first > tmp->value.first)
+						tmp = tmp->right;
+					else if (node->value.first == tmp->value.first)
+					{
+						deleteNode(node);
+						return (ft::make_pair(iterator(tmp, NIL), false));
+					}
+					else
+						tmp = tmp->left;
+				}
+				node->parent = tmp->parent;
+				deleteNode(tmp);
+				if (node->parent->value.first > node->value.first)
+					node->parent->left = node;
+				else
+					node->parent->right = node;
 			}
 			return (ft::make_pair(iterator(), bool()));
 		}
