@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 16:02:26 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/25 19:00:18 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/25 19:29:54 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ namespace ft
 		{
 			if (_head->nill)
 				return (*this);
-			if (!_head->right->nill)
+			if (_head->right && !_head->right->nill)
 			{
 				_head = _head->right;
 				while (!_head->left->nill)
@@ -99,7 +99,7 @@ namespace ft
 
 		binary_tree_const_iterator &operator--(void)
 		{
-			if (!_head->left->nill)
+			if (_head->left && !_head->left->nill)
 			{
 				_head = _head->left;
 				while (!_head->right->nill)
@@ -183,7 +183,7 @@ namespace ft
 		{
 			if (_head->nill)
 				return (*this);
-			if (!_head->right->nill)
+			if (_head->right && !_head->right->nill)
 			{
 				_head = _head->right;
 				while (!_head->left->nill)
@@ -214,7 +214,7 @@ namespace ft
 
 		binary_tree_iterator &operator--(void)
 		{
-			if (!_head->left->nill)
+			if (_head->left && !_head->left->nill)
 			{
 				_head = _head->left;
 				while (!_head->right->nill)

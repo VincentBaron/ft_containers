@@ -6,7 +6,7 @@
 #    By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/14 13:38:45 by vbaron            #+#    #+#              #
-#    Updated: 2022/02/24 10:28:09 by vincentbaro      ###   ########.fr        #
+#    Updated: 2022/02/25 19:27:22 by vincentbaro      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ NAME_TEST = unit-test
 
 CC = clang++
 
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 -Wno-unused #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 -Wno-unused -fsanitize=address
 
 all: $(NAME)
 
