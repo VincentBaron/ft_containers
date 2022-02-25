@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 16:02:26 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/25 19:29:54 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/25 22:39:05 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@
 
 namespace ft
 {
-	template <typename Node>
+	template <typename Pair, typename Node>
 	class binary_tree_const_iterator : ft::iterator<std::bidirectional_iterator_tag, Node>
 	{
 	public:
 		typedef Node value_type;
 		typedef typename ft::iterator<std::bidirectional_iterator_tag, value_type>::iterator_category iterator_category;
 		typedef typename ft::iterator<std::bidirectional_iterator_tag, value_type>::difference_type difference_type;
-		typedef typename Node::value_type *pointer;
-		typedef typename Node::value_type reference;
+		typedef const Pair *pointer;
+		typedef const Pair &reference;
 
 		binary_tree_const_iterator() : _head(NULL){};
 
@@ -132,16 +132,16 @@ namespace ft
 		Node *_head;
 	};
 
-	template <typename Node>
+	template <typename Pair, typename Node>
 	class binary_tree_iterator : ft::iterator<std::bidirectional_iterator_tag, Node>
 	{
 	public:
 		typedef Node value_type;
 		typedef typename ft::iterator<std::bidirectional_iterator_tag, value_type>::iterator_category iterator_category;
 		typedef typename ft::iterator<std::bidirectional_iterator_tag, value_type>::difference_type difference_type;
-		typedef typename Node::value_type *pointer;
-		typedef typename Node::value_type reference;
-		typedef ft::binary_tree_const_iterator<Node> const_iterator;
+		typedef Pair *pointer;
+		typedef Pair &reference;
+		typedef ft::binary_tree_const_iterator<Pair, Node> const_iterator;
 
 		binary_tree_iterator() : _head(NULL){};
 
@@ -253,14 +253,14 @@ namespace ft
 		Node *_head;
 	};
 
-	template <typename It>
-	bool operator==(ft::binary_tree_iterator<It> lhs, ft::binary_tree_iterator<It> rhs)
+	template <typename Pair, typename It>
+	bool operator==(ft::binary_tree_iterator<Pair, It> lhs, ft::binary_tree_iterator<Pair, It> rhs)
 	{
 		return (lhs._head == rhs._head);
 	}
 
-	template <typename It>
-	bool operator==(ft::binary_tree_const_iterator<It> lhs, ft::binary_tree_const_iterator<It> rhs)
+	template <typename Pair, typename It>
+	bool operator==(ft::binary_tree_const_iterator<Pair, It> lhs, ft::binary_tree_const_iterator<Pair, It> rhs)
 	{
 		return (lhs._head == rhs._head);
 	}

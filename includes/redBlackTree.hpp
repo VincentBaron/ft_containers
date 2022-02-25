@@ -26,6 +26,7 @@ namespace ft
 	public:
 		
 		typedef Pair value_type;
+		typedef Pair &reference;
 		
 		Node() : color(BLACKT), value(Pair()), left(NULL), right(NULL), parent(NULL), nill(1) {};
 		Node(Pair elem) : color(REDT), value(elem), left(NULL), right(NULL), parent(NULL), nill(0) {};

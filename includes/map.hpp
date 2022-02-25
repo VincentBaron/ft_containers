@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/25 19:25:05 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/25 23:04:35 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ namespace ft
 		typedef typename Alloc::const_reference const_reference;
 		typedef typename Alloc::pointer pointer;
 		typedef typename Alloc::const_pointer const_pointer;
-		typedef class ft::binary_tree_iterator<Node> iterator;
-		typedef class ft::binary_tree_const_iterator<Node> const_iterator;
+		typedef class ft::binary_tree_iterator<value_type, Node> iterator;
+		typedef class ft::binary_tree_const_iterator<value_type, Node> const_iterator;
 		typedef typename ft::reverse_iterator<iterator> reverse_iterator;
 		typedef typename ft::reverse_iterator<const_iterator> const_reverse_iterator;
 		typedef typename ft::iterator_traits<iterator> difference_type;
@@ -215,6 +215,12 @@ namespace ft
 			allocator_type _allocTmp;
 			size_type _sizeTmp;
 
+			_compTmp = _comp;
+			_node_allocTmp = _node_alloc;
+			_rootTmp = _root;
+			_allocTmp = _alloc;
+			_sizeTmp = _size;
+			
 			_comp = x._comp;
 			_node_alloc = x._node_alloc;
 			_root = x._root;
@@ -250,9 +256,9 @@ namespace ft
 			for (; first != last; ++first)
 			{
 				if (first->first == k)
-					break ;
+					return first;
 			}
-			return first;
+			return NULL;
 		};
 
 		const_iterator find(const key_type &k) const
@@ -263,16 +269,16 @@ namespace ft
 			for (; first != last; ++first)
 			{
 				if (first->first == k)
-					break ;
+					return first;
 			}
-			return first;
+			return NULL;
 		};
 
 		size_type count(const key_type &k) const
 		{
 			const_iterator ite = find(k);
 
-			if (ite == end())
+			if (ite == end() || ite == NULL)
 				return 0;
 			else
 				return 1;
@@ -405,19 +411,19 @@ namespace ft
 				nodePtr tmp = _root;
 				while (!tmp->nill)
 				{
-					if (node->value.first > tmp->value.first)
-						tmp = tmp->right;
-					else if (node->value.first == tmp->value.first)
+					if (node->value.first == tmp->value.first)
 					{
 						deleteNodeAndChild(node);
 						return (ft::make_pair(iterator(tmp), false));
 					}
+					else if (!_comp(node->value.first, tmp->value.first))
+						tmp = tmp->right;
 					else
 						tmp = tmp->left;
 				}
 				node->parent = tmp->parent;
 				deleteNode(tmp);
-				if (node->parent->value.first > node->value.first)
+				if (!_comp(node->parent->value.first, node->value.first))
 					node->parent->left = node;
 				else
 					node->parent->right = node;
@@ -489,7 +495,7 @@ namespace ft
 				deleteNodeAndChild(nodeToDelete);
 				_root = NULL;
 				_size--;
-				return ;
+				return;
 			}
 			bool originalColor = nodeToDelete->color;
 			nodePtr x, y;
@@ -499,7 +505,6 @@ namespace ft
 				x = nodeToDelete->right;
 				deleteNode(nodeToDelete->left);
 				rbTransplant(nodeToDelete, x);
-
 			}
 			else if (nodeToDelete->right->nill)
 			{
@@ -668,10 +673,10 @@ namespace ft
 		}
 
 		nodePtr keySearch(nodePtr start, const key_type &key) const
-		{	
+		{
 			while (start && !start->nill && key != start->value.first)
 			{
-				if (key < start->value.first)
+				if (_comp(key, start->value.first))
 					start = start->left;
 				else
 					start = start->right;
@@ -679,6 +684,45 @@ namespace ft
 			return (start);
 		}
 	};
+
+	// template <class Key, class T, class Compare, class Alloc>
+	// bool operator==(const map<Key, T, Compare, Alloc> &lhs, const map<Key, T, Compare, Alloc> &rhs)
+	// {
+	// 	if (lhs.size() != rhs.size())
+	// 		return false;
+	// 	else
+	// 		return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
+	// }
+
+	template <class Key, class T, class Compare, class Alloc>
+	bool operator<(const map<Key, T, Compare, Alloc> &lhs, const map<Key, T, Compare, Alloc> &rhs)
+	{
+		return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+	}
+
+	template <class Key, class T, class Compare, class Alloc>
+	bool operator!=(const map<Key, T, Compare, Alloc> &lhs, const map<Key, T, Compare, Alloc> &rhs)
+	{
+		return (!(lhs == rhs));
+	}
+
+	template <class Key, class T, class Compare, class Alloc>
+	bool operator<=(const map<Key, T, Compare, Alloc> &lhs, const map<Key, T, Compare, Alloc> &rhs)
+	{
+		return (!(rhs < lhs));
+	}
+
+	template <class Key, class T, class Compare, class Alloc>
+	bool operator>=(const map<Key, T, Compare, Alloc> &lhs, const map<Key, T, Compare, Alloc> &rhs)
+	{
+		return (!(lhs < rhs));
+	}
+
+	template <class Key, class T, class Compare, class Alloc>
+	bool operator>(const map<Key, T, Compare, Alloc> &lhs, const map<Key, T, Compare, Alloc> &rhs)
+	{
+		return (rhs < lhs);
+	}
 }
 
 #endif
