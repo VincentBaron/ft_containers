@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/25 18:44:27 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/25 19:15:27 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,15 +158,13 @@ namespace ft
 
 		mapped_type &operator[](const key_type &k)
 		{
-			// nodePtr node = keySearch(_root, k);
-			// if (node != NIL)
-			// 	return (node->value.second);
-			// value_type tmp = ft::make_pair(k, mapped_type());
-			// insert(tmp);
-			// nodePtr tmp2 = keySearch(_root, k);
-			// return (tmp2->value.second);
-
-			return ((*(insert(ft::make_pair(k, mapped_type()).first))).second);
+			nodePtr node = keySearch(_root, k);
+			if (node && !node->nill)
+				return (node->value.second);
+			value_type tmp = ft::make_pair(k, mapped_type());
+			insert(tmp);
+			nodePtr tmp2 = keySearch(_root, k);
+			return (tmp2->value.second);
 		};
 
 		pair<iterator, bool> insert(const value_type &val)
@@ -655,27 +653,30 @@ namespace ft
 			x->parent = y;
 		}
 
-		nodePtr minimum(nodePtr node)
+		nodePtr minimum(nodePtr node) const
 		{
 			while (!node->left->nill)
 				node = node->left;
 			return (node);
 		}
 
-		nodePtr maximum(nodePtr node)
+		nodePtr maximum(nodePtr node) const
 		{
 			while (!node->right->nill)
 				node = node->right;
 			return (node);
 		}
 
-		nodePtr keySearch(nodePtr node, key_type &key)
-		{
-			if (node->nill || key == node->value.first)
-				return (node);
-			if (key < node->value.first)
-				return keySearch(node->left, key);
-			return keySearch(node->right, key);
+		nodePtr keySearch(nodePtr start, const key_type &key) const
+		{	
+			while (start && !start->nill && key != start->value.first)
+			{
+				if (key < start->value.first)
+					start = start->left;
+				else
+					start = start->right;
+			}
+			return (start);
 		}
 	};
 }

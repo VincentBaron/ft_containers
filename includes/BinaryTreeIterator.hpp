@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 16:02:26 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/25 15:10:40 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/25 19:00:18 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ namespace ft
 		typedef typename Node::value_type *pointer;
 		typedef typename Node::value_type reference;
 
-		binary_tree_const_iterator() : _head(NULL) {};
+		binary_tree_const_iterator() : _head(NULL){};
 
 		binary_tree_const_iterator(Node *head) : _head(head){};
 
@@ -106,7 +106,7 @@ namespace ft
 					_head = _head->right;
 				return (*this);
 			}
-			
+
 			Node *x = _head;
 			Node *y = x->parent;
 			while (y != NULL && x == y->left)
@@ -119,7 +119,6 @@ namespace ft
 			else
 				_head = y;
 			return (*this);
-
 		}
 
 		binary_tree_const_iterator operator--(int)
@@ -142,8 +141,9 @@ namespace ft
 		typedef typename ft::iterator<std::bidirectional_iterator_tag, value_type>::difference_type difference_type;
 		typedef typename Node::value_type *pointer;
 		typedef typename Node::value_type reference;
+		typedef ft::binary_tree_const_iterator<Node> const_iterator;
 
-		binary_tree_iterator() : _head(NULL) {};
+		binary_tree_iterator() : _head(NULL){};
 
 		binary_tree_iterator(Node *head) : _head(head){};
 
@@ -221,7 +221,7 @@ namespace ft
 					_head = _head->right;
 				return (*this);
 			}
-			
+
 			Node *x = _head;
 			Node *y = x->parent;
 			while (y != NULL && x == y->left)
@@ -234,7 +234,6 @@ namespace ft
 			else
 				_head = y;
 			return (*this);
-
 		}
 
 		binary_tree_iterator operator--(int)
@@ -242,6 +241,12 @@ namespace ft
 			binary_tree_iterator tmp(*this);
 			operator--();
 			return (tmp);
+		}
+
+		operator const_iterator() const
+		{
+			const_iterator tmp(_head);
+			return tmp;
 		}
 
 	public:
