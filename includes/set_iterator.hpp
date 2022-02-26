@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 16:02:26 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/26 11:14:43 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/26 11:22:02 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@
 #include "redBlackTree.hpp"
 
 namespace ft
-{
-	class ft::set_iterator;
-	
+{	
 	template <typename Pair, typename Node>
 	class set_const_iterator : ft::iterator<std::bidirectional_iterator_tag, Node>
 	{
@@ -29,6 +27,7 @@ namespace ft
 		typedef typename ft::iterator<std::bidirectional_iterator_tag, value_type>::difference_type difference_type;
 		typedef const Pair *pointer;
 		typedef const Pair &reference;
+		// typedef ft::set_iterator<Pair, Node> iterator;
 
 		set_const_iterator() : _head(NULL){};
 
@@ -121,6 +120,12 @@ namespace ft
 			operator--();
 			return (tmp);
 		}
+
+		// operator iterator() const
+		// {
+		// 	iterator tmp(_head);
+		// 	return tmp;
+		// }
 
 	public:
 		Node *_head;
