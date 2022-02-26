@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.hpp                                            :+:      :+:    :+:   */
+/*   set.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/26 09:37:54 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/26 09:12:52 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_HPP
-#define MAP_HPP
+#ifndef SET_HPP
+#define SET_HPP
 #include <functional>
 #include <memory>
 #include "utils.hpp"
@@ -21,20 +21,20 @@
 
 namespace ft
 {
-	template <class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<std::pair<const Key, T> > >
-	class map
+	template <class T, class Compare = std::less<Key>, class Alloc = std::allocator<std::pair<const T, T> > >
+	class set
 	{
 	public:
-		typedef Key key_type;
+		typedef T key_type;
+		typedef T value_type;
 		typedef T mapped_type;
-		typedef ft::pair<const key_type, mapped_type> value_type;
 		typedef Compare key_compare;
 		typedef ft::Node<value_type> Node;
 		typedef size_t size_type;
 
 		class value_compare : public std::binary_function<value_type, value_type, bool>
 		{
-			friend class map<Key, T, Compare, Alloc>;
+			friend class map<T, Compare, Alloc>;
 
 		protected:
 			key_compare comp;
@@ -58,22 +58,22 @@ namespace ft
 		typedef typename ft::reverse_iterator<const_iterator> const_reverse_iterator;
 		typedef typename ft::iterator_traits<iterator> difference_type;
 
-		explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type())
+		explicit set(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type())
 			: _comp(comp), _root(NULL), _alloc(alloc), _size(0){};
 
 		template <class InputIterator>
-		map(InputIterator first, InputIterator last, const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type(), typename ft::enable_if<!ft::isIntegral<InputIterator>::value, InputIterator>::type * = 0)
+		set(InputIterator first, InputIterator last, const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type(), typename ft::enable_if<!ft::isIntegral<InputIterator>::value, InputIterator>::type * = 0)
 			: _comp(comp), _root(NULL), _alloc(alloc), _size(0)
 		{
 			insert(first, last);
 		};
 
-		map(const map &x) : _comp(x._comp), _root(NULL), _alloc(x._alloc), _size(0)
+		set(const set &x) : _comp(x._comp), _root(NULL), _alloc(x._alloc), _size(0)
 		{
 			insert(x.begin(), x.end());
 		};
 
-		map &operator=(const map &x)
+		set &operator=(const set &x)
 		{
 			if (this == &x)
 				return (*this);
@@ -156,26 +156,17 @@ namespace ft
 			return (_node_alloc.max_size());
 		};
 
-		mapped_type &operator[](const key_type &k)
-		{
-			nodePtr node = keySearch(_root, k);
-			if (node && !node->nill)
-				return (node->value.second);
-			value_type tmp = ft::make_pair(k, mapped_type());
-			insert(tmp);
-			nodePtr tmp2 = keySearch(_root, k);
-			return (tmp2->value.second);
-		};
-
 		pair<iterator, bool> insert(const value_type &val)
 		{
-			return (insertTree(val));
+			ft::pair<key_type, value_type> duo(val, val);
+			return (insertTree(duo));
 		};
 
 		iterator insert(iterator position, const value_type &val)
 		{
 			(void)position;
-			return (insertTree(val).first);
+			ft::pair<key_type, value_type> duo(val, val);
+			return (insertTree(duo).first);
 		};
 
 		template <class InputIterator>
@@ -192,10 +183,10 @@ namespace ft
 			erase((*position).first);
 		};
 
-		size_type erase(const key_type &k)
+		size_type erase(const value_type &k)
 		{
 			iterator pos = find(k);
-			if (pos == end() || pos._head == NULL)
+			if (pos == end())
 				return (0);
 			deleteTree(pos._head);
 			return (1);
