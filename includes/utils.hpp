@@ -6,13 +6,14 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 10:20:45 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/25 23:10:43 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/26 12:06:32 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_HPP
 #define UTILS_HPP
 #include <iterator>
+# include <iostream>
 #include <sstream>
 #include <sys/time.h>
 #define RESET "\033[0m"

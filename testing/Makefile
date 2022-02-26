@@ -1,61 +1,55 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/12/14 13:38:45 by vbaron            #+#    #+#              #
-#    Updated: 2022/01/14 14:45:29 by vincentbaro      ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME_M_STD	= map_std
+NAME_M_FT	= map_ft
+NAME_V_STD	= vector_std
+NAME_V_FT	= vector_ft
+NAME_S_STD	= stack_std
+NAME_S_FT	= stack_ft
+NAME = ${NAME_M_STD} ${NAME_M_FT} ${NAME_V_STD} ${NAME_V_FT} ${NAME_S_STD} ${NAME_S_FT}
 
-DIR_S = ./
-DIR_O = objs
+SRCS	= main_map.cpp \
+	  main_vector.cpp \
+	  main_stack.cpp
 
-SOURCES = 	main.cpp \
+OBJS_M	= main_map.o
+OBJS_V	= main_vector.o
+OBJS_S	= main_stack.o
+OBJS	= ${OBJS_M} ${OBJS_V} ${OBJS_S}
 
+# DEPS	= ../includes/map.hpp \
+# 	  map_iterator.hpp \
+# 	  vector.hpp \
+# 	  vector_iterator.hpp \
+# 	  stack.hpp \
+# 	  common_utils.hpp \
+# 	  iterator_utils.hpp
 
-SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
-OBJ = $(addprefix $(DIR_O)/,$(SOURCES:.cpp=.o))
-OBJS := $(filter-out objs/test_unit.o, $(OBJ))
-OBJS_TEST := $(filter-out objs/main.o, $(OBJ))
-HEADERS = headers
+CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
-NAME = containers
-NAME_TEST = unit-test
+STD = -D STD
 
-CC = clang++
+all: map vector stack
 
-CFLAGS = -Wall -Wextra -Werror -Wno-unused-parameter -std=c++98
+%.o: %.cpp ${DEPS}
+	clang++ -c -o $@ $< ${CPPFLAGS} 
 
-all: $(NAME)
+map: ${OBJS_M}
+	clang++ ${CPPFLAGS} ${OBJS_M} -o ${NAME_M_FT}
 
-$(DIR_O)/%.o: $(DIR_S)/%.cpp
-	mkdir -p $(DIR_O)	
-	$(CC) $(CFLAGS) -o $@ -c $<
+vector: ${OBJS_V}
+	clang++ ${CPPFLAGS} ${OBJS_V} -o ${NAME_V_FT}
 
-$(NAME): $(OBJS)
-		$(CC) $(CFLAGS) $^ -o $@
-
-unit-test: $(NAME_TEST)
-
-$(DIR_O)/%.o: $(DIR_S)/%.cpp
-	mkdir -p $(DIR_O)	
-	$(CC) $(CFLAGS) -o $@ -c $<
-
-$(NAME_TEST): $(OBJS_TEST)
-		$(CC) $(CFLAGS) $^ -o $@
+stack: ${OBJS_S}
+	clang++ ${CPPFLAGS} ${OBJS_S} -o ${NAME_S_FT}
 
 clean:
-		rm -f $(OBJS)		
-	rm -f $(OBJS)/*.o
-	rm -rf $(DIR_O)	
+	rm -f ${OBJS}
 
 fclean: clean
-	rm -rf $(NAME)
-	rm -rf $(NAME_TEST)
+	rm -f ${NAME}
 
 re: fclean all
 
-.PHONY: re fclean all clean
+std: ${SRCS}
+	clang++ ${CPPFLAGS} main_map.cpp -o ${NAME_M_STD} ${STD}
+	clang++ ${CPPFLAGS} main_vector.cpp -o ${NAME_V_STD} ${STD}
+	clang++ ${CPPFLAGS} main_stack.cpp -o ${NAME_S_STD} ${STD}
