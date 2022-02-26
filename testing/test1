@@ -1,0 +1,23 @@
+..................Constructors......................
+
+size of first: 0
+size of second: 3
+size of third: 0
+size of fourth: 2
+...................Empty...................
+
+total: 55
+.................Size.....................
+
+0. size: 0
+1. size: 5
+2. size: 4
+..................Top...................
+
+mystack.top() is now 15
+...............Push......................
+
+Popping out elements... 4 3 2 1 0
+....................Pop...................
+
+Popping out elements... 4 3 2 1 0
