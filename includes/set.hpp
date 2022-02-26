@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:22:12 by vscode            #+#    #+#             */
-/*   Updated: 2022/02/26 10:42:25 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/26 10:57:32 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "utils.hpp"
 #include "reverse_iterator.hpp"
 #include "redBlackTree.hpp"
-#include "BinaryTreeIterator.hpp"
+#include "set_iterator.hpp"
 
 namespace ft
 {
@@ -44,7 +44,7 @@ namespace ft
 		public:
 			bool operator()(const value_type &x, const value_type &y) const
 			{
-				return comp(x.first, y.first);
+				return comp(x, y);
 			}
 		};
 
@@ -53,8 +53,8 @@ namespace ft
 		typedef typename Alloc::const_reference const_reference;
 		typedef typename Alloc::pointer pointer;
 		typedef typename Alloc::const_pointer const_pointer;
-		typedef class ft::binary_tree_iterator<value_type, Node> iterator;
-		typedef class ft::binary_tree_const_iterator<value_type, Node> const_iterator;
+		typedef class ft::set_iterator<value_type, Node> iterator;
+		typedef class ft::set_const_iterator<value_type, Node> const_iterator;
 		typedef typename ft::reverse_iterator<iterator> reverse_iterator;
 		typedef typename ft::reverse_iterator<const_iterator> const_reverse_iterator;
 		typedef typename ft::iterator_traits<iterator> difference_type;
@@ -258,7 +258,7 @@ namespace ft
 
 			for (; first != last; ++first)
 			{
-				if (first->first == k)
+				if (*first == k)
 					return first;
 			}
 			return NULL;
