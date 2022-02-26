@@ -1,23 +1,35 @@
-..................Constructors......................
-
-size of first: 0
-size of second: 3
-size of third: 0
-size of fourth: 2
-...................Empty...................
-
-total: 55
-.................Size.....................
-
+Size of first: 0
+Size of second: 5
+myset contains: 13 23 42 65 75
+myset contains: 13 23 42 65 75
+myset contains: 78 64 49 21 17
+myset contains: 78 64 49 21 17
+myset contains: 10 20 30
 0. size: 0
-1. size: 5
-2. size: 4
-..................Top...................
-
-mystack.top() is now 15
-...............Push......................
-
-Popping out elements... 4 3 2 1 0
-....................Pop...................
-
-Popping out elements... 4 3 2 1 0
+1. size: 10
+2. size: 11
+3. size: 10
+The set contains 1000 elements.
+myset contains: 5 10 15 20 24 25 26 30 40 50
+myset contains: 10 30 50
+first contains: 20 25 32
+second contains: 10 12 75
+myset contains: 100 200 300
+myset contains: 1101 2202
+myset contains: 0 1 2 3 4
+myset contains: 0 1 2 3 4
+myset contains: 10 30 50
+0 is not an element of myset.
+1 is not an element of myset.
+2 is not an element of myset.
+3 is an element of myset.
+4 is not an element of myset.
+5 is not an element of myset.
+6 is an element of myset.
+7 is not an element of myset.
+8 is not an element of myset.
+9 is an element of myset.
+myset contains: 10 20 70 80 90
+myset contains: 10 20 70 80 90
+the lower bound points to: 30
+the upper bound points to: 40
