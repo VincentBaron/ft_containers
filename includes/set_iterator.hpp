@@ -6,7 +6,7 @@
 /*   By: vincentbaron <vincentbaron@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 16:02:26 by vincentbaro       #+#    #+#             */
-/*   Updated: 2022/02/26 11:22:02 by vincentbaro      ###   ########.fr       */
+/*   Updated: 2022/02/28 11:36:30 by vincentbaro      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,8 @@ namespace ft
 		set_iterator(Node *head) : _head(head){};
 
 		set_iterator(const set_iterator &srcs) : _head(srcs._head){};
+
+		set_iterator(const const_iterator &srcs) : _head(srcs._head){};
 
 		set_iterator &operator=(const set_iterator &srcs)
 		{
