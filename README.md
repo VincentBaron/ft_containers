@@ -12,4 +12,7 @@ In this project we had to reimplement from scratch the following C++ STL contain
 
 ## What I learned
 
-:warning: Project ungoing!
+1. How C++ containers work.
+2. AST Binary tree data structure.
+3. TDD.
+4. Iterators implementation from scratch.
